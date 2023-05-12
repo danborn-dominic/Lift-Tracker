@@ -56,6 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB542A0EBB3F00EF9C75 /* Lift_TrackerApp.swift */,
+				07FDCB692A0EBC2100EF9C75 /* Interactors */,
+				07FDCB682A0EBBFB00EF9C75 /* Persistance */,
+				07FDCB672A0EBBE000EF9C75 /* Models */,
 				07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */,
 				07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */,
 				07FDCB5D2A0EBB4100EF9C75 /* Persistence.swift */,
@@ -71,6 +74,27 @@
 				07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		07FDCB672A0EBBE000EF9C75 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		07FDCB682A0EBBFB00EF9C75 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
+		07FDCB692A0EBC2100EF9C75 /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
