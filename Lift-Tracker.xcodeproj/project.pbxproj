@@ -46,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB532A0EBB3F00EF9C75 /* Lift-Tracker */,
-				07FDCB6F2A0EC0AA00EF9C75 /* Resources */,
 				07FDCB702A0EC0B300EF9C75 /* UnitTests */,
 				07FDCB522A0EBB3F00EF9C75 /* Products */,
 			);
@@ -71,6 +70,7 @@
 				07FDCB692A0EBC2100EF9C75 /* Interactors */,
 				07FDCB672A0EBBE000EF9C75 /* Models */,
 				07FDCB6E2A0EC08E00EF9C75 /* UI */,
+				07FDCB6F2A0EC0AA00EF9C75 /* Resources */,
 			);
 			path = "Lift-Tracker";
 			sourceTree = "<group>";
