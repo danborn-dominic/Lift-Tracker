@@ -13,6 +13,9 @@
 		07FDCB5C2A0EBB4100EF9C75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */; };
 		07FDCB5E2A0EBB4100EF9C75 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB5D2A0EBB4100EF9C75 /* Persistence.swift */; };
 		07FDCB612A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB5F2A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld */; };
+		07FDCB742A0ED14400EF9C75 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB732A0ED14400EF9C75 /* AppState.swift */; };
+		07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB752A0ED24000EF9C75 /* InteractorsContainer.swift */; };
+		07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB772A0ED2BC00EF9C75 /* DependencyInjector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		07FDCB5D2A0EBB4100EF9C75 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		07FDCB602A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lift_Tracker.xcdatamodel; sourceTree = "<group>"; };
+		07FDCB732A0ED14400EF9C75 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		07FDCB752A0ED24000EF9C75 /* InteractorsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorsContainer.swift; sourceTree = "<group>"; };
+		07FDCB772A0ED2BC00EF9C75 /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,8 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB532A0EBB3F00EF9C75 /* Lift-Tracker */,
+				07FDCB6F2A0EC0AA00EF9C75 /* Resources */,
+				07FDCB702A0EC0B300EF9C75 /* UnitTests */,
 				07FDCB522A0EBB3F00EF9C75 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,30 +63,22 @@
 		07FDCB532A0EBB3F00EF9C75 /* Lift-Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				07FDCB542A0EBB3F00EF9C75 /* Lift_TrackerApp.swift */,
-				07FDCB692A0EBC2100EF9C75 /* Interactors */,
 				07FDCB682A0EBBFB00EF9C75 /* Persistance */,
+				07FDCB6A2A0EC03300EF9C75 /* System */,
+				07FDCB6B2A0EC03900EF9C75 /* Utilities */,
+				07FDCB6C2A0EC05800EF9C75 /* Injected */,
+				07FDCB6D2A0EC06A00EF9C75 /* Repositories */,
+				07FDCB692A0EBC2100EF9C75 /* Interactors */,
 				07FDCB672A0EBBE000EF9C75 /* Models */,
-				07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */,
-				07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */,
-				07FDCB5D2A0EBB4100EF9C75 /* Persistence.swift */,
-				07FDCB5F2A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld */,
-				07FDCB5A2A0EBB4100EF9C75 /* Preview Content */,
+				07FDCB6E2A0EC08E00EF9C75 /* UI */,
 			);
 			path = "Lift-Tracker";
-			sourceTree = "<group>";
-		};
-		07FDCB5A2A0EBB4100EF9C75 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		07FDCB672A0EBBE000EF9C75 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				07FDCB5F2A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -86,6 +86,7 @@
 		07FDCB682A0EBBFB00EF9C75 /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
+				07FDCB5D2A0EBB4100EF9C75 /* Persistence.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -95,6 +96,78 @@
 			children = (
 			);
 			path = Interactors;
+			sourceTree = "<group>";
+		};
+		07FDCB6A2A0EC03300EF9C75 /* System */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		07FDCB6B2A0EC03900EF9C75 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		07FDCB6C2A0EC05800EF9C75 /* Injected */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB732A0ED14400EF9C75 /* AppState.swift */,
+				07FDCB752A0ED24000EF9C75 /* InteractorsContainer.swift */,
+				07FDCB772A0ED2BC00EF9C75 /* DependencyInjector.swift */,
+			);
+			path = Injected;
+			sourceTree = "<group>";
+		};
+		07FDCB6D2A0EC06A00EF9C75 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		07FDCB6E2A0EC08E00EF9C75 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB542A0EBB3F00EF9C75 /* Lift_TrackerApp.swift */,
+				07FDCB712A0EC93600EF9C75 /* Views */,
+				07FDCB722A0EC93D00EF9C75 /* Components */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		07FDCB6F2A0EC0AA00EF9C75 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */,
+				07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		07FDCB702A0EC0B300EF9C75 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		07FDCB712A0EC93600EF9C75 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		07FDCB722A0EC93D00EF9C75 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +240,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
+				07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */,
 				07FDCB5E2A0EBB4100EF9C75 /* Persistence.swift in Sources */,
+				07FDCB742A0ED14400EF9C75 /* AppState.swift in Sources */,
 				07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */,
 				07FDCB552A0EBB3F00EF9C75 /* Lift_TrackerApp.swift in Sources */,
 				07FDCB612A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld in Sources */,
