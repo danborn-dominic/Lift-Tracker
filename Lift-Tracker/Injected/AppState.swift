@@ -31,3 +31,13 @@ extension AppState {
         var isActive: Bool = false
     }
 }
+
+#if DEBUG
+extension AppState {
+    static var preview: AppState {
+        var state = AppState()
+        state.system.isActive = true
+        return state
+    }
+}
+#endif

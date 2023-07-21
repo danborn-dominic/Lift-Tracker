@@ -36,6 +36,14 @@ extension EnvironmentValues {
     }
 }
 
+#if DEBUG
+extension DIContainer {
+    static var preview: Self {
+        .init(appState: .init(AppState.preview), interactors: .stub)
+    }
+}
+#endif
+
 extension View {
 
     func inject(_ appState: AppState,

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE62A2BC9020002D89B /* Loadable.swift */; };
 		076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE82A2BC9100002D89B /* CancelBag.swift */; };
+		0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1702A6B19B6005A0A05 /* MockData.swift */; };
 		07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EC2A229624008F87CB /* RootViewModifier.swift */; };
 		07A6C3EF2A2296F7008F87CB /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EE2A2296F7008F87CB /* WorkoutListView.swift */; };
 		07A6C3F12A229706008F87CB /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		076ACFE62A2BC9020002D89B /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		076ACFE82A2BC9100002D89B /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
+		0777D1702A6B19B6005A0A05 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		07A6C3EC2A229624008F87CB /* RootViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModifier.swift; sourceTree = "<group>"; };
 		07A6C3EE2A2296F7008F87CB /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
 		07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				07FDCB7F2A0FE9F400EF9C75 /* Models.swift */,
 				07FDCB812A0FEA0500EF9C75 /* Models+CoreData.swift */,
+				0777D1702A6B19B6005A0A05 /* MockData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
 				07A6C3F12A229706008F87CB /* WorkoutDetailView.swift in Sources */,
+				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
 				07A6C3EF2A2296F7008F87CB /* WorkoutListView.swift in Sources */,
 				07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */,

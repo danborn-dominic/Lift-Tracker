@@ -81,8 +81,6 @@ extension SetStruct {
 
     init?(managedObject: SetMO) {
         print("INFO mapping setMO to setStruct")
-        guard let id = managedObject.id else { return nil }
-
         self.init(reps: Int(managedObject.numReps), weight: managedObject.weight)
     }
 

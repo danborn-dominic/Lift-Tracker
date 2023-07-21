@@ -14,6 +14,10 @@ struct WorkoutListView: View {
     @State private(set) var workouts: Loadable<[WorkoutStruct]> = .notRequested
     @Environment(\.injected) private var injected: DIContainer
 
+    init(workouts: Loadable<[WorkoutStruct]> = .notRequested) {
+        self._workouts = .init(initialValue: workouts)
+    }
+
     var body: some View {
         NavigationView {
             self.content
@@ -22,7 +26,7 @@ struct WorkoutListView: View {
                 Image(systemName: "plus")
             })
         }
-            .onAppear(perform: loadWorkouts)
+        .onAppear(perform: loadWorkouts)
             .onReceive(workoutsUpdate) { workouts in
             switch workouts {
             case .notRequested:
@@ -38,6 +42,7 @@ struct WorkoutListView: View {
     }
 
     @ViewBuilder private var content: some View {
+        let _ = print("idk ", workouts)
         switch workouts {
         case .notRequested: notRequestedView
         case .isLoading(_, _): loadingView
@@ -52,13 +57,6 @@ struct WorkoutListView: View {
 private extension WorkoutListView {
     var workoutsUpdate: AnyPublisher<Loadable<[WorkoutStruct]>, Never> {
         injected.appState.updates(for: \.userData.workouts)
-    }
-}
-
-private extension WorkoutListView {
-    func loadWorkouts() {
-        injected.interactors.workoutInteractor
-            .loadWorkouts()
     }
 }
 
@@ -86,6 +84,12 @@ private extension WorkoutListView {
             .onTapGesture { self.loadWorkouts() }
     }
 
+    func loadWorkouts() {
+        print("INFO called load workouts in view")
+        injected.interactors.workoutInteractor
+            .loadWorkouts()
+    }
+
     func deleteWorkout(at offsets: IndexSet) {
         let workoutsToDelete = offsets.lazy.map { self.workouts.value?[$0] }
         workoutsToDelete.forEach { workout in
@@ -100,6 +104,7 @@ private extension WorkoutListView {
 
 private extension WorkoutListView {
     func loadedView(_ workouts: [WorkoutStruct]) -> some View {
+//        Text("test")
         List {
             ForEach(workouts, id: \.id) { workout in
                 NavigationLink(destination: WorkoutDetailView(workout: workout)) {
@@ -110,3 +115,12 @@ private extension WorkoutListView {
         }
     }
 }
+
+#if DEBUG
+    struct WorkoutList_Previews: PreviewProvider {
+        static var previews: some View {
+            WorkoutListView(workouts: .loaded(WorkoutStruct.mockedData))
+                .inject(.preview)
+        }
+    }
+#endif
