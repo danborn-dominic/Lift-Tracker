@@ -10,8 +10,13 @@
 		076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE62A2BC9020002D89B /* Loadable.swift */; };
 		076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE82A2BC9100002D89B /* CancelBag.swift */; };
 		0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1702A6B19B6005A0A05 /* MockData.swift */; };
+		0777D1732A6B4FA8005A0A05 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1722A6B4FA8005A0A05 /* HomeView.swift */; };
+		0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1742A6B4FCE005A0A05 /* SettingsView.swift */; };
+		0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1762A6B5006005A0A05 /* ExercisesView.swift */; };
+		0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1782A6B5013005A0A05 /* ProgressView.swift */; };
+		0777D17B2A6B5115005A0A05 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D17A2A6B5115005A0A05 /* RecentView.swift */; };
 		07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EC2A229624008F87CB /* RootViewModifier.swift */; };
-		07A6C3EF2A2296F7008F87CB /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EE2A2296F7008F87CB /* WorkoutListView.swift */; };
+		07A6C3EF2A2296F7008F87CB /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EE2A2296F7008F87CB /* WorkoutsView.swift */; };
 		07A6C3F12A229706008F87CB /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */; };
 		07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */; };
 		07A6C3F52A26D04C008F87CB /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F42A26D04C008F87CB /* Store.swift */; };
@@ -41,8 +46,13 @@
 		076ACFE62A2BC9020002D89B /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		076ACFE82A2BC9100002D89B /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 		0777D1702A6B19B6005A0A05 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		0777D1722A6B4FA8005A0A05 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0777D1742A6B4FCE005A0A05 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0777D1762A6B5006005A0A05 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
+		0777D1782A6B5013005A0A05 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		0777D17A2A6B5115005A0A05 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		07A6C3EC2A229624008F87CB /* RootViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModifier.swift; sourceTree = "<group>"; };
-		07A6C3EE2A2296F7008F87CB /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
+		07A6C3EE2A2296F7008F87CB /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
 		07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
 		07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		07A6C3F42A26D04C008F87CB /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -213,9 +223,14 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */,
-				07A6C3EE2A2296F7008F87CB /* WorkoutListView.swift */,
+				07A6C3EE2A2296F7008F87CB /* WorkoutsView.swift */,
 				07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */,
 				07C32AFF2A3D06FB00219776 /* AddWorkoutView.swift */,
+				0777D1722A6B4FA8005A0A05 /* HomeView.swift */,
+				0777D1742A6B4FCE005A0A05 /* SettingsView.swift */,
+				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
+				0777D1782A6B5013005A0A05 /* ProgressView.swift */,
+				0777D17A2A6B5115005A0A05 /* RecentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,14 +314,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0777D1732A6B4FA8005A0A05 /* HomeView.swift in Sources */,
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
+				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
 				07A6C3F12A229706008F87CB /* WorkoutDetailView.swift in Sources */,
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
-				07A6C3EF2A2296F7008F87CB /* WorkoutListView.swift in Sources */,
+				07A6C3EF2A2296F7008F87CB /* WorkoutsView.swift in Sources */,
 				07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */,
 				07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */,
+				0777D17B2A6B5115005A0A05 /* RecentView.swift in Sources */,
 				07C32AF32A33A8D900219776 /* ErrorView.swift in Sources */,
 				07C32AF92A33B6C200219776 /* SceneDelegate.swift in Sources */,
 				07C32AF72A33B38900219776 /* AppDelegate.swift in Sources */,
@@ -314,11 +332,13 @@
 				076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */,
 				07FDCB7C2A0F01D500EF9C75 /* WorkoutRepository.swift in Sources */,
 				07C32B022A464B7C00219776 /* Helpers.swift in Sources */,
+				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
 				07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */,
 				07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */,
 				07FDCB822A0FEA0500EF9C75 /* Models+CoreData.swift in Sources */,
 				07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */,
 				07FDCB7E2A0F041D00EF9C75 /* WorkoutInteractor.swift in Sources */,
+				0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */,
 				076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */,
 				07FDCB612A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld in Sources */,
 				07C32AFD2A39507A00219776 /* SystemEventsHandler.swift in Sources */,

@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-struct WorkoutListView: View {
+struct WorkoutsView: View {
 
     @State private(set) var workouts: Loadable<[WorkoutStruct]> = .notRequested
     @Environment(\.injected) private var injected: DIContainer
@@ -19,14 +19,12 @@ struct WorkoutListView: View {
     }
 
     var body: some View {
-        NavigationView {
-            self.content
-                .navigationBarTitle("Workouts")
-                .navigationBarItems(trailing: NavigationLink(destination: AddWorkoutView()) {
-                Image(systemName: "plus")
-            })
-        }
-        .onAppear(perform: loadWorkouts)
+        self.content
+            .navigationBarItems(trailing: NavigationLink(destination: AddWorkoutView()) {
+            Image(systemName: "plus")
+        })
+            .navigationBarTitle("Routines")
+            .onAppear(perform: loadWorkouts)
             .onReceive(workoutsUpdate) { workouts in
             switch workouts {
             case .notRequested:
@@ -54,7 +52,7 @@ struct WorkoutListView: View {
 
 // MARK: - Side Effects
 
-private extension WorkoutListView {
+private extension WorkoutsView {
     var workoutsUpdate: AnyPublisher<Loadable<[WorkoutStruct]>, Never> {
         injected.appState.updates(for: \.userData.workouts)
     }
@@ -62,7 +60,7 @@ private extension WorkoutListView {
 
 // MARK: - Routing
 
-extension WorkoutListView {
+extension WorkoutsView {
     struct Routing: Equatable {
         var workoutDetails: WorkoutStruct.ID?
     }
@@ -70,7 +68,7 @@ extension WorkoutListView {
 
 // MARK: - Managing Content
 
-private extension WorkoutListView {
+private extension WorkoutsView {
     var notRequestedView: some View {
         Text("").onAppear(perform: loadWorkouts)
     }
@@ -102,7 +100,7 @@ private extension WorkoutListView {
 
 // MARK: - Displaying Content
 
-private extension WorkoutListView {
+private extension WorkoutsView {
     func loadedView(_ workouts: [WorkoutStruct]) -> some View {
 //        Text("test")
         List {
@@ -119,7 +117,7 @@ private extension WorkoutListView {
 #if DEBUG
     struct WorkoutList_Previews: PreviewProvider {
         static var previews: some View {
-            WorkoutListView(workouts: .loaded(WorkoutStruct.mockedData))
+            WorkoutsView(workouts: .loaded(WorkoutStruct.mockedData))
                 .inject(.preview)
         }
     }

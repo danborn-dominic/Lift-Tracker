@@ -22,7 +22,7 @@ extension AppState {
 
 extension AppState {
     struct ViewRouting: Equatable {
-        var workoutList = WorkoutListView.Routing()
+        var workoutList = WorkoutsView.Routing()
     }
 }
 
