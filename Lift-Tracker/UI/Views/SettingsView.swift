@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    private let container: DIContainer
+
+    init(container: DIContainer) {
+        print("INFO SettingsView init: DIContainer injected")
+        self.container = container
+    }
+    
     var body: some View {
         NavigationView {
         }
             .navigationBarTitle("Settings")
-    }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
     }
 }

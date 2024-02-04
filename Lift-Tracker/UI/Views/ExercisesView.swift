@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct ExercisesView: View {
+    
+    private let container: DIContainer
+
+    init(container: DIContainer) {
+        print("INFO ExercisesView init: DIContainer injected")
+        self.container = container
+    }
+    
     var body: some View {
         NavigationView {
         }
             .navigationBarTitle("Exercises")
-    }
-}
-
-struct ExercisesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExercisesView()
     }
 }

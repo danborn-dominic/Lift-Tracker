@@ -14,14 +14,16 @@ struct ContentView: View {
     private let container: DIContainer
 
     init(container: DIContainer) {
+        print("INFO ContentView init: DIContainer injected")
         self.container = container
     }
 
     var body: some View {
-
+        var debug = print("INFO ContentView body: rendering views with DIContainer")
+        
         TabView {
             NavigationView {
-                HomeView()
+                HomeView(container: container)
             }
                 .tabItem {
                 VStack {
@@ -31,7 +33,7 @@ struct ContentView: View {
             }
 
             NavigationView {
-                WorkoutsView()
+                WorkoutsView(container: container)
             }
                 .tabItem {
                 VStack {
@@ -41,7 +43,7 @@ struct ContentView: View {
             }
 
             NavigationView {
-                ExercisesView()
+                ExercisesView(container: container)
             }
                 .tabItem {
                 VStack {
@@ -51,7 +53,7 @@ struct ContentView: View {
             }
 
             NavigationView {
-                ProgressView()
+                ProgressView(container: container)
             }
                 .tabItem {
                 VStack {
@@ -61,7 +63,7 @@ struct ContentView: View {
             }
 
             NavigationView {
-                SettingsView()
+                SettingsView(container: container)
             }
                 .tabItem {
                 VStack {
@@ -71,15 +73,6 @@ struct ContentView: View {
             }
 
         }
+
     }
 }
-
-// MARK: - Preview
-
-#if DEBUG
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView(container: .preview)
-        }
-    }
-#endif

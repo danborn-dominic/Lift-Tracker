@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct ProgressView: View {
+    
+    private let container: DIContainer
+
+    init(container: DIContainer) {
+        print("INFO ProgressView init: DIContainer injected")
+        self.container = container
+    }
+    
     var body: some View {
         NavigationView {
         }
             .navigationBarTitle("Progress")
-    }
-}
-
-struct ProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressView()
     }
 }
