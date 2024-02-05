@@ -28,7 +28,7 @@ struct RoutinesView: View {
                     Text("Routines")
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddWorkoutView(container:container)) {
+                    NavigationLink(destination: AddRoutineView(container:container)) {
                         Image(systemName: "plus")
                     }
                 }
