@@ -26,6 +26,8 @@ struct RoutinesView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("Routines")
+                        .font(.largeTitle)
+                        .bold()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AddRoutineView(container:container)) {

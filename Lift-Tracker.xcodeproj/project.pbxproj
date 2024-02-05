@@ -17,7 +17,6 @@
 		0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1782A6B5013005A0A05 /* ProgressView.swift */; };
 		07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EC2A229624008F87CB /* RootViewModifier.swift */; };
 		07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EE2A2296F7008F87CB /* RoutinesView.swift */; };
-		07A6C3F12A229706008F87CB /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */; };
 		07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */; };
 		07A6C3F52A26D04C008F87CB /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F42A26D04C008F87CB /* Store.swift */; };
 		07C32AF32A33A8D900219776 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32AF22A33A8D900219776 /* ErrorView.swift */; };
@@ -53,7 +52,6 @@
 		0777D1782A6B5013005A0A05 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		07A6C3EC2A229624008F87CB /* RootViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModifier.swift; sourceTree = "<group>"; };
 		07A6C3EE2A2296F7008F87CB /* RoutinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesView.swift; sourceTree = "<group>"; };
-		07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
 		07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		07A6C3F42A26D04C008F87CB /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		07C32AF22A33A8D900219776 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -91,6 +89,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		070129262B717C4C00EFF73A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0777D1722A6B4FA8005A0A05 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		070129272B717C5700EFF73A /* Routines */ = {
+			isa = PBXGroup;
+			children = (
+				07A6C3EE2A2296F7008F87CB /* RoutinesView.swift */,
+				07C32AFF2A3D06FB00219776 /* AddRoutineView.swift */,
+				0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */,
+			);
+			path = Routines;
+			sourceTree = "<group>";
+		};
+		070129282B717C7000EFF73A /* Exercies */ = {
+			isa = PBXGroup;
+			children = (
+				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
+			);
+			path = Exercies;
+			sourceTree = "<group>";
+		};
+		0701292A2B717C9600EFF73A /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				0777D1782A6B5013005A0A05 /* ProgressView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		0701292B2B717CA200EFF73A /* More */ = {
+			isa = PBXGroup;
+			children = (
+				0777D1742A6B4FCE005A0A05 /* SettingsView.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
 		07FDCB482A0EBB3F00EF9C75 = {
 			isa = PBXGroup;
 			children = (
@@ -223,14 +263,11 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */,
-				07A6C3EE2A2296F7008F87CB /* RoutinesView.swift */,
-				07A6C3F02A229706008F87CB /* WorkoutDetailView.swift */,
-				07C32AFF2A3D06FB00219776 /* AddRoutineView.swift */,
-				0777D1722A6B4FA8005A0A05 /* HomeView.swift */,
-				0777D1742A6B4FCE005A0A05 /* SettingsView.swift */,
-				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
-				0777D1782A6B5013005A0A05 /* ProgressView.swift */,
-				0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */,
+				070129262B717C4C00EFF73A /* Home */,
+				070129272B717C5700EFF73A /* Routines */,
+				070129282B717C7000EFF73A /* Exercies */,
+				0701292A2B717C9600EFF73A /* Progress */,
+				0701292B2B717CA200EFF73A /* More */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -318,7 +355,6 @@
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
 				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
-				07A6C3F12A229706008F87CB /* WorkoutDetailView.swift in Sources */,
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
 				07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */,

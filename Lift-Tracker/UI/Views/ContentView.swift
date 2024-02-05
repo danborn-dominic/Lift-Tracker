@@ -10,14 +10,14 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-
+    
     private let container: DIContainer
-
+    
     init(container: DIContainer) {
         print("INFO ContentView init: DIContainer injected")
         self.container = container
     }
-
+    
     var body: some View {
         var debug = print("INFO ContentView body: rendering views with DIContainer")
         
@@ -25,55 +25,55 @@ struct ContentView: View {
             NavigationView {
                 HomeView(container: container)
             }
-                .tabItem {
+            .tabItem {
                 VStack {
                     Image(systemName: "house")
                     Text("Home")
                 }
             }
-
+            
             NavigationView {
                 RoutinesView(container: container)
             }
-                .tabItem {
+            .tabItem {
                 VStack {
                     Image(systemName: "figure.strengthtraining.traditional")
                     Text("Routines")
                 }
             }
-
+            
             NavigationView {
                 ExercisesView(container: container)
             }
-                .tabItem {
+            .tabItem {
                 VStack {
                     Image(systemName: "dumbbell")
                     Text("Exercises")
                 }
             }
-
+            
             NavigationView {
                 ProgressView(container: container)
             }
-                .tabItem {
+            .tabItem {
                 VStack {
                     Image(systemName: "chart.bar")
                     Text("Progress")
                 }
             }
-
+            
             NavigationView {
                 SettingsView(container: container)
             }
-                .tabItem {
+            .tabItem {
                 VStack {
                     Image(systemName: "ellipsis")
                     Text("More")
                 }
             }
-
+            
         }
-
+        
     }
 }
 
