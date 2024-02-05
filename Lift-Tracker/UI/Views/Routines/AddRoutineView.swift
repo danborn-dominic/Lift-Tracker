@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddRoutineView: View {
     private let container: DIContainer
-    @State private var workoutName = ""
+    @State private var routineName = ""
     @State private var exercises: [ExerciseStruct] = []
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -20,8 +20,8 @@ struct AddRoutineView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Workout Name")) {
-                    TextField("Name", text: $workoutName)
+                Section(header: Text("Routine Name")) {
+                    TextField("Name", text: $routineName)
                 }
 
                 Section(header: Text("Exercises")) {
@@ -45,13 +45,13 @@ struct AddRoutineView: View {
             }
             .navigationBarTitle("Add Workout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                saveWorkout()
+                saveRoutine()
             })
         }
     }
 
-    private func saveWorkout() {
-        let newWorkout = WorkoutStruct(name: workoutName, exercises: exercises)
+    private func saveRoutine() {
+        let newWorkout = WorkoutStruct(name: routineName, exercises: exercises)
         print("INFO saving workout: ", newWorkout)
         container.interactors.workoutInteractor.addWorkout(workout: newWorkout)
         self.presentationMode.wrappedValue.dismiss()

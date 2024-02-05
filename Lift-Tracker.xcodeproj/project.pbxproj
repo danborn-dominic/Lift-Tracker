@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292C2B718D4000EFF73A /* AddExerciseView.swift */; };
 		0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */; };
 		076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE62A2BC9020002D89B /* Loadable.swift */; };
 		076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE82A2BC9100002D89B /* CancelBag.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0701292C2B718D4000EFF73A /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
 		0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
 		076ACFE62A2BC9020002D89B /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		076ACFE82A2BC9100002D89B /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
+				0701292C2B718D4000EFF73A /* AddExerciseView.swift */,
 			);
 			path = Exercies;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */,
 				07C32B002A3D06FB00219776 /* AddRoutineView.swift in Sources */,
 				07C32AFB2A33B97400219776 /* AppEnvironment.swift in Sources */,
+				0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

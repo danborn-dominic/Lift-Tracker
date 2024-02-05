@@ -23,6 +23,12 @@ struct ExercisesView: View {
                         .font(.largeTitle)
                         .bold()
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination:
+                        AddExerciseView(container:container)) {
+                        Image(systemName: "plus")
+                    }
+                }
             }
     }
     

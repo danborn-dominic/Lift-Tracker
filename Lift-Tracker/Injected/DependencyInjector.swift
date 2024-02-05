@@ -11,10 +11,10 @@ import Combine
 // MARK: - DIContainer
 
 struct DIContainer: EnvironmentKey {
-
+    
     let appState: WorkoutStore<AppState>
     let interactors: Interactors
-
+    
     init(appState: WorkoutStore<AppState>, interactors: Interactors) {
         print("INFO initializing the DIContainer")
         self.appState = appState
@@ -38,22 +38,22 @@ extension EnvironmentValues {
 }
 
 #if DEBUG
-    extension DIContainer {
-        static var preview: Self {
-                .init(appState: .init(AppState.preview), interactors: .stub)
-        }
+extension DIContainer {
+    static var preview: Self {
+        .init(appState: .init(AppState.preview), interactors: .stub)
     }
+}
 #endif
 
 extension View {
-
+    
     func inject(_ appState: AppState,
                 _ interactors: DIContainer.Interactors) -> some View {
         let container = DIContainer(appState: .init(appState),
                                     interactors: interactors)
         return inject(container)
     }
-
+    
     func inject(_ container: DIContainer) -> some View {
         print("INFO injecting the dependencies")
         return self

@@ -19,8 +19,6 @@ struct ContentView: View {
     }
     
     var body: some View {
-        var debug = print("INFO ContentView body: rendering views with DIContainer")
-        
         TabView {
             NavigationView {
                 HomeView(container: container)
@@ -73,14 +71,14 @@ struct ContentView: View {
             }
             
         }
-        
     }
+        
 }
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(container: DIContainer.preview)
+        ContentView(container: .preview)
     }
 }
 #endif
