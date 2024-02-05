@@ -22,7 +22,7 @@ extension AppState {
 
 extension AppState {
     struct ViewRouting: Equatable {
-        var workoutList = WorkoutsView.Routing()
+        var workoutList = RoutinesView.Routing()
     }
 }
 
@@ -37,6 +37,7 @@ extension AppState {
     static var preview: AppState {
         var state = AppState()
         state.system.isActive = true
+        state.userData.workouts = .loaded(WorkoutStruct.mockData)
         return state
     }
 }

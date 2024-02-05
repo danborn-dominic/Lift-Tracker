@@ -33,7 +33,7 @@ struct ContentView: View {
             }
 
             NavigationView {
-                WorkoutsView(container: container)
+                RoutinesView(container: container)
             }
                 .tabItem {
                 VStack {
@@ -76,3 +76,11 @@ struct ContentView: View {
 
     }
 }
+
+#if DEBUG
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(container: DIContainer.preview)
+    }
+}
+#endif

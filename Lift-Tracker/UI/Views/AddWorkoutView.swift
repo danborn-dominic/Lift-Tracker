@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct AddWorkoutView: View {
+    private let container: DIContainer
     @State private var workoutName = ""
     @State private var exercises: [ExerciseStruct] = [ExerciseStruct]()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Environment(\.injected) private var injected: DIContainer
+    
+    init(container: DIContainer) {
+        self.container = container
+    }
 
     var body: some View {
         NavigationView {
@@ -49,7 +53,7 @@ struct AddWorkoutView: View {
     private func saveWorkout() {
         let newWorkout = WorkoutStruct(name: workoutName, exercises: exercises)
         print("INFO saving workout: ", newWorkout)
-        self.injected.interactors.workoutInteractor.addWorkout(workout: newWorkout)
+        container.interactors.workoutInteractor.addWorkout(workout: newWorkout)
         self.presentationMode.wrappedValue.dismiss()
     }
 }

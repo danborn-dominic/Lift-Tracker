@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-struct WorkoutsView: View {
+struct RoutinesView: View {
     
     private let container: DIContainer
     @State private(set) var workouts: Loadable<[WorkoutStruct]> = .notRequested
@@ -28,7 +28,7 @@ struct WorkoutsView: View {
                     Text("Routines")
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddWorkoutView()) {
+                    NavigationLink(destination: AddWorkoutView(container:container)) {
                         Image(systemName: "plus")
                     }
                 }
@@ -59,19 +59,19 @@ struct WorkoutsView: View {
     }
 }
 // MARK: - Side Effects
-private extension WorkoutsView {
+private extension RoutinesView {
     var workoutsUpdate: AnyPublisher<Loadable<[WorkoutStruct]>, Never> {
         container.appState.updates(for: \.userData.workouts)
     }
 }
 // MARK: - Routing
-extension WorkoutsView {
+extension RoutinesView {
     struct Routing: Equatable {
         var workoutDetails: WorkoutStruct.ID?
     }
 }
 // MARK: - Managing Content
-private extension WorkoutsView {
+private extension RoutinesView {
     var notRequestedView: some View {
         Text("").onAppear(perform: loadWorkouts)
     }
@@ -103,16 +103,23 @@ private extension WorkoutsView {
 
 // MARK: - Displaying Content
 
-private extension WorkoutsView {
+private extension RoutinesView {
     func loadedView(_ workouts: [WorkoutStruct]) -> some View {
-                Text("test")
-//        List {
-//            ForEach(workouts, id: \.id) { workout in
-//                NavigationLink(destination: WorkoutDetailView(workout: workout)) {
-//                    Text(workout.name)
-//                }
-//            }
-//            .onDelete(perform: deleteWorkout)
-//        }
+        List {
+            ForEach(workouts, id: \.id) { workout in
+                NavigationLink(destination: RoutineDetailView(workout: workout)) {
+                    Text(workout.name)
+                }
+            }
+            .onDelete(perform: deleteWorkout)
+        }
     }
 }
+
+#if DEBUG
+struct WorkoutsView_Previews: PreviewProvider {
+    static var previews: some View {
+        return RoutinesView(container: .preview)
+    }
+}
+#endif

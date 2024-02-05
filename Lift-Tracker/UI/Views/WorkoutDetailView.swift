@@ -39,14 +39,12 @@ struct WorkoutDetailView: View {
     }
 }
 
-
-// MARK: - Preview
-
 #if DEBUG
-    struct WorkoutDetails_Previews: PreviewProvider {
-        static var previews: some View {
-            WorkoutDetailView(workout: WorkoutStruct.mockedData[0])
-                .inject(.preview)
-        }
+struct WorkoutDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mockWorkout = WorkoutStruct.mockData[0]
+        WorkoutDetailView(workout: mockWorkout)
+            .previewLayout(.sizeThatFits)
     }
+}
 #endif

@@ -72,3 +72,30 @@ struct SetStruct: Codable, Equatable, Identifiable {
         self.weight = weight
     }
 }
+
+extension WorkoutStruct {
+    static var mockData: [WorkoutStruct] {
+        [
+            WorkoutStruct(name: "Upper Body", id: UUID(), exercises: ExerciseStruct.mockData),
+            WorkoutStruct(name: "Lower Body", id: UUID(), exercises: ExerciseStruct.mockData)
+        ]
+    }
+}
+
+extension ExerciseStruct {
+    static var mockData: [ExerciseStruct] {
+        [
+            ExerciseStruct(name: "Push Ups", sets: SetStruct.mockData),
+            ExerciseStruct(name: "Pull Ups", sets: SetStruct.mockData)
+        ]
+    }
+}
+
+extension SetStruct {
+    static var mockData: [SetStruct] {
+        [
+            SetStruct(reps: 10, weight: 20),
+            SetStruct(reps: 8, weight: 25)
+        ]
+    }
+}
