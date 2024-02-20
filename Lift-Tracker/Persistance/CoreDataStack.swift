@@ -100,40 +100,58 @@ struct CoreDataStack: PersistentStore {
         .eraseToAnyPublisher()
     }
     
+    /// Fetches a single object from the Core Data store and maps it to a different type.
+    /// This generic method fetches the first object of type `T` from the results and converts it to type `V`.
+    ///
+    /// - Parameters:
+    ///   - fetchRequest: An `NSFetchRequest` instance configured to fetch `T` objects.
+    ///   - map: A closure that maps the fetched `T` object to a `V` object.
+    ///
+    /// - Returns: A publisher that emits an optional `V` object or an error.
     func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
                         map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error> {
         return Future<V?, Error> { promise in
             do {
-                print("DEBUG: Fetching objects from context")
+                // Execute the fetch request on the managed object context.
                 let fetchedObjects = try self.persistentContainer.viewContext.fetch(fetchRequest)
-                print("DEBUG: Number of objects fetched: \(fetchedObjects.count)")
-                
+                // Check if at least one object is fetched and process it.
                 if let firstObject = fetchedObjects.first {
-                    print("DEBUG: First object fetched: \(firstObject)")
+                    // Map the first fetched object to the desired type.
                     let mappedObject = try map(firstObject)
-                    print("DEBUG: Mapped object: \(String(describing: mappedObject))")
+                    // Promise success with the mapped object.
                     promise(.success(mappedObject))
                 } else {
-                    print("DEBUG: No objects fetched")
+                    // If no objects are fetched, return nil.
                     promise(.success(nil))
                 }
             } catch {
-                print("ERROR: Fetch operation failed with error: \(error)")
+                // If an error occurs during the fetch operation, promise a failure with the error.
                 promise(.failure(error))
             }
         }
         .eraseToAnyPublisher()
     }
     
-    
+    /// Executes a database operation in the context and persists any changes.
+    /// This method takes a closure of type `DBOperation` which performs a task in the managed object context.
+    /// If the operation is successful, changes are saved to the persistent store.
+    ///
+    /// - Parameter operation: A closure that performs the database operation and returns a `Result`.
+    ///
+    /// - Returns: A publisher that emits the result of the operation or an error.
     func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error> {
         return Future { promise in
             do {
+                // Perform the operation within the managed object context.
                 let result = try operation(self.persistentContainer.viewContext)
+                // Attempt to save any changes made during the operation.
                 try self.persistentContainer.viewContext.save()
+                // If successful, promise the result.
                 promise(.success(result))
             } catch {
+                // In case of an error, rollback any changes made during the operation.
                 self.persistentContainer.viewContext.rollback()
+                // Promise a failure with the encountered error.
                 promise(.failure(error))
             }
         }
