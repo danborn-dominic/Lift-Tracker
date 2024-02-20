@@ -16,18 +16,18 @@ struct AddRoutineView: View {
     init(container: DIContainer) {
         self.container = container
     }
-
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Routine Name")) {
                     TextField("Name", text: $routineName)
                 }
-
+                
                 Section(header: Text("Exercises")) {
                     ForEach(exercises.indices, id: \.self) { index in
                         HStack {
-                            TextField("Exercise Name", text: $exercises[index].name)
+                            TextField("Exercise Name", text: $exercises[index].exerciseName)
                             Button(action: {
                                 exercises.remove(at: index)
                             }) {
@@ -37,9 +37,9 @@ struct AddRoutineView: View {
                         }
                     }
                     .onDelete(perform: deleteExercise)
-
+                    
                     Button("Add Exercise") {
-                        exercises.append(ExerciseStruct(name: ""))
+                        exercises.append(ExerciseStruct(exerciseName: ""))
                     }
                 }
             }
@@ -49,9 +49,9 @@ struct AddRoutineView: View {
             })
         }
     }
-
+    
     private func saveRoutine() {
-        let newWorkout = WorkoutStruct(name: routineName, exercises: exercises)
+        let newWorkout = WorkoutStruct(workoutName: routineName, exercises: exercises)
         print("INFO saving workout: ", newWorkout)
         container.interactors.workoutInteractor.addWorkout(workout: newWorkout)
         self.presentationMode.wrappedValue.dismiss()
@@ -62,10 +62,10 @@ struct AddRoutineView: View {
     }
 }
 
-#if DEBUG
-struct AddRoutineView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddRoutineView(container: .preview)
-    }
-}
-#endif
+//#if DEBUG
+//struct AddRoutineView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddRoutineView(container: .preview)
+//    }
+//}
+//#endif

@@ -4,19 +4,20 @@ import Combine
 
 protocol PersistentStore {
     typealias DBOperation<Result> = (NSManagedObjectContext) throws -> Result
-
+    
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
                      map: @escaping (T) throws -> V?) -> AnyPublisher<[V], Error>
+    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
+                        map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error>
     func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error>
-    func printWorkouts()
 }
 
 struct CoreDataStack: PersistentStore {
-
+    
     private let persistentContainer: NSPersistentContainer
     private let isStoreLoaded = CurrentValueSubject<Bool, Error>(false)
     private let bgQueue = DispatchQueue(label: "coredata")
-
+    
     init() {
         persistentContainer = NSPersistentContainer(name: "Lift_Tracker")
         bgQueue.async { [weak isStoreLoaded, weak persistentContainer] in
@@ -32,7 +33,7 @@ struct CoreDataStack: PersistentStore {
             }
         }
     }
-
+    
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
                      map: @escaping (T) throws -> V?) -> AnyPublisher<[V], Error> {
         return Future { promise in
@@ -44,9 +45,35 @@ struct CoreDataStack: PersistentStore {
                 promise(.failure(error))
             }
         }
-            .eraseToAnyPublisher()
+        .eraseToAnyPublisher()
+    }
+    
+    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
+                        map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error> {
+        return Future<V?, Error> { promise in
+            do {
+                print("DEBUG: Fetching objects from context")
+                let fetchedObjects = try self.persistentContainer.viewContext.fetch(fetchRequest)
+                print("DEBUG: Number of objects fetched: \(fetchedObjects.count)")
+
+                if let firstObject = fetchedObjects.first {
+                    print("DEBUG: First object fetched: \(firstObject)")
+                    let mappedObject = try map(firstObject)
+                    print("DEBUG: Mapped object: \(String(describing: mappedObject))")
+                    promise(.success(mappedObject))
+                } else {
+                    print("DEBUG: No objects fetched")
+                    promise(.success(nil))
+                }
+            } catch {
+                print("ERROR: Fetch operation failed with error: \(error)")
+                promise(.failure(error))
+            }
+        }
+        .eraseToAnyPublisher()
     }
 
+    
     func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error> {
         return Future { promise in
             do {
@@ -58,32 +85,6 @@ struct CoreDataStack: PersistentStore {
                 promise(.failure(error))
             }
         }
-            .eraseToAnyPublisher()
+        .eraseToAnyPublisher()
     }
-
-    func printWorkouts() {
-        print("INFO printing coredata contents")
-        let context = persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<WorkoutMO> = WorkoutMO.fetchRequest()
-
-        do {
-            let workouts = try context.fetch(fetchRequest)
-            for workout in workouts {
-                print("Workout: \(workout.name ?? ""), ID: \(workout.id?.uuidString ?? "")")
-                if let exercises = workout.exercises?.allObjects as? [ExerciseMO] {
-                    for exercise in exercises {
-                        print("\tExercise: \(exercise.name ?? "")")
-                        if let sets = exercise.sets?.allObjects as? [SetMO] {
-                            for set in sets {
-                                print("\t\tSet: Reps - \(set.numReps), Weight - \(set.weight)")
-                            }
-                        }
-                    }
-                }
-            }
-        } catch {
-            print("INFO Error fetching workouts: \(error)")
-        }
-    }
-
 }

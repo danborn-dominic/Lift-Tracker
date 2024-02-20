@@ -9,48 +9,72 @@ import Foundation
 
 struct WorkoutStruct: Codable, Equatable, Identifiable {
     let id: UUID?
-    var name: String
+    var workoutName: String
     var exercises: [ExerciseStruct]
-
-    init(name: String) {
+    
+    init(workoutName: String) {
         self.id = UUID()
-        self.name = name
+        self.workoutName = workoutName
         self.exercises = [ExerciseStruct]()
     }
-
-    init(name: String, id: ID) {
+    
+    init(workoutName: String, id: ID) {
         self.id = id
-        self.name = name
+        self.workoutName = workoutName
         self.exercises = [ExerciseStruct]()
     }
-
-    init(name: String, id: ID, exercises: [ExerciseStruct]) {
+    
+    init(workoutName: String, id: ID, exercises: [ExerciseStruct]) {
         self.id = id
-        self.name = name
+        self.workoutName = workoutName
         self.exercises = exercises
     }
-
-    init(name: String, exercises: [ExerciseStruct]) {
+    
+    init(workoutName: String, exercises: [ExerciseStruct]) {
         self.id = nil
-        self.name = name
+        self.workoutName = workoutName
         self.exercises = exercises
     }
 }
 
 struct ExerciseStruct: Codable, Equatable, Identifiable {
     let id: UUID?
-    var name: String
+    var exerciseName: String
+    var exerciseNotes: String
     var sets: [SetStruct]
-
-    init(name: String) {
+    
+    init(exerciseName: String) {
         self.id = UUID()
-        self.name = name
+        self.exerciseName = exerciseName
+        self.exerciseNotes = ""
         self.sets = [SetStruct]()
     }
-
-    init(name: String, sets: [SetStruct]) {
-        self.id = UUID()
-        self.name = name
+    
+    init(id: UUID, exerciseName: String) {
+        self.id = id
+        self.exerciseName = exerciseName
+        self.exerciseNotes = ""
+        self.sets = [SetStruct]()
+    }
+    
+    init(id: UUID, exerciseName: String, sets: [SetStruct]) {
+        self.id = id
+        self.exerciseName = exerciseName
+        self.exerciseNotes = ""
+        self.sets = sets
+    }
+    
+    init(id: UUID, exerciseName: String, exerciseNotes: String) {
+        self.id = id
+        self.exerciseName = exerciseName
+        self.exerciseNotes = exerciseNotes
+        self.sets = [SetStruct]()
+    }
+    
+    init(id: UUID, exerciseName: String, exerciseNotes: String, sets: [SetStruct]) {
+        self.id = id
+        self.exerciseName = exerciseName
+        self.exerciseNotes = exerciseNotes
         self.sets = sets
     }
 }
@@ -59,13 +83,13 @@ struct SetStruct: Codable, Equatable, Identifiable {
     let id: UUID?
     var repetitions: Int
     var weight: Double
-
+    
     init() {
         self.id = UUID()
         self.repetitions = 0
         self.weight = 0.0
     }
-
+    
     init(reps: Int, weight: Double) {
         self.id = UUID()
         self.repetitions = reps
@@ -73,29 +97,17 @@ struct SetStruct: Codable, Equatable, Identifiable {
     }
 }
 
-extension WorkoutStruct {
-    static var mockData: [WorkoutStruct] {
-        [
-            WorkoutStruct(name: "Upper Body", id: UUID(), exercises: ExerciseStruct.mockData),
-            WorkoutStruct(name: "Lower Body", id: UUID(), exercises: ExerciseStruct.mockData)
-        ]
+struct ExerciseLibraryStruct: Codable, Equatable, Identifiable {
+    let id: UUID?
+    var exercises: [ExerciseStruct]
+    
+    init() {
+        self.id = UUID()
+        self.exercises = [ExerciseStruct]()
     }
-}
-
-extension ExerciseStruct {
-    static var mockData: [ExerciseStruct] {
-        [
-            ExerciseStruct(name: "Push Ups", sets: SetStruct.mockData),
-            ExerciseStruct(name: "Pull Ups", sets: SetStruct.mockData)
-        ]
-    }
-}
-
-extension SetStruct {
-    static var mockData: [SetStruct] {
-        [
-            SetStruct(reps: 10, weight: 20),
-            SetStruct(reps: 8, weight: 25)
-        ]
+    
+    init(exercises: [ExerciseStruct]) {
+        self.id = UUID()
+        self.exercises = exercises
     }
 }

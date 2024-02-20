@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292C2B718D4000EFF73A /* AddExerciseView.swift */; };
+		0701292F2B73D7A500EFF73A /* ExerciseLibraryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */; };
+		070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070129302B7599F600EFF73A /* ExerciseInteractor.swift */; };
 		0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */; };
 		076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE62A2BC9020002D89B /* Loadable.swift */; };
 		076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE82A2BC9100002D89B /* CancelBag.swift */; };
@@ -44,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		0701292C2B718D4000EFF73A /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
+		0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibraryRepository.swift; sourceTree = "<group>"; };
+		070129302B7599F600EFF73A /* ExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInteractor.swift; sourceTree = "<group>"; };
 		0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
 		076ACFE62A2BC9020002D89B /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		076ACFE82A2BC9100002D89B /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB7D2A0F041D00EF9C75 /* WorkoutInteractor.swift */,
+				070129302B7599F600EFF73A /* ExerciseInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				07FDCB7B2A0F01D500EF9C75 /* WorkoutRepository.swift */,
+				0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -361,6 +367,7 @@
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
 				07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */,
+				0701292F2B73D7A500EFF73A /* ExerciseLibraryRepository.swift in Sources */,
 				07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */,
 				07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */,
 				07C32AF32A33A8D900219776 /* ErrorView.swift in Sources */,
@@ -370,6 +377,7 @@
 				076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */,
 				07FDCB7C2A0F01D500EF9C75 /* WorkoutRepository.swift in Sources */,
 				07C32B022A464B7C00219776 /* Helpers.swift in Sources */,
+				070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */,
 				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
 				07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */,
 				07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */,

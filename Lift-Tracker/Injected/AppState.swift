@@ -17,6 +17,7 @@ struct AppState: Equatable {
 extension AppState {
     struct UserData: Equatable {
         var workouts: Loadable<[WorkoutStruct]> = .notRequested
+        var exercises: Loadable<ExerciseLibraryStruct> = .notRequested
     }
 }
 

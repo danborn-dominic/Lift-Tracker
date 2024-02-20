@@ -12,9 +12,9 @@ struct RoutineDetailView: View {
 
     var body: some View {
         List(workout.exercises, id: \.id) { exercise in
-            Text(exercise.name)
+            Text(exercise.exerciseName)
         }
-        .navigationTitle(workout.name)
+        .navigationTitle(workout.workoutName)
     }
 }
 

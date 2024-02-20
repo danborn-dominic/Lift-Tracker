@@ -8,35 +8,33 @@
 import Foundation
 
 #if DEBUG
+extension WorkoutStruct {
+    static let mockData: [WorkoutStruct] = [
+        WorkoutStruct(workoutName: "Full Body Workout", id: UUID(), exercises: ExerciseStruct.mockData),
+        WorkoutStruct(workoutName: "Upper Body Workout", id: UUID(), exercises: [ExerciseStruct.mockData[0], ExerciseStruct.mockData[1]]),
+        WorkoutStruct(workoutName: "Lower Body Workout", id: UUID(), exercises: [ExerciseStruct.mockData[2]]),
+        WorkoutStruct(workoutName: "Push Workout", id: UUID(), exercises: [ExerciseStruct.mockData[3]]),
+        WorkoutStruct(workoutName: "Pull Workout", id: UUID(), exercises: [ExerciseStruct.mockData[4]]),
+        WorkoutStruct(workoutName: "Legs Workout", id: UUID(), exercises: [ExerciseStruct.mockData[5]])
+    ]
+}
 
-    extension WorkoutStruct {
-        static let mockedData: [WorkoutStruct] = [
-            WorkoutStruct(name: "Full Body Workout", id: UUID(), exercises: ExerciseStruct.mockedData),
-            WorkoutStruct(name: "Upper Body Workout", id: UUID(), exercises: [ExerciseStruct.mockedData[0], ExerciseStruct.mockedData[1]]),
-            WorkoutStruct(name: "Lower Body Workout", id: UUID(), exercises: [ExerciseStruct.mockedData[2]]),
-            WorkoutStruct(name: "Push Workout", id: UUID(), exercises: [ExerciseStruct.mockedData[3]]),
-            WorkoutStruct(name: "Pull Workout", id: UUID(), exercises: [ExerciseStruct.mockedData[4]]),
-            WorkoutStruct(name: "Legs Workout", id: UUID(), exercises: [ExerciseStruct.mockedData[5]])
-        ]
-    }
+extension ExerciseStruct {
+    static let mockData: [ExerciseStruct] = [
+        ExerciseStruct(id: UUID(), exerciseName: "Bench Press", sets: SetStruct.mockData),
+        ExerciseStruct(id: UUID(), exerciseName: "Pull Ups", sets: SetStruct.mockData),
+        ExerciseStruct(id: UUID(), exerciseName: "Squats", sets: SetStruct.mockData),
+        ExerciseStruct(id: UUID(), exerciseName: "Shoulder Press", sets: SetStruct.mockData),
+        ExerciseStruct(id: UUID(), exerciseName: "Bent Over Rows", sets: SetStruct.mockData),
+        ExerciseStruct(id: UUID(), exerciseName: "Lunges", sets: SetStruct.mockData)
+    ]
+}
 
-    extension ExerciseStruct {
-        static let mockedData: [ExerciseStruct] = [
-            ExerciseStruct(name: "Bench Press", sets: SetStruct.mockedData),
-            ExerciseStruct(name: "Pull Ups", sets: SetStruct.mockedData),
-            ExerciseStruct(name: "Squats", sets: SetStruct.mockedData),
-            ExerciseStruct(name: "Shoulder Press", sets: SetStruct.mockedData),
-            ExerciseStruct(name: "Bent Over Rows", sets: SetStruct.mockedData),
-            ExerciseStruct(name: "Lunges", sets: SetStruct.mockedData)
-        ]
-    }
-
-    extension SetStruct {
-        static let mockedData: [SetStruct] = [
-            SetStruct(reps: 10, weight: 80.0),
-            SetStruct(reps: 8, weight: 90.0),
-            SetStruct(reps: 6, weight: 100.0)
-        ]
-    }
-
+extension SetStruct {
+    static let mockData: [SetStruct] = [
+        SetStruct(reps: 10, weight: 80.0),
+        SetStruct(reps: 8, weight: 90.0),
+        SetStruct(reps: 6, weight: 100.0)
+    ]
+}
 #endif

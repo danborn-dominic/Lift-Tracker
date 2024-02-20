@@ -12,10 +12,10 @@ import Combine
 import Foundation
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
     var systemEventsHandler: SystemEventsHandler?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         print("INFO setting up scene")
@@ -29,13 +29,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         self.systemEventsHandler = environment.systemEventsHandler
+        print("INFO done setting up scene")
     }
-
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("INFO scene active")
         systemEventsHandler?.sceneDidBecomeActive()
     }
-
+    
     func sceneWillResignActive(_ scene: UIScene) {
         systemEventsHandler?.sceneWillResignActive()
     }

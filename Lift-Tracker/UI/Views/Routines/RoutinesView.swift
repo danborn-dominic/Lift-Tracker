@@ -21,7 +21,6 @@ struct RoutinesView: View {
     }
     
     var body: some View {
-        
         self.content
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -51,7 +50,6 @@ struct RoutinesView: View {
     }
     
     @ViewBuilder private var content: some View {
-        let _ = print("INFO workouts status: ", workouts)
         switch workouts {
         case .notRequested: notRequestedView
         case .isLoading(_, _): loadingView
@@ -104,24 +102,27 @@ private extension RoutinesView {
 }
 
 // MARK: - Displaying Content
-
 private extension RoutinesView {
     func loadedView(_ workouts: [WorkoutStruct]) -> some View {
-        List {
-            ForEach(workouts, id: \.id) { workout in
-                NavigationLink(destination: RoutineDetailView(workout: workout)) {
-                    Text(workout.name)
+        if workouts.isEmpty {
+            return AnyView(Text("No routines"))
+        } else {
+            return AnyView(List {
+                ForEach(workouts, id: \.id) { workout in
+                    NavigationLink(destination: RoutineDetailView(workout: workout)) {
+                        Text(workout.workoutName)
+                    }
                 }
-            }
-            .onDelete(perform: deleteWorkout)
+                .onDelete(perform: deleteWorkout)
+            })
         }
     }
 }
 
-#if DEBUG
-struct WorkoutsView_Previews: PreviewProvider {
-    static var previews: some View {
-        return RoutinesView(container: .preview)
-    }
-}
-#endif
+//#if DEBUG
+//struct WorkoutsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        return RoutinesView(container: .preview)
+//    }
+//}
+//#endif
