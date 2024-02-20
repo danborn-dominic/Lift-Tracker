@@ -11,8 +11,8 @@ import SwiftUI
 
 protocol WorkoutInteractor {
     func loadWorkouts()
-    func addWorkout(workout: WorkoutStruct)
-    func deleteWorkout(workout: WorkoutStruct)
+    func addWorkout(workout: RoutineStruct)
+    func deleteWorkout(workout: RoutineStruct)
 }
 
 class RealWorkoutInteractor: WorkoutInteractor {
@@ -40,7 +40,7 @@ class RealWorkoutInteractor: WorkoutInteractor {
             .store(in: cancelBag)
     }
     
-    func addWorkout(workout: WorkoutStruct) {
+    func addWorkout(workout: RoutineStruct) {
         print("INFO: Starting to add workout: \(workout)")
         let cancelBag = CancelBag()
         print("INFO: Created a new CancelBag for the operation")
@@ -65,8 +65,8 @@ class RealWorkoutInteractor: WorkoutInteractor {
     }
     
     
-    func deleteWorkout(workout: WorkoutStruct) {
-        print("INFO deleting workout " + workout.workoutName)
+    func deleteWorkout(workout: RoutineStruct) {
+        print("INFO deleting workout " + workout.routineName)
         let cancelBag = CancelBag()
         appState.value.userData.workouts.setIsLoading(cancelBag: cancelBag)
         
@@ -89,9 +89,9 @@ struct StubWorkoutInteractor: WorkoutInteractor {
     func loadWorkouts() {
     }
     
-    func addWorkout(workout: WorkoutStruct) {
+    func addWorkout(workout: RoutineStruct) {
     }
     
-    func deleteWorkout(workout: WorkoutStruct) {
+    func deleteWorkout(workout: RoutineStruct) {
     }
 }

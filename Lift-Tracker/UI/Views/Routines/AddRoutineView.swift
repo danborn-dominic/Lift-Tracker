@@ -39,7 +39,7 @@ struct AddRoutineView: View {
                     .onDelete(perform: deleteExercise)
                     
                     Button("Add Exercise") {
-                        exercises.append(ExerciseStruct(exerciseName: ""))
+                        exercises.append(ExerciseStruct(id: UUID(), exerciseName: ""))
                     }
                 }
             }
@@ -51,7 +51,7 @@ struct AddRoutineView: View {
     }
     
     private func saveRoutine() {
-        let newWorkout = WorkoutStruct(workoutName: routineName, exercises: exercises)
+        let newWorkout = RoutineStruct(id: UUID(), routineName: routineName, exercises: exercises)
         print("INFO saving workout: ", newWorkout)
         container.interactors.workoutInteractor.addWorkout(workout: newWorkout)
         self.presentationMode.wrappedValue.dismiss()

@@ -12,7 +12,7 @@ import Combine
 struct RoutinesView: View {
     
     private let container: DIContainer
-    @State private(set) var workouts: Loadable<[WorkoutStruct]> = .notRequested
+    @State private(set) var workouts: Loadable<[RoutineStruct]> = .notRequested
     
     init(container: DIContainer) {
         print("INFO WorkoutsView init: DIContainer injected")
@@ -60,14 +60,14 @@ struct RoutinesView: View {
 }
 // MARK: - Side Effects
 private extension RoutinesView {
-    var workoutsUpdate: AnyPublisher<Loadable<[WorkoutStruct]>, Never> {
+    var workoutsUpdate: AnyPublisher<Loadable<[RoutineStruct]>, Never> {
         container.appState.updates(for: \.userData.workouts)
     }
 }
 // MARK: - Routing
 extension RoutinesView {
     struct Routing: Equatable {
-        var workoutDetails: WorkoutStruct.ID?
+        var workoutDetails: RoutineStruct.ID?
     }
 }
 // MARK: - Managing Content
@@ -103,14 +103,14 @@ private extension RoutinesView {
 
 // MARK: - Displaying Content
 private extension RoutinesView {
-    func loadedView(_ workouts: [WorkoutStruct]) -> some View {
+    func loadedView(_ workouts: [RoutineStruct]) -> some View {
         if workouts.isEmpty {
             return AnyView(Text("No routines"))
         } else {
             return AnyView(List {
                 ForEach(workouts, id: \.id) { workout in
                     NavigationLink(destination: RoutineDetailView(workout: workout)) {
-                        Text(workout.workoutName)
+                        Text(workout.routineName)
                     }
                 }
                 .onDelete(perform: deleteWorkout)

@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct RoutineDetailView: View {
-    let workout: WorkoutStruct
+    let workout: RoutineStruct
 
     var body: some View {
         List(workout.exercises, id: \.id) { exercise in
             Text(exercise.exerciseName)
         }
-        .navigationTitle(workout.workoutName)
+        .navigationTitle(workout.routineName)
     }
 }
 
 #if DEBUG
 struct RoutineDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RoutineDetailView(workout: WorkoutStruct.mockData[0])
+        RoutineDetailView(workout: RoutineStruct.mockData[0])
     }
 }
 #endif

@@ -50,6 +50,38 @@
             endingLineNumber = "21"
             landmarkName = "createWorkout(workout:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "943B78E0-8CE2-48D7-88C1-045DF542556A - 759bd1d1a00f2a68"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Lift_Tracker.RealWorkoutsRepository.createWorkout(workout: Lift_Tracker.WorkoutStruct) -&gt; Combine.AnyPublisher&lt;(), Swift.Error&gt;"
+                  moduleName = "Lift-Tracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dominicdanborn/Documents/Projects/Apps/Lift-Tracker/Lift-Tracker/Repositories/WorkoutRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "218">
+               </Location>
+               <Location
+                  uuid = "943B78E0-8CE2-48D7-88C1-045DF542556A - a9774021e724c475"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Lift_Tracker.RealWorkoutsRepository.createWorkout(workout: Lift_Tracker.RoutineStruct) -&gt; Combine.AnyPublisher&lt;(), Swift.Error&gt;"
+                  moduleName = "Lift-Tracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dominicdanborn/Documents/Projects/Apps/Lift-Tracker/Lift-Tracker/Repositories/WorkoutRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "218">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

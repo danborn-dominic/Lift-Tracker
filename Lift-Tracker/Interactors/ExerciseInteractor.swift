@@ -45,7 +45,7 @@ class RealExerciseInteractor: ExerciseInteractor {
                     self?.appState.value.userData.exercises = .loaded(exerciseLibrary)
                 } else {
                     print("WARNING: No exercises data available, setting state to loaded with empty array")
-                    let emptyExerciseLibrary = ExerciseLibraryStruct(exercises: [])
+                    let emptyExerciseLibrary = ExerciseLibraryStruct(id: UUID(), exercises: [])
                     self?.appState.value.userData.exercises = .loaded(emptyExerciseLibrary)
                 }
             })
