@@ -15,10 +15,10 @@ protocol ExerciseInteractor {
 
 class RealExerciseInteractor: ExerciseInteractor {
     let exercisesRepository: ExerciseLibraryRepository
-    var appState: WorkoutStore<AppState>
+    var appState: DataStore<AppState>
     private var cancelBag = CancelBag()
     
-    init(exercisesRepository: ExerciseLibraryRepository, appState: WorkoutStore<AppState>) {
+    init(exercisesRepository: ExerciseLibraryRepository, appState: DataStore<AppState>) {
         print("DEBUG: initializing ExerciseInteractor")
         self.exercisesRepository = exercisesRepository
         self.appState = appState

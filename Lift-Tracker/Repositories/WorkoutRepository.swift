@@ -8,20 +8,20 @@
 import CoreData
 import Combine
 
-protocol WorkoutsRepository {
-    func createWorkout(workout: RoutineStruct) -> AnyPublisher<Void, Error>
-    func readWorkouts() -> AnyPublisher<[RoutineStruct], Error>
-    func updateWorkout(workout: RoutineStruct) -> AnyPublisher<Void, Error>
-    func deleteWorkout(workout: RoutineStruct) -> AnyPublisher<Void, Error>
+protocol RoutinesRepository {
+    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func readRoutines() -> AnyPublisher<[RoutineStruct], Error>
+    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
 }
 
-struct RealWorkoutsRepository: WorkoutsRepository {
+struct RealRoutinesRepository: RoutinesRepository {
     let persistentStore: PersistentStore
     
-    func createWorkout(workout: RoutineStruct) -> AnyPublisher<Void, Error> {
-        print("INFO creating workout: ", workout)
+    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+        print("INFO creating workout: ", routine)
         return persistentStore.update { context in
-            guard let _ = workout.mapToMO(in: context) else {
+            guard let _ = routine.mapToMO(in: context) else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
             }
         }
@@ -29,7 +29,7 @@ struct RealWorkoutsRepository: WorkoutsRepository {
         .eraseToAnyPublisher()
     }
     
-    func readWorkouts() -> AnyPublisher<[RoutineStruct], Error> {
+    func readRoutines() -> AnyPublisher<[RoutineStruct], Error> {
         print("INFO reading workouts in repository")
         let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
         fetchRequest.returnsObjectsAsFaults = false
@@ -38,9 +38,9 @@ struct RealWorkoutsRepository: WorkoutsRepository {
     }
     
     
-    func updateWorkout(workout: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         return persistentStore.update { context in
-            guard let _ = workout.mapToMO(in: context) else {
+            guard let _ = routine.mapToMO(in: context) else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
             }
         }
@@ -48,12 +48,12 @@ struct RealWorkoutsRepository: WorkoutsRepository {
         .eraseToAnyPublisher()
     }
     
-    func deleteWorkout(workout: RoutineStruct) -> AnyPublisher<Void, Error> {
-        print("DEBUG: Initiating deletion of workout in WorkoutRepository: \(workout.routineName)")
+    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+        print("DEBUG: Initiating deletion of workout in WorkoutRepository: \(routine.routineName)")
         
         return persistentStore.update { context in
             let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
-            guard let id = workout.id else {
+            guard let id = routine.id else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Workout id is missing"])
             }
             fetchRequest.predicate = NSPredicate(format: "id == %@", id.uuidString)

@@ -40,7 +40,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "943B78E0-8CE2-48D7-88C1-045DF542556A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Lift-Tracker/Repositories/WorkoutRepository.swift"
@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "createWorkout(workout:)"
+            landmarkName = "createRoutine(routine:)"
             landmarkType = "7">
             <Locations>
                <Location

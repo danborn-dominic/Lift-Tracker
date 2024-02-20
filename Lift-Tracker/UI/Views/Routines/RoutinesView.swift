@@ -61,7 +61,7 @@ struct RoutinesView: View {
 // MARK: - Side Effects
 private extension RoutinesView {
     var workoutsUpdate: AnyPublisher<Loadable<[RoutineStruct]>, Never> {
-        container.appState.updates(for: \.userData.workouts)
+        container.appState.updates(for: \.userData.routines)
     }
 }
 // MARK: - Routing

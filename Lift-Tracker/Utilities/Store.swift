@@ -15,9 +15,9 @@ import SwiftUI
 import Combine
 
 // A typealias for a state store using CurrentValueSubject.
-typealias WorkoutStore<State> = CurrentValueSubject<State, Never>
+typealias DataStore<State> = CurrentValueSubject<State, Never>
 
-extension WorkoutStore {
+extension DataStore {
     /// A subscript extension for CurrentValueSubject that allows direct access
     /// and modification of its Output value's properties using a key path.
     ///
@@ -94,7 +94,7 @@ extension Binding where Value: Equatable {
     /// - Returns:
     ///     - A new binding that updates the specified property in the state when its value changes.
     ///
-    func dispatched<State>(to state: WorkoutStore<State>,
+    func dispatched<State>(to state: DataStore<State>,
                            _ keyPath: WritableKeyPath<State, Value>) -> Self {
         // Creates a new binding that, when set, updates the specified property in the provided state.
         // The 'onSet' closure updates the state's property specified by keyPath with the binding's new value.
