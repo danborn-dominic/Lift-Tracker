@@ -10,16 +10,75 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-
+    
     private let container: DIContainer
-
+    
     init(container: DIContainer) {
+        print("INFO ContentView init: DIContainer injected")
         self.container = container
     }
-
+    
     var body: some View {
-        WorkoutListView()
-            .inject(container)
+        TabView {
+            NavigationView {
+                HomeView(container: container)
+            }
+            .tabItem {
+                VStack {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
+            }
+            
+            NavigationView {
+                RoutinesView(container: container)
+            }
+            .tabItem {
+                VStack {
+                    Image(systemName: "figure.strengthtraining.traditional")
+                    Text("Routines")
+                }
+            }
+            
+            NavigationView {
+                ExercisesView(container: container)
+            }
+            .tabItem {
+                VStack {
+                    Image(systemName: "dumbbell")
+                    Text("Exercises")
+                }
+            }
+            
+            NavigationView {
+                ProgressView(container: container)
+            }
+            .tabItem {
+                VStack {
+                    Image(systemName: "chart.bar")
+                    Text("Progress")
+                }
+            }
+            
+            NavigationView {
+                SettingsView(container: container)
+            }
+            .tabItem {
+                VStack {
+                    Image(systemName: "ellipsis")
+                    Text("More")
+                }
+            }
+            
+        }
     }
+        
 }
 
+#if DEBUG
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(container: .preview)
+    }
+}
+#endif

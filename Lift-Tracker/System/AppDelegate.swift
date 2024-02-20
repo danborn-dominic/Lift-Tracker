@@ -13,13 +13,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var systemEventsHandler: SystemEventsHandler? = {
         self.systemEventsHandler(UIApplication.shared)
     }()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions
-        launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                     launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("INFO launching application")
         return true
     }
-
+    
     private func systemEventsHandler(_ application: UIApplication) -> SystemEventsHandler? {
         return sceneDelegate(application)?.systemEventsHandler
     }

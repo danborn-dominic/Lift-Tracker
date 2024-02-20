@@ -17,12 +17,13 @@ struct AppState: Equatable {
 extension AppState {
     struct UserData: Equatable {
         var workouts: Loadable<[WorkoutStruct]> = .notRequested
+        var exercises: Loadable<ExerciseLibraryStruct> = .notRequested
     }
 }
 
 extension AppState {
     struct ViewRouting: Equatable {
-        var workoutList = WorkoutListView.Routing()
+        var workoutList = RoutinesView.Routing()
     }
 }
 
@@ -31,3 +32,14 @@ extension AppState {
         var isActive: Bool = false
     }
 }
+
+#if DEBUG
+extension AppState {
+    static var preview: AppState {
+        var state = AppState()
+        state.system.isActive = true
+        state.userData.workouts = .loaded(WorkoutStruct.mockData)
+        return state
+    }
+}
+#endif

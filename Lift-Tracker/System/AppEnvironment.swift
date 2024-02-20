@@ -21,8 +21,9 @@ extension AppEnvironment {
 
         let persistentStore = CoreDataStack()
         let workoutsRepository = RealWorkoutsRepository(persistentStore: persistentStore)
+        let exerciseRepository = RealExerciseLibraryRepository(persistentStore: persistentStore)
 
-        let interactors = configuredInteractors(appState: appState, workoutsRepository: workoutsRepository)
+        let interactors = configuredInteractors(appState: appState, workoutsRepository: workoutsRepository, exerciseRepository: exerciseRepository)
         let diContainer = DIContainer(appState: appState, interactors: interactors)
 
         let systemEventsHandler = RealSystemEventsHandler(container: diContainer)
@@ -32,10 +33,10 @@ extension AppEnvironment {
         return AppEnvironment(container: diContainer, systemEventsHandler: systemEventsHandler)
     }
 
-    private static func configuredInteractors(appState: WorkoutStore<AppState>, workoutsRepository: WorkoutsRepository) -> DIContainer.Interactors {
+    private static func configuredInteractors(appState: WorkoutStore<AppState>, workoutsRepository: WorkoutsRepository, exerciseRepository: ExerciseLibraryRepository) -> DIContainer.Interactors {
         let workoutInteractor = RealWorkoutInteractor(workoutsRepository: workoutsRepository, appState: appState)
-
-        return .init(workoutInteractor: workoutInteractor)
+        let exerciseInteractor = RealExerciseInteractor(exercisesRepository: exerciseRepository, appState: appState)
+        return .init(workoutInteractor: workoutInteractor, exerciseInteractor: exerciseInteractor)
     }
 }
 

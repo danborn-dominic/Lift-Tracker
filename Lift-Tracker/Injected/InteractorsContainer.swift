@@ -8,9 +8,11 @@
 extension DIContainer {
     struct Interactors {
         let workoutInteractor: WorkoutInteractor
+        let exerciseInteractor: ExerciseInteractor
 
-        init(workoutInteractor: WorkoutInteractor) {
+        init(workoutInteractor: WorkoutInteractor, exerciseInteractor: ExerciseInteractor) {
             self.workoutInteractor = workoutInteractor
+            self.exerciseInteractor = exerciseInteractor
         }
 
     }
@@ -19,7 +21,8 @@ extension DIContainer {
 extension DIContainer.Interactors {
     static var stub: DIContainer.Interactors {
         let workoutInteractor = StubWorkoutInteractor()
-        return DIContainer.Interactors(workoutInteractor: workoutInteractor)
+        let exerciseInteractor = StubExerciseInteractor()
+        return DIContainer.Interactors(workoutInteractor: workoutInteractor, exerciseInteractor: exerciseInteractor)
     }
 }
 

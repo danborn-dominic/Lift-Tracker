@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ExerciseMO" representedClassName="ExerciseMO" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D56" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ExerciseLibraryMO" representedClassName="ExerciseLibraryMO" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseMO" inverseName="exerciseLibrary" inverseEntity="ExerciseMO"/>
+    </entity>
+    <entity name="ExerciseMO" representedClassName="ExerciseMO" syncable="YES" codeGenerationType="class">
+        <attribute name="exerciseName" optional="YES" attributeType="String"/>
+        <attribute name="exerciseNotes" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="numSets" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exerciseLibrary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseLibraryMO" inverseName="exercises" inverseEntity="ExerciseLibraryMO"/>
         <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SetMO" inverseName="exercise" inverseEntity="SetMO"/>
         <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutMO" inverseName="exercises" inverseEntity="WorkoutMO"/>
     </entity>
@@ -16,7 +22,7 @@
     <entity name="WorkoutMO" representedClassName="WorkoutMO" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="workoutName" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseMO" inverseName="workout" inverseEntity="ExerciseMO"/>
     </entity>
 </model>
