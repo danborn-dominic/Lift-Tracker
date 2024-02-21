@@ -87,15 +87,15 @@ private extension RoutinesView {
     
     func loadWorkouts() {
         print("INFO called load workouts in view")
-        container.interactors.workoutInteractor
-            .loadWorkouts()
+        container.interactors.routineInteractor
+            .loadRoutines()
     }
     
     func deleteWorkout(at offsets: IndexSet) {
-        let workoutsToDelete = offsets.lazy.map { self.workouts.value?[$0] }
-        workoutsToDelete.forEach { workout in
-            if let workout = workout {
-                container.interactors.workoutInteractor.deleteWorkout(workout: workout)
+        let routinesToDelete = offsets.lazy.map { self.workouts.value?[$0] }
+        routinesToDelete.forEach { routine in
+            if let routine = routine {
+                container.interactors.routineInteractor.deleteRoutine(routine: routine)
             }
         }
     }

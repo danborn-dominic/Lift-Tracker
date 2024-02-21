@@ -63,7 +63,7 @@ struct ExercisesView: View {
 // MARK: - Side Effects
 private extension ExercisesView {
     var exercisesUpdate: AnyPublisher<Loadable<ExerciseLibraryStruct>, Never> {
-        container.appState.updates(for: \.userData.exercises)
+        container.appState.updates(for: \.userData.exerciseLibrary)
     }
 }
 // MARK: - Routing

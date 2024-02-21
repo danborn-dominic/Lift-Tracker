@@ -51,9 +51,8 @@ struct AddRoutineView: View {
     }
     
     private func saveRoutine() {
-        let newWorkout = RoutineStruct(id: UUID(), routineName: routineName, exercises: exercises)
-        print("INFO saving workout: ", newWorkout)
-        container.interactors.workoutInteractor.addWorkout(workout: newWorkout)
+        let newRoutine = RoutineStruct(id: UUID(), routineName: routineName, exercises: exercises)
+        container.interactors.routineInteractor.addRoutine(routine: newRoutine)
         self.presentationMode.wrappedValue.dismiss()
     }
     
