@@ -48,7 +48,7 @@ struct AddRoutineView: View {
                     }
                 }
             }
-            .navigationBarTitle("Add Workout", displayMode: .inline)
+            .navigationBarTitle("Add Routine", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
                 saveRoutine()
             })

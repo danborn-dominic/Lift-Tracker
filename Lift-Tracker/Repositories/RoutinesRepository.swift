@@ -7,7 +7,7 @@
 //  Description:
 //  This file defines the `RoutinesRepository` protocol and its concrete implementation `RealRoutinesRepository`.
 //  The repository acts as an intermediary between the persistence layer (Core Data) and the application logic,
-//  facilitating CRUD operations for workout routines. It abstracts the underlying data fetching and manipulation
+//  facilitating CRUD operations for routines. It abstracts the underlying data fetching and manipulation
 //  mechanisms, providing a clean interface for interacting with routine data.
 //  This includes creating, reading, updating, and deleting routines, using Core Data and Combine for asynchronous operations.
 //
@@ -112,18 +112,18 @@ struct RealRoutinesRepository: RoutinesRepository {
             
             // Ensure the routine has a valid ID. If not, throw an error.
             guard let id = routine.id else {
-                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Workout id is missing"])
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Routine id is missing"])
             }
             fetchRequest.predicate = NSPredicate(format: "id == %@", id.uuidString)
             
             // Fetch the routine from the context using the ID.
-            let workouts = try context.fetch(fetchRequest)
-            if let routineMO = workouts.first {
+            let routines = try context.fetch(fetchRequest)
+            if let routineMO = routines.first {
                 // If the routine is found, delete it.
                 context.delete(routineMO)
             } else {
                 // If the routine is not found, throw an error.
-                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to find workout to delete"])
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to find routine to delete"])
             }
         }
         .map { _ in }

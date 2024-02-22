@@ -15,12 +15,12 @@ import Foundation
 #if DEBUG
 extension RoutineStruct {
     static let mockData: [RoutineStruct] = [
-        RoutineStruct(id: UUID(), routineName: "Full Body Workout", exercises: ExerciseStruct.mockData),
-        RoutineStruct(id: UUID(), routineName: "Upper Body Workout", exercises: [ExerciseStruct.mockData[0], ExerciseStruct.mockData[1]]),
-        RoutineStruct(id: UUID(), routineName: "Lower Body Workout", exercises: [ExerciseStruct.mockData[2]]),
-        RoutineStruct(id: UUID(), routineName: "Push Workout", exercises: [ExerciseStruct.mockData[3]]),
-        RoutineStruct(id: UUID(), routineName: "Pull Workout", exercises: [ExerciseStruct.mockData[4]]),
-        RoutineStruct(id: UUID(), routineName: "Legs Workout", exercises: [ExerciseStruct.mockData[5]])
+        RoutineStruct(id: UUID(), routineName: "Full Body", exercises: ExerciseStruct.mockData),
+        RoutineStruct(id: UUID(), routineName: "Upper Body", exercises: [ExerciseStruct.mockData[0], ExerciseStruct.mockData[1]]),
+        RoutineStruct(id: UUID(), routineName: "Lower Body", exercises: [ExerciseStruct.mockData[2]]),
+        RoutineStruct(id: UUID(), routineName: "Push", exercises: [ExerciseStruct.mockData[3]]),
+        RoutineStruct(id: UUID(), routineName: "Pull", exercises: [ExerciseStruct.mockData[4]]),
+        RoutineStruct(id: UUID(), routineName: "Legs", exercises: [ExerciseStruct.mockData[5]])
     ]
 }
 

@@ -45,8 +45,8 @@ struct ExercisesView: View {
                     self.exercisesLibrary = .notRequested
                 case .isLoading(let last, _):
                     self.exercisesLibrary = .isLoading(last: last, cancelBag: CancelBag())
-                case .loaded(let workouts):
-                    self.exercisesLibrary = .loaded(workouts)
+                case .loaded(let routines):
+                    self.exercisesLibrary = .loaded(routines)
                 case .failed(let error):
                     self.exercisesLibrary = .failed(error)
                 }
@@ -87,7 +87,7 @@ private extension ExercisesView {
     }
     
     func failedView(_ error: Error) -> some View {
-        Text("Failed to load workouts: \(error.localizedDescription)")
+        Text("Failed to load routines: \(error.localizedDescription)")
             .onTapGesture { self.loadExercises() }
     }
     

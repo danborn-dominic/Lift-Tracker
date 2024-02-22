@@ -37,11 +37,11 @@ extension AppEnvironment {
         let persistentStore = CoreDataStack()
         
         // Create repositories for routines and exercises.
-        let workoutsRepository = RealRoutinesRepository(persistentStore: persistentStore)
+        let routinesRepository = RealRoutinesRepository(persistentStore: persistentStore)
         let exerciseRepository = RealExerciseLibraryRepository(persistentStore: persistentStore)
         
         // Configure interactors with the repositories and application state.
-        let interactors = configuredInteractors(appState: appState, workoutsRepository: workoutsRepository, exerciseRepository: exerciseRepository)
+        let interactors = configuredInteractors(appState: appState, routinesRepository: routinesRepository, exerciseRepository: exerciseRepository)
         
         // Initialize the dependency injection container with the application state and interactors.
         let diContainer = DIContainer(appState: appState, interactors: interactors)
@@ -59,14 +59,14 @@ extension AppEnvironment {
     ///
     /// - Parameters:
     ///   - appState: The application state to be used by the interactors.
-    ///   - workoutsRepository: The routines repository for routines-related operations.
+    ///   - routinesRepository: The routines repository for routines-related operations.
     ///   - exerciseRepository: The exercise library repository for exercises-related operations.
     /// - Returns:
     ///     - Interactors for the DI container.
-    private static func configuredInteractors(appState: DataStore<AppState>, workoutsRepository: RoutinesRepository, exerciseRepository: ExerciseLibraryRepository) -> DIContainer.Interactors {
+    private static func configuredInteractors(appState: DataStore<AppState>, routinesRepository: RoutinesRepository, exerciseRepository: ExerciseLibraryRepository) -> DIContainer.Interactors {
         
         // Initialize the routine interactor with the routines repository and application state.
-        let routineInteractor = RealRoutineInteractor(routinesRepository: workoutsRepository, appState: appState)
+        let routineInteractor = RealRoutineInteractor(routinesRepository: routinesRepository, appState: appState)
         
         // Initialize the exercise interactor with the exercise library repository and application state.
         let exerciseInteractor = RealExerciseInteractor(exercisesRepository: exerciseRepository, appState: appState)

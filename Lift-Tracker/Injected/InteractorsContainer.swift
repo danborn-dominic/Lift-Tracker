@@ -6,8 +6,8 @@
 //
 //  Description:
 //  This file contains the definition of the Interactors container within the Dependency Injection Container (DIContainer).
-//  It holds instances of different interactors like WorkoutInteractor and ExerciseInteractor, which are responsible for handling
-//  business logic related to workouts and exercises respectively. This container facilitates the injection of these interactors
+//  It holds instances of different interactors like RoutineInteractor and ExerciseInteractor, which are responsible for handling
+//  business logic related to routines and exercises respectively. This container facilitates the injection of these interactors
 //  into different parts of the application.
 //
 //  Copyright © 2023 Dominic Danborn. All rights reserved.

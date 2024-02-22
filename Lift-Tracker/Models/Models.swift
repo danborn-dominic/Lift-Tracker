@@ -6,7 +6,7 @@
 //
 //  Description:
 //  This file contains the data model definitions used throughout the Lift-Tracker app,
-//  including structures for workouts, exercises, sets, and other related entities.
+//  including structures for routines, exercises, sets, and other related entities.
 //
 //  Copyright © 2023 Dominic Danborn. All rights reserved.
 //

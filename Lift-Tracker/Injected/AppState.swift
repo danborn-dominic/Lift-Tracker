@@ -30,9 +30,9 @@ struct AppState: Equatable {
 
 // Extension for managing user-specific data.
 extension AppState {
-    // UserData encapsulates the state of user-related data such as workouts and exercises.
+    // UserData encapsulates the state of user-related data such as routines and exercises.
     struct UserData: Equatable {
-        // routines holds the state of user's workout routines.
+        // routines holds the state of user's routines.
         var routines: Loadable<[RoutineStruct]> = .notRequested
         // exercises holds the state of the user's exercise library.
         var exerciseLibrary: Loadable<ExerciseLibraryStruct> = .notRequested
@@ -43,7 +43,7 @@ extension AppState {
 extension AppState {
     // ViewRouting encapsulates the navigation state of the app.
     struct ViewRouting: Equatable {
-        // workoutList holds the routing state for the workouts view.
+        // routineList holds the routing state for the routines view.
         var routineList = RoutinesView.Routing()
     }
 }

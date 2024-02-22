@@ -5,7 +5,7 @@
 //  Created by Dominic Danborn on 5/30/23.
 //
 //  Description:
-//  This file defines the WorkoutStore, a type of CurrentValueSubject for state management within the app.
+//  This file defines the DataStore, a type of CurrentValueSubject for state management within the app.
 //  It includes extensions for key path based state updates, bulk updates, and SwiftUI Binding modifications.
 //
 //  Copyright © 2023 Dominic Danborn. All rights reserved.
