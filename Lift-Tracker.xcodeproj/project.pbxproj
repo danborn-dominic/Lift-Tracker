@@ -138,6 +138,36 @@
 			path = More;
 			sourceTree = "<group>";
 		};
+		0754614C2B87D56B0063CE03 /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB6E2A0EC08E00EF9C75 /* UI */,
+			);
+			path = "Presentation Layer";
+			sourceTree = "<group>";
+		};
+		0754614D2B87D5820063CE03 /* Business Logic Layer */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB6C2A0EC05800EF9C75 /* Injected */,
+				07FDCB692A0EBC2100EF9C75 /* Interactors */,
+				07FDCB6B2A0EC03900EF9C75 /* Utilities */,
+				07FDCB6A2A0EC03300EF9C75 /* System */,
+			);
+			path = "Business Logic Layer";
+			sourceTree = "<group>";
+		};
+		0754614F2B87D59D0063CE03 /* Data Access Layer */ = {
+			isa = PBXGroup;
+			children = (
+				07FDCB672A0EBBE000EF9C75 /* Models */,
+				07FDCB682A0EBBFB00EF9C75 /* Persistance */,
+				07FDCB6D2A0EC06A00EF9C75 /* Repositories */,
+				07FDCB6F2A0EC0AA00EF9C75 /* Resources */,
+			);
+			path = "Data Access Layer";
+			sourceTree = "<group>";
+		};
 		07FDCB482A0EBB3F00EF9C75 = {
 			isa = PBXGroup;
 			children = (
@@ -158,16 +188,10 @@
 		07FDCB532A0EBB3F00EF9C75 /* Lift-Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				0754614C2B87D56B0063CE03 /* Presentation Layer */,
+				0754614D2B87D5820063CE03 /* Business Logic Layer */,
+				0754614F2B87D59D0063CE03 /* Data Access Layer */,
 				07C32AFE2A3D01F600219776 /* Info.plist */,
-				07FDCB682A0EBBFB00EF9C75 /* Persistance */,
-				07FDCB6A2A0EC03300EF9C75 /* System */,
-				07FDCB6B2A0EC03900EF9C75 /* Utilities */,
-				07FDCB6C2A0EC05800EF9C75 /* Injected */,
-				07FDCB6D2A0EC06A00EF9C75 /* Repositories */,
-				07FDCB692A0EBC2100EF9C75 /* Interactors */,
-				07FDCB672A0EBBE000EF9C75 /* Models */,
-				07FDCB6E2A0EC08E00EF9C75 /* UI */,
-				07FDCB6F2A0EC0AA00EF9C75 /* Resources */,
 			);
 			path = "Lift-Tracker";
 			sourceTree = "<group>";
