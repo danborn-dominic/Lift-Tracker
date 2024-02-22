@@ -37,8 +37,8 @@
 		07FDCB742A0ED14400EF9C75 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB732A0ED14400EF9C75 /* AppState.swift */; };
 		07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB752A0ED24000EF9C75 /* InteractorsContainer.swift */; };
 		07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB772A0ED2BC00EF9C75 /* DependencyInjector.swift */; };
-		07FDCB7C2A0F01D500EF9C75 /* WorkoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB7B2A0F01D500EF9C75 /* WorkoutRepository.swift */; };
-		07FDCB7E2A0F041D00EF9C75 /* WorkoutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB7D2A0F041D00EF9C75 /* WorkoutInteractor.swift */; };
+		07FDCB7C2A0F01D500EF9C75 /* RoutinesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB7B2A0F01D500EF9C75 /* RoutinesRepository.swift */; };
+		07FDCB7E2A0F041D00EF9C75 /* RoutineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB7D2A0F041D00EF9C75 /* RoutineInteractor.swift */; };
 		07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB7F2A0FE9F400EF9C75 /* Models.swift */; };
 		07FDCB822A0FEA0500EF9C75 /* Models+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB812A0FEA0500EF9C75 /* Models+CoreData.swift */; };
 		07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB832A17F08900EF9C75 /* CoreDataStack.swift */; };
@@ -77,8 +77,8 @@
 		07FDCB732A0ED14400EF9C75 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		07FDCB752A0ED24000EF9C75 /* InteractorsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorsContainer.swift; sourceTree = "<group>"; };
 		07FDCB772A0ED2BC00EF9C75 /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
-		07FDCB7B2A0F01D500EF9C75 /* WorkoutRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRepository.swift; sourceTree = "<group>"; };
-		07FDCB7D2A0F041D00EF9C75 /* WorkoutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInteractor.swift; sourceTree = "<group>"; };
+		07FDCB7B2A0F01D500EF9C75 /* RoutinesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesRepository.swift; sourceTree = "<group>"; };
+		07FDCB7D2A0F041D00EF9C75 /* RoutineInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInteractor.swift; sourceTree = "<group>"; };
 		07FDCB7F2A0FE9F400EF9C75 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		07FDCB812A0FEA0500EF9C75 /* Models+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models+CoreData.swift"; sourceTree = "<group>"; };
 		07FDCB832A17F08900EF9C75 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		07FDCB692A0EBC2100EF9C75 /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
-				07FDCB7D2A0F041D00EF9C75 /* WorkoutInteractor.swift */,
+				07FDCB7D2A0F041D00EF9C75 /* RoutineInteractor.swift */,
 				070129302B7599F600EFF73A /* ExerciseInteractor.swift */,
 			);
 			path = Interactors;
@@ -236,7 +236,7 @@
 		07FDCB6D2A0EC06A00EF9C75 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				07FDCB7B2A0F01D500EF9C75 /* WorkoutRepository.swift */,
+				07FDCB7B2A0F01D500EF9C75 /* RoutinesRepository.swift */,
 				0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */,
 			);
 			path = Repositories;
@@ -375,7 +375,7 @@
 				07C32AF72A33B38900219776 /* AppDelegate.swift in Sources */,
 				07FDCB742A0ED14400EF9C75 /* AppState.swift in Sources */,
 				076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */,
-				07FDCB7C2A0F01D500EF9C75 /* WorkoutRepository.swift in Sources */,
+				07FDCB7C2A0F01D500EF9C75 /* RoutinesRepository.swift in Sources */,
 				07C32B022A464B7C00219776 /* Helpers.swift in Sources */,
 				070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */,
 				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
@@ -383,7 +383,7 @@
 				07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */,
 				07FDCB822A0FEA0500EF9C75 /* Models+CoreData.swift in Sources */,
 				07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */,
-				07FDCB7E2A0F041D00EF9C75 /* WorkoutInteractor.swift in Sources */,
+				07FDCB7E2A0F041D00EF9C75 /* RoutineInteractor.swift in Sources */,
 				0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */,
 				0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */,
 				076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */,

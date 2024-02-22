@@ -4,6 +4,11 @@
 //
 //  Created by Dominic Danborn on 7/21/23.
 //
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
+//
 
 import SwiftUI
 import Combine
@@ -14,7 +19,6 @@ struct ExercisesView: View {
     @State private(set) var exercisesLibrary: Loadable<ExerciseLibraryStruct> = .notRequested
     
     init(container: DIContainer) {
-        print("INFO ExercisesView init: DIContainer injected")
         self.container = container
         self._exercisesLibrary = .init(initialValue: exercisesLibrary)
     }
@@ -41,8 +45,8 @@ struct ExercisesView: View {
                     self.exercisesLibrary = .notRequested
                 case .isLoading(let last, _):
                     self.exercisesLibrary = .isLoading(last: last, cancelBag: CancelBag())
-                case .loaded(let workouts):
-                    self.exercisesLibrary = .loaded(workouts)
+                case .loaded(let routines):
+                    self.exercisesLibrary = .loaded(routines)
                 case .failed(let error):
                     self.exercisesLibrary = .failed(error)
                 }
@@ -63,7 +67,7 @@ struct ExercisesView: View {
 // MARK: - Side Effects
 private extension ExercisesView {
     var exercisesUpdate: AnyPublisher<Loadable<ExerciseLibraryStruct>, Never> {
-        container.appState.updates(for: \.userData.exercises)
+        container.appState.updates(for: \.userData.exerciseLibrary)
     }
 }
 // MARK: - Routing
@@ -83,31 +87,21 @@ private extension ExercisesView {
     }
     
     func failedView(_ error: Error) -> some View {
-        Text("Failed to load workouts: \(error.localizedDescription)")
+        Text("Failed to load routines: \(error.localizedDescription)")
             .onTapGesture { self.loadExercises() }
     }
     
     func loadExercises() {
-        print("DEBUG: Called load exercises in view")
         container.interactors.exerciseInteractor
             .loadExercises()
-        print("DEBUG: Exercises loaded in view")
-        
     }
     
     func deleteExercise(at offsets: IndexSet) {
-        print("DEBUG: Initiating deleteExercise at offsets: \(offsets)")
-        guard let exercises = exercisesLibrary.value?.exercises else {
-            print("DEBUG: No exercises available to delete")
-            return
-        }
+        guard let exercises = exercisesLibrary.value?.exercises else { return }
         offsets.forEach { index in
             if index < exercises.count {
                 let exerciseToDelete = exercises[index]
-                print("DEBUG: Deleting exercise at index \(index): \(exerciseToDelete.exerciseName)")
                 container.interactors.exerciseInteractor.deleteExercise(exercise: exerciseToDelete)
-            } else {
-                print("DEBUG: Index \(index) out of range, cannot delete")
             }
         }
     }
@@ -116,7 +110,6 @@ private extension ExercisesView {
 // MARK: - Displaying Content
 private extension ExercisesView {
     func loadedView(_ exerciseLibrary: ExerciseLibraryStruct) -> some View {
-        print("DEBUG: ExerciseLibrary in loadedView: ", exerciseLibrary.exercises)
         let exercises = exerciseLibrary.exercises
         if exercises.isEmpty {
             return AnyView(Text("No exercises"))
@@ -131,10 +124,10 @@ private extension ExercisesView {
     }
 }
 
-//#if DEBUG
-//struct ExercisesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExercisesView(container: .preview)
-//    }
-//}
-//#endif
+#if DEBUG
+struct ExercisesView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExercisesView(container: .preview)
+    }
+}
+#endif

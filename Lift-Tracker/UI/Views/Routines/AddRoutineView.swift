@@ -1,8 +1,13 @@
 //
-//  AddWorkoutView.swift
+//  AddRoutineView.swift
 //  Lift-Tracker
 //
 //  Created by Dominic Danborn on 6/16/23.
+//
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
 import SwiftUI
@@ -39,11 +44,11 @@ struct AddRoutineView: View {
                     .onDelete(perform: deleteExercise)
                     
                     Button("Add Exercise") {
-                        exercises.append(ExerciseStruct(exerciseName: ""))
+                        exercises.append(ExerciseStruct(id: UUID(), exerciseName: ""))
                     }
                 }
             }
-            .navigationBarTitle("Add Workout", displayMode: .inline)
+            .navigationBarTitle("Add Routine", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
                 saveRoutine()
             })
@@ -51,9 +56,8 @@ struct AddRoutineView: View {
     }
     
     private func saveRoutine() {
-        let newWorkout = WorkoutStruct(workoutName: routineName, exercises: exercises)
-        print("INFO saving workout: ", newWorkout)
-        container.interactors.workoutInteractor.addWorkout(workout: newWorkout)
+        let newRoutine = RoutineStruct(id: UUID(), routineName: routineName, exercises: exercises)
+        container.interactors.routineInteractor.addRoutine(routine: newRoutine)
         self.presentationMode.wrappedValue.dismiss()
     }
     
@@ -62,10 +66,10 @@ struct AddRoutineView: View {
     }
 }
 
-//#if DEBUG
-//struct AddRoutineView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddRoutineView(container: .preview)
-//    }
-//}
-//#endif
+#if DEBUG
+struct AddRoutineView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddRoutineView(container: .preview)
+    }
+}
+#endif

@@ -1,25 +1,37 @@
 //
 //  ContentView.swift
-//  WorkoutApp
+//  Lift-Tracker
 //
-//  Created by Your Name on Today's Date.
-//  Copyright (c) 2023 Your Name. All rights reserved.
+//  Created by Dominic Danborn on 5/27/23.
+//
+//  Description:
+//  This file defines the ContentView struct, which serves as the main view of the Lift-Tracker application.
+//  It sets up a tab-based navigation structure, providing access to different sections of the app such as
+//  Home, Routines, Exercises, Progress, and More. The view relies on the DIContainer to inject dependencies
+//  into its child views.
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
 import SwiftUI
 import Combine
 
+/// The main view of the Lift-Tracker application, organizing the navigation structure.
 struct ContentView: View {
     
+    /// The dependency injection container, holding app-wide dependencies.
     private let container: DIContainer
     
+    /// Initializes a new ContentView with the provided DIContainer.
     init(container: DIContainer) {
-        print("INFO ContentView init: DIContainer injected")
         self.container = container
     }
     
+    /// The content and layout of the view.
     var body: some View {
+        
         TabView {
+            // Home tab with navigation view.
             NavigationView {
                 HomeView(container: container)
             }
@@ -30,6 +42,7 @@ struct ContentView: View {
                 }
             }
             
+            // Routines tab with navigation view.
             NavigationView {
                 RoutinesView(container: container)
             }
@@ -40,6 +53,7 @@ struct ContentView: View {
                 }
             }
             
+            // Exercises tab with navigation view.
             NavigationView {
                 ExercisesView(container: container)
             }
@@ -50,6 +64,7 @@ struct ContentView: View {
                 }
             }
             
+            // Progress tab with navigation view.
             NavigationView {
                 ProgressView(container: container)
             }
@@ -60,6 +75,7 @@ struct ContentView: View {
                 }
             }
             
+            // Settings (More) tab with navigation view.
             NavigationView {
                 SettingsView(container: container)
             }
@@ -72,7 +88,6 @@ struct ContentView: View {
             
         }
     }
-        
 }
 
 #if DEBUG

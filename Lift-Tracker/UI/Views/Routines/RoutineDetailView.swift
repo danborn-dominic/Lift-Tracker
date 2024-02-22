@@ -4,24 +4,30 @@
 //
 //  Created by Dominic Danborn on 2/4/24.
 //
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
+//
 
 import SwiftUI
 
 struct RoutineDetailView: View {
-    let workout: WorkoutStruct
-
+    
+    let routine: RoutineStruct
+    
     var body: some View {
-        List(workout.exercises, id: \.id) { exercise in
+        List(routine.exercises, id: \.id) { exercise in
             Text(exercise.exerciseName)
         }
-        .navigationTitle(workout.workoutName)
+        .navigationTitle(routine.routineName)
     }
 }
 
 #if DEBUG
 struct RoutineDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RoutineDetailView(workout: WorkoutStruct.mockData[0])
+        RoutineDetailView(routine: RoutineStruct.mockData[0])
     }
 }
 #endif

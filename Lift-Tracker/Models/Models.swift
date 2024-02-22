@@ -4,110 +4,74 @@
 //
 //  Created by Dominic Danborn on 5/13/23.
 //
+//  Description:
+//  This file contains the data model definitions used throughout the Lift-Tracker app,
+//  including structures for routines, exercises, sets, and other related entities.
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
+//
 
 import Foundation
 
-struct WorkoutStruct: Codable, Equatable, Identifiable {
-    let id: UUID?
-    var workoutName: String
-    var exercises: [ExerciseStruct]
+// RoutineStruct represents a routine created by the user in the Lift-Tracker app.
+// It includes a unique identifier, a name, and a collection of exercises.
+struct RoutineStruct: Codable, Equatable, Identifiable {
+    let id: UUID?                       // Unique identifier for the routine. Must be assigned on creation.
+    var routineName: String             // Name of the routine.
+    var exercises: [ExerciseStruct]     // Collection of exercises.
     
-    init(workoutName: String) {
-        self.id = UUID()
-        self.workoutName = workoutName
+    // Initializes a new routine with an ID and a name.
+    init(id: UUID, routineName: String) {
+        self.id = id
+        self.routineName = routineName
         self.exercises = [ExerciseStruct]()
     }
     
-    init(workoutName: String, id: ID) {
+    // Initializes a new routine with an ID, name, and set of exercises.
+    init(id: UUID, routineName: String, exercises: [ExerciseStruct]) {
         self.id = id
-        self.workoutName = workoutName
-        self.exercises = [ExerciseStruct]()
-    }
-    
-    init(workoutName: String, id: ID, exercises: [ExerciseStruct]) {
-        self.id = id
-        self.workoutName = workoutName
-        self.exercises = exercises
-    }
-    
-    init(workoutName: String, exercises: [ExerciseStruct]) {
-        self.id = nil
-        self.workoutName = workoutName
+        self.routineName = routineName
         self.exercises = exercises
     }
 }
 
+// ExerciseStruct represents an exercise created by the user in the Lift-Tracker app.
+// It includes a unique identifier, a name, and notes about the exercise.
 struct ExerciseStruct: Codable, Equatable, Identifiable {
-    let id: UUID?
-    var exerciseName: String
-    var exerciseNotes: String
-    var sets: [SetStruct]
+    let id: UUID?                       // Unique identifier for the exercise. Must be assigned on creation.
+    var exerciseName: String            // Name of the exercise.
+    var exerciseNotes: String           // Notes about the exercise.
     
-    init(exerciseName: String) {
-        self.id = UUID()
-        self.exerciseName = exerciseName
-        self.exerciseNotes = ""
-        self.sets = [SetStruct]()
-    }
-    
+    // Initializes a new exercise with an ID and a name.
     init(id: UUID, exerciseName: String) {
         self.id = id
         self.exerciseName = exerciseName
         self.exerciseNotes = ""
-        self.sets = [SetStruct]()
     }
     
-    init(id: UUID, exerciseName: String, sets: [SetStruct]) {
-        self.id = id
-        self.exerciseName = exerciseName
-        self.exerciseNotes = ""
-        self.sets = sets
-    }
-    
+    // Initializes a new exercise with an ID, a name, and notes.
     init(id: UUID, exerciseName: String, exerciseNotes: String) {
         self.id = id
         self.exerciseName = exerciseName
         self.exerciseNotes = exerciseNotes
-        self.sets = [SetStruct]()
-    }
-    
-    init(id: UUID, exerciseName: String, exerciseNotes: String, sets: [SetStruct]) {
-        self.id = id
-        self.exerciseName = exerciseName
-        self.exerciseNotes = exerciseNotes
-        self.sets = sets
     }
 }
 
-struct SetStruct: Codable, Equatable, Identifiable {
-    let id: UUID?
-    var repetitions: Int
-    var weight: Double
-    
-    init() {
-        self.id = UUID()
-        self.repetitions = 0
-        self.weight = 0.0
-    }
-    
-    init(reps: Int, weight: Double) {
-        self.id = UUID()
-        self.repetitions = reps
-        self.weight = weight
-    }
-}
-
+// ExerciseLibraryStruct represents a collection of the exercises created by the user in the Lift-Tracker app.
+// It includes a unique identifier and a collection of ALL exercises that exist in the app.
 struct ExerciseLibraryStruct: Codable, Equatable, Identifiable {
-    let id: UUID?
-    var exercises: [ExerciseStruct]
+    let id: UUID?                       // Unique identifier for the exercise. Must be assigned on creation.
+    var exercises: [ExerciseStruct]     // A collection of all the exercises in the app.
     
-    init() {
-        self.id = UUID()
+    // Initializes a new ExerciseLibrary with an ID.
+    init(id: UUID) {
+        self.id = id
         self.exercises = [ExerciseStruct]()
     }
     
-    init(exercises: [ExerciseStruct]) {
-        self.id = UUID()
+    // Initializes a new ExerciseLibrary with an ID and a collection of exercises.
+    init(id: UUID, exercises: [ExerciseStruct]) {
+        self.id = id
         self.exercises = exercises
     }
 }
