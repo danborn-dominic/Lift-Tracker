@@ -4,6 +4,11 @@
 //
 //  Created by Dominic Danborn on 7/21/23.
 //
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
+//
 
 import SwiftUI
 
@@ -12,7 +17,6 @@ struct HomeView: View {
     private let container: DIContainer
     
     init(container: DIContainer) {
-        print("INFO HomeView init: DIContainer injected")
         self.container = container
     }
     

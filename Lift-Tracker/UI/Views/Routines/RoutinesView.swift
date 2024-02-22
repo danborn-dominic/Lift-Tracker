@@ -1,9 +1,13 @@
 //
-//  WorkoutList.swift
-//  WorkoutApp
+//  RoutinesView.swift
+//  Lift-Tracker
 //
-//  Created by Your Name on Today's Date.
-//  Copyright (c) 2023 Your Name. All rights reserved.
+//  Created by Dominic Danborn on 7/21/23.
+//
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
 import SwiftUI
@@ -15,7 +19,6 @@ struct RoutinesView: View {
     @State private(set) var workouts: Loadable<[RoutineStruct]> = .notRequested
     
     init(container: DIContainer) {
-        print("INFO WorkoutsView init: DIContainer injected")
         self.container = container
         self._workouts = .init(initialValue: workouts)
     }
@@ -86,7 +89,6 @@ private extension RoutinesView {
     }
     
     func loadWorkouts() {
-        print("INFO called load workouts in view")
         container.interactors.routineInteractor
             .loadRoutines()
     }
@@ -119,10 +121,10 @@ private extension RoutinesView {
     }
 }
 
-//#if DEBUG
-//struct WorkoutsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        return RoutinesView(container: .preview)
-//    }
-//}
-//#endif
+#if DEBUG
+struct WorkoutsView_Previews: PreviewProvider {
+    static var previews: some View {
+        return RoutinesView(container: .preview)
+    }
+}
+#endif

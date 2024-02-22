@@ -1,8 +1,13 @@
 //
-//  AddWorkoutView.swift
+//  AddRoutineView.swift
 //  Lift-Tracker
 //
 //  Created by Dominic Danborn on 6/16/23.
+//
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
 import SwiftUI
@@ -61,10 +66,10 @@ struct AddRoutineView: View {
     }
 }
 
-//#if DEBUG
-//struct AddRoutineView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddRoutineView(container: .preview)
-//    }
-//}
-//#endif
+#if DEBUG
+struct AddRoutineView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddRoutineView(container: .preview)
+    }
+}
+#endif

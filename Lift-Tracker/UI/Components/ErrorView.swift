@@ -4,18 +4,16 @@
 //
 //  Created by Dominic Danborn on 6/9/23.
 //
-
+//  Description:
+// TODO: write description
 //
-//  ErrorView.swift
-//  CountriesSwiftUI
-//
-//  Created by Alexey Naumov on 25.10.2019.
-//  Copyright © 2019 Alexey Naumov. All rights reserved.
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
 import SwiftUI
 
 struct ErrorView: View {
+    
     let error: Error
     let retryAction: () -> Void
     

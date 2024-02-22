@@ -4,6 +4,11 @@
 //
 //  Created by Dominic Danborn on 2/5/24.
 //
+//  Description:
+// TODO: write description
+//
+//  Copyright © 2023 Dominic Danborn. All rights reserved.
+//
 
 import SwiftUI
 
@@ -36,17 +41,15 @@ struct AddExerciseView: View {
     
     private func saveExercise() {
         let newExercise = ExerciseStruct(id: UUID(), exerciseName: exerciseName, exerciseNotes: exerciseNotes)
-        print("DEBUG Saving exercise from view: ", newExercise)
         container.interactors.exerciseInteractor.addExercise(exercise: newExercise)
-        print("DEBUG finished saving exercise, dismissing view")
         self.presentationMode.wrappedValue.dismiss()
     }
 }
 
-//#if DEBUG
-//struct AddExerciseView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddExerciseView(container: .preview)
-//    }
-//}
-//#endif
+#if DEBUG
+struct AddExerciseView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddExerciseView(container: .preview)
+    }
+}
+#endif
