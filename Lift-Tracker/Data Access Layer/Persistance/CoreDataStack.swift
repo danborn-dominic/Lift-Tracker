@@ -50,29 +50,53 @@ struct CoreDataStack: PersistentStore {
     private let bgQueue = DispatchQueue(label: "coredata")
     
     /// Initializes a new instance of CoreDataStack.
-    /// - Sets up the persistent container with the specified name and loads its stores.
-    init() {
-        persistentContainer = NSPersistentContainer(name: "Lift_Tracker")
-        
-        // Perform the store loading asynchronously to avoid blocking the main thread.
+    /// This initializer is responsible for setting up the Core Data stack with a specified version of the data model.
+    /// It initializes the NSPersistentContainer and configures it with the correct store based on the provided directory, domain mask, and version number.
+    /// The loading of the persistent stores is performed asynchronously to avoid blocking the main thread.
+    ///
+    /// - Parameters:
+    ///   - directory: The FileManager.SearchPathDirectory where the database should be stored. Defaults to .documentDirectory.
+    ///   - domainMask: The FileManager.SearchPathDomainMask for the directory. Defaults to .userDomainMask.
+    ///   - vNumber: The version number of the data model.
+    init(directory: FileManager.SearchPathDirectory = .documentDirectory,
+         domainMask: FileManager.SearchPathDomainMask = .userDomainMask,
+         version vNumber: UInt) {
+
+        // Create a `Version` instance with the provided version number.
+        let version = Version(vNumber)
+
+        // Initialize the NSPersistentContainer with the model name.
+        // The model name is derived from the `Version` instance.
+        persistentContainer = NSPersistentContainer(name: version.modelName)
+
+        // Check if a URL for the database file can be constructed using the specified directory and domain mask.
+        if let url = version.dbFileURL(directory, domainMask) {
+            // Create a description for the persistent store using the URL.
+            let store = NSPersistentStoreDescription(url: url)
+            // Assign this store description to the persistent container.
+            persistentContainer.persistentStoreDescriptions = [store]
+        }
+
+        // Perform the loading of the persistent stores on a background queue.
         bgQueue.async { [weak isStoreLoaded, weak persistentContainer] in
-            // Load persistent stores (database files) associated with the model.
+            // Load the persistent stores, which involves setting up the database file and performing any necessary migrations.
             persistentContainer?.loadPersistentStores { (storeDescription, error) in
-                // Once loading is complete, switch back to the main thread.
+                // Once the store loading is complete, handle the result on the main thread.
                 DispatchQueue.main.async {
                     if let error = error {
-                        // Notify subscribers about the failure in loading the store.
+                        // If there was an error loading the stores, send a failure completion to `isStoreLoaded`.
                         isStoreLoaded?.send(completion: .failure(error))
                     } else {
-                        // Configure the view context as read-only if the store is loaded successfully.
+                        // If the stores were loaded successfully, configure the main context for read-only operations.
                         persistentContainer?.viewContext.configureAsReadOnlyContext()
-                        // Notify subscribers that the store has been successfully loaded.
+                        // Update `isStoreLoaded` to indicate successful loading of the store.
                         isStoreLoaded?.value = true
                     }
                 }
             }
         }
     }
+
     
     /// Fetches objects from the Core Data store and maps them to a different type.
     /// This generic method fetches objects of type `T` and converts them to type `V`.
@@ -157,4 +181,48 @@ struct CoreDataStack: PersistentStore {
         }
         .eraseToAnyPublisher()
     }
+}
+
+// MARK: - Versioning
+
+// Extension to `CoreDataStack` to define a nested `Version` struct.
+extension CoreDataStack {
+    // A struct to encapsulate information about a specific version of the database.
+    struct Version {
+        // Private property to hold the version number.
+        private let number: UInt
+        
+        // Initializer to create a `Version` instance with a specific version number.
+        init(_ number: UInt) {
+            self.number = number
+        }
+        
+        // Computed property to return the model name.
+        var modelName: String {
+            return "Lift_Tracker"
+        }
+        
+        // Function to generate the file URL for the database.
+        // It takes a directory and domainMask to determine where to store the database file.
+        func dbFileURL(_ directory: FileManager.SearchPathDirectory,
+                       _ domainMask: FileManager.SearchPathDomainMask) -> URL? {
+            // Uses FileManager to find the URL for the specified directory and domain,
+            // then appends the subpath for the database file.
+            return FileManager.default
+                .urls(for: directory, in: domainMask).first?
+                .appendingPathComponent(subpathToDB)
+        }
+        
+        // Private computed property to define the subpath for the database file.
+        // The database file is named "db.sql".
+        private var subpathToDB: String {
+            return "db.sql"
+        }
+    }
+}
+
+// Extension to `CoreDataStack.Version` to provide the current actual version number.
+extension CoreDataStack.Version {
+    // A static property to represent the current version of the database.
+    static var actual: UInt { 1 }
 }

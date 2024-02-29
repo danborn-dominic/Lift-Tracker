@@ -14,6 +14,8 @@
 		0754616F2B8D392E0063CE03 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754616E2B8D392E0063CE03 /* UnitTests.swift */; };
 		075461752B8D39A70063CE03 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461662B8BEEFE0063CE03 /* Mock.swift */; };
 		0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */; };
+		075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ADE1E2B8E65D80097280B /* TestHelpers.swift */; };
+		075ADE212B8E82090097280B /* MockedPersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ADE202B8E82090097280B /* MockedPersistentStore.swift */; };
 		076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE62A2BC9020002D89B /* Loadable.swift */; };
 		076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076ACFE82A2BC9100002D89B /* CancelBag.swift */; };
 		0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1702A6B19B6005A0A05 /* MockData.swift */; };
@@ -66,6 +68,8 @@
 		0754616C2B8D392E0063CE03 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0754616E2B8D392E0063CE03 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
 		075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedRoutinesRepository.swift; sourceTree = "<group>"; };
+		075ADE1E2B8E65D80097280B /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		075ADE202B8E82090097280B /* MockedPersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedPersistentStore.swift; sourceTree = "<group>"; };
 		076ACFE62A2BC9020002D89B /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		076ACFE82A2BC9100002D89B /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 		0777D1702A6B19B6005A0A05 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 			children = (
 				075461662B8BEEFE0063CE03 /* Mock.swift */,
 				075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */,
+				075ADE202B8E82090097280B /* MockedPersistentStore.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -302,8 +307,17 @@
 				075461522B87FA4F0063CE03 /* Business Logic Layer */,
 				075461512B87FA3F0063CE03 /* Data Access Layer */,
 				0754615F2B88DE200063CE03 /* Mocks */,
+				075ADE1D2B8E65B70097280B /* Helpers */,
 			);
 			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		075ADE1D2B8E65B70097280B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				075ADE1E2B8E65D80097280B /* TestHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		07FDCB482A0EBB3F00EF9C75 = {
@@ -547,8 +561,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0754616F2B8D392E0063CE03 /* UnitTests.swift in Sources */,
+				075ADE212B8E82090097280B /* MockedPersistentStore.swift in Sources */,
 				0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */,
 				075461752B8D39A70063CE03 /* Mock.swift in Sources */,
+				075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

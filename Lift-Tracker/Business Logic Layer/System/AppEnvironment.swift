@@ -34,7 +34,7 @@ extension AppEnvironment {
         let appState = DataStore<AppState>(AppState())
         
         // Set up the Core Data stack for persistence.
-        let persistentStore = CoreDataStack()
+        let persistentStore = CoreDataStack(version: CoreDataStack.Version.actual)
         
         // Create repositories for routines and exercises.
         let routinesRepository = RealRoutinesRepository(persistentStore: persistentStore)
