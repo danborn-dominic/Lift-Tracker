@@ -2,7 +2,6 @@
 //  RoutineRepository.swift
 //  Lift-Tracker
 //
-//  Created by Dominic Danborn on 5/12/23.
 //
 //  Description:
 //  This file defines the `RoutinesRepository` protocol and its concrete implementation `RealRoutinesRepository`.
@@ -11,6 +10,7 @@
 //  mechanisms, providing a clean interface for interacting with routine data.
 //  This includes creating, reading, updating, and deleting routines, using Core Data and Combine for asynchronous operations.
 //
+//  Created by Dominic Danborn on 5/12/23.
 //  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 

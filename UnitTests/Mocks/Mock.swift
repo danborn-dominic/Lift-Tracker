@@ -2,10 +2,6 @@
 //  Mock.swift
 //  Lift-Tracker
 //
-//  Created by Dominic Danborn on 2/25/24.
-//
-//  Created by Dominic Danborn on 2/25/24.
-//
 //  Description:
 //  This file defines the Mock protocol and the MockActions class, which are essential
 //  for unit testing in the Lift-Tracker app. The Mock protocol standardizes the way actions
@@ -15,6 +11,7 @@
 //  This file facilitates the creation of robust and reliable unit tests by providing tools to
 //  mock and assert interactions within the app's components.
 //
+//  Created by Dominic Danborn on 2/25/24.
 //  Copyright © 2024 Dominic Danborn. All rights reserved.
 //
 
