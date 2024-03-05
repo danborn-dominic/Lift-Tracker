@@ -35,7 +35,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     
     /// Simulates the loading of routines.
     /// This function registers the action and provides a stub implementation.
-    func loadRoutines() {
+    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>) {
         register(.loadRoutines)
     }
     
@@ -44,8 +44,9 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     ///
     /// - Parameters:
     ///   - routine: The `RoutineStruct` instance to be added.
-    func addRoutine(routine: RoutineStruct) {
+    func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         register(.addRoutine(routine))
+        return Just<Void>.withErrorType(Error.self)
     }
     
     /// Simulates the deletion of a specific routine.
@@ -53,8 +54,9 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     ///
     /// - Parameters:
     ///   - routine: The `RoutineStruct` instance to be deleted.
-    func deleteRoutine(routine: RoutineStruct) {
+    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         register(.deleteRoutine(routine))
+        return Just<Void>.withErrorType(Error.self)
     }
 }
 

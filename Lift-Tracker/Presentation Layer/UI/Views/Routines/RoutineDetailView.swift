@@ -23,11 +23,3 @@ struct RoutineDetailView: View {
         .navigationTitle(routine.routineName)
     }
 }
-
-#if DEBUG
-struct RoutineDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        RoutineDetailView(routine: RoutineStruct.mockData[0])
-    }
-}
-#endif

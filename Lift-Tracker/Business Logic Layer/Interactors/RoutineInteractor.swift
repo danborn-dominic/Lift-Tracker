@@ -89,8 +89,10 @@ struct StubRoutineInteractor: RoutineInteractor {
     }
     
     func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+        return Just<Void>.withErrorType(Error.self)
     }
     
     func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+        return Just<Void>.withErrorType(Error.self)
     }
 }

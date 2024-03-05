@@ -13,15 +13,15 @@ import Foundation
 @testable import Lift_Tracker
 
 extension RoutineStruct {
-    static let mockedData: [RoutineStruct] = [
-        RoutineStruct(id: UUID(), routineName: "Push", exercises: [ExerciseStruct.mockData[0], ExerciseStruct.mockData[3]]),
-        RoutineStruct(id: UUID(), routineName: "Pull", exercises: [ExerciseStruct.mockData[1], ExerciseStruct.mockData[4]]),
-        RoutineStruct(id: UUID(), routineName: "Legs", exercises: [ExerciseStruct.mockData[2], ExerciseStruct.mockData[5]])
+    static let testData: [RoutineStruct] = [
+        RoutineStruct(id: UUID(), routineName: "Push", exercises: [ExerciseStruct.testData[0], ExerciseStruct.testData[3]]),
+        RoutineStruct(id: UUID(), routineName: "Pull", exercises: [ExerciseStruct.testData[1], ExerciseStruct.testData[4]]),
+        RoutineStruct(id: UUID(), routineName: "Legs", exercises: [ExerciseStruct.testData[2], ExerciseStruct.testData[5]])
     ]
 }
 
 extension ExerciseStruct {
-    static let mockedData: [ExerciseStruct] = [
+    static let testData: [ExerciseStruct] = [
         ExerciseStruct(id: UUID(), exerciseName: "Bench Press"),
         ExerciseStruct(id: UUID(), exerciseName: "Pull Ups"),
         ExerciseStruct(id: UUID(), exerciseName: "Squats"),

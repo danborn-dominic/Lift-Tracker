@@ -45,11 +45,3 @@ struct AddExerciseView: View {
         self.presentationMode.wrappedValue.dismiss()
     }
 }
-
-#if DEBUG
-struct AddExerciseView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddExerciseView(container: .preview)
-    }
-}
-#endif

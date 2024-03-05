@@ -89,8 +89,6 @@ private extension RoutinesView {
     }
     
     func loadRoutines() {
-        container.interactors.routineInteractor
-            .loadRoutines()
     }
     
     func deleteRoutine(at offsets: IndexSet) {
@@ -120,11 +118,3 @@ private extension RoutinesView {
         }
     }
 }
-
-#if DEBUG
-struct RoutinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        return RoutinesView(container: .preview)
-    }
-}
-#endif

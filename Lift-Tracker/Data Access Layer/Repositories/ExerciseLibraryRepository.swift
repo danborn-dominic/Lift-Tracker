@@ -62,7 +62,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
             }
             
             // Map the ExerciseStruct to an ExerciseMO.
-            guard let exerciseMO = exercise.mapToMO(in: context) else {
+            guard let exerciseMO = exercise.store(in: context) else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
             }
             
@@ -103,7 +103,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
         // Call the update function of the persistentStore.
         return persistentStore.update { context in
             // Map the updated ExerciseStruct to an existing ExerciseMO.
-            guard let _ = exercise.mapToMO(in: context) else {
+            guard let _ = exercise.store(in: context) else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
             }
         }

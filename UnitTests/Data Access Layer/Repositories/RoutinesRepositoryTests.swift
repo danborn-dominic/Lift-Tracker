@@ -34,36 +34,45 @@ class RoutinesRepositoryTests: XCTestCase {
         super.tearDown()
     }
     
-    // Test creating a new routine
+    /// Test for verifying the `createRoutine` method of `RealRoutinesRepository`.
+    /// Ensures that the method creates a routine successfully in the persistent store.
     func test_createRoutine() {
-        let routine = RoutineStruct(id: UUID(), routineName: "Test Routine", exercises: [])
-        mockedStore.actions = .init(expected: [.update()])
-        let expectation = XCTestExpectation(description: "createRoutine completes")
-        systemUnderTest.createRoutine(routine: routine)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    XCTFail("Failed with error: \(error)")
-                }
-                expectation.fulfill()
-            }, receiveValue: { })
+        // Select a routine to test creation.
+        let routineToCreate = RoutineStruct.testData[0]
+        // Configure the mocked store to expect an update action reflecting routine creation.
+        mockedStore.actions = .init(expected: [
+            .update(.init(inserted: 1, updated: 0, deleted: 0))
+        ])
+        
+        // Create an XCTest expectation to handle the asynchronous nature of the operation.
+        let expected = XCTestExpectation(description: #function)
+        
+        systemUnderTest.createRoutine(routine: routineToCreate)
+            .sinkToResult { result in
+                // Assert that the routine creation results in success.
+                result.assertSuccess()
+                // Verify that the actions performed on the mock store match the expectations.
+                self.mockedStore.verify()
+                // Fulfill the expectation indicating the completion of the asynchronous call.
+                expected.fulfill()
+            }
+            // Store the Combine subscription in a cancel bag to manage its lifecycle.
             .store(in: cancelBag)
-        wait(for: [expectation], timeout: 1.0)
-        mockedStore.verify()
+
+        // Wait for the expectation to be fulfilled, with a timeout to avoid endless waiting.
+        wait(for: [expected], timeout: 0.5)
     }
     
     /// Test for verifying the `readRoutines` method of `RealRoutinesRepository`.
     /// Ensures that the method fetches routines correctly from the persistent store and returns them as expected.
     func test_readRoutines() throws {
         // Setup mock data and expectations
-        let expectedRoutines = RoutineStruct.testData
+        let routines = RoutineStruct.testData
         mockedStore.actions = .init(expected: [
             .fetch(.init(inserted: 0, updated: 0, deleted: 0))
         ])
         try mockedStore.preloadData { context in
-            expectedRoutines.forEach { $0.store(in: context) }
+            routines.forEach { $0.store(in: context) }
         }
         
         // XCTest expectation to wait for asynchronous code
@@ -73,7 +82,7 @@ class RoutinesRepositoryTests: XCTestCase {
         systemUnderTest.readRoutines()
             .sinkToResult { result in
                 // Assert the result matches expected data
-                result.assertSuccess(value: expectedRoutines)
+                result.assertSuccess(value: routines)
                 // Verify mock store interactions
                 self.mockedStore.verify()
                 // Verify mock store interactions
@@ -84,43 +93,73 @@ class RoutinesRepositoryTests: XCTestCase {
         wait(for: [expected], timeout: 0.5)
     }
     
-    // Test updating a routine
-    func test_updateRoutine() {
-        let routine = RoutineStruct(id: UUID(), routineName: "Updated Routine", exercises: [])
-        mockedStore.actions = .init(expected: [.update])
-        let expectation = XCTestExpectation(description: "updateRoutine completes")
-        systemUnderTest.updateRoutine(routine: routine)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    XCTFail("Failed with error: \(error)")
-                }
-                expectation.fulfill()
-            }, receiveValue: { })
+    /// Test for verifying the `updateRoutine` method of `RealRoutinesRepository`.
+    /// Ensures that the method updates a routine successfully in the persistent store.
+    func test_updateRoutine() throws {
+        // Setup a routine to test the update functionality.
+        let routines = RoutineStruct.testData
+        let routineToUpdate = RoutineStruct.testData[0]
+        mockedStore.actions = .init(expected: [
+            .update(.init(inserted: 0, updated: 1, deleted: 0))
+        ])
+        try mockedStore.preloadData { context in
+            routines.forEach { $0.store(in: context) }
+        }
+        
+        // XCTest expectation to wait for asynchronous code.
+        let expected = XCTestExpectation(description: #function)
+        
+        // Invoke the updateRoutine function from the system under test (repository).
+        systemUnderTest.updateRoutine(routine: routineToUpdate)
+            .sinkToResult { result in
+                // Assert that the routine update results in success.
+                result.assertSuccess()
+                // Verify that the actions performed on the mock store match the expectations.
+                self.mockedStore.verify()
+                // Fulfill the expectation indicating the completion of the asynchronous call.
+                expected.fulfill()
+            }
+            // Store the Combine subscription in a cancel bag to manage its lifecycle.
             .store(in: cancelBag)
-        wait(for: [expectation], timeout: 1.0)
-        mockedStore.verify()
+        
+        // Wait for the expectation to be fulfilled.
+        wait(for: [expected], timeout: 0.5)
     }
+
     
-    // Test deleting a routine
-    func test_deleteRoutine() {
-        let routine = RoutineStruct(id: UUID(), routineName: "Routine to Delete", exercises: [])
-        mockedStore.actions = .init(expected: [.update])
-        let expectation = XCTestExpectation(description: "deleteRoutine completes")
-        systemUnderTest.deleteRoutine(routine: routine)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    XCTFail("Failed with error: \(error)")
-                }
-                expectation.fulfill()
-            }, receiveValue: { })
+    /// Test for verifying the `deleteRoutine` method of `RealRoutinesRepository`.
+    /// Ensures that the method deletes a routine successfully from the persistent store.
+    func test_deleteRoutine() throws {
+        // Select a routine to test the delete functionality.
+        let routines = RoutineStruct.testData
+        let routineToDelete = RoutineStruct.testData[0]
+        
+        // Configure the mocked store to expect an update action reflecting routine deletion.
+        mockedStore.actions = .init(expected: [
+            .update(.init(inserted: 0, updated: 0, deleted: 1))
+        ])
+        try mockedStore.preloadData { context in
+            routines.forEach { $0.store(in: context) }
+        }
+        
+        // XCTest expectation to wait for asynchronous code.
+        let expected = XCTestExpectation(description: #function)
+        
+        // Invoke the deleteRoutine function from the system under test (repository).
+        systemUnderTest.deleteRoutine(routine: routineToDelete)
+            .sinkToResult { result in
+                // Assert that the routine deletion results in success.
+                result.assertSuccess()
+                // Verify that the actions performed on the mock store match the expectations.
+                self.mockedStore.verify()
+                // Fulfill the expectation indicating the completion of the asynchronous call.
+                expected.fulfill()
+            }
+            // Store the Combine subscription in a cancel bag to manage its lifecycle.
             .store(in: cancelBag)
-        wait(for: [expectation], timeout: 1.0)
-        mockedStore.verify()
+        
+        // Wait for the expectation to be fulfilled.
+        wait(for: [expected], timeout: 0.5)
     }
+
 }

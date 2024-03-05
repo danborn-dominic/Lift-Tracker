@@ -50,7 +50,7 @@ struct RealRoutinesRepository: RoutinesRepository {
         return persistentStore.update { context in
             // Attempt to map the RoutineStruct to a RoutineMO (Managed Object).
             // If mapping fails, throw an error.
-            guard let _ = routine.mapToMO(in: context) else {
+            guard let _ = routine.store(in: context) else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
             }
         }
@@ -90,7 +90,7 @@ struct RealRoutinesRepository: RoutinesRepository {
         return persistentStore.update { context in
             // Attempt to map the RoutineStruct to a RoutineMO (Managed Object).
             // If mapping fails, throw an error.
-            guard let _ = routine.mapToMO(in: context) else {
+            guard let _ = routine.store(in: context) else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
             }
         }
