@@ -65,13 +65,15 @@ struct RealRoutinesRepository: RoutinesRepository {
     ///     - A publisher emitting an array of `RoutineStruct` when the operation succeeds,
     ///   or an error if the fetch operation fails.
     func readRoutines() -> AnyPublisher<[RoutineStruct], Error> {
-        // Build the fetch request to teh persistentStore
+        // Build the fetch request to the persistentStore
         let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
         fetchRequest.returnsObjectsAsFaults = false
         fetchRequest.relationshipKeyPathsForPrefetching = ["exercises"]
         
         // Fetch the routines from the persistent store and map each RoutineMO to a RoutineStruct.
-        return persistentStore.fetch(fetchRequest, map: { RoutineStruct(managedObject: $0) })
+        return persistentStore
+            .fetch(fetchRequest, map: { RoutineStruct(managedObject: $0) })
+            .eraseToAnyPublisher()
     }
     
     /// Updates an existing routine in the persistent store.
