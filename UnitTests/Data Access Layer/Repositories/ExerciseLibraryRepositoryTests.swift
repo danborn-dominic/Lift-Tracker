@@ -86,7 +86,7 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
         let exercises = ExerciseStruct.testData
         let sortedExercises = exercises.sorted(by: { $0.exerciseName < $1.exerciseName })
         mockedStore.actions = .init(expected: [
-            .fetchOne(.init(inserted: 0, updated: 0, deleted: 0))
+            .fetch(.init(inserted: 0, updated: 0, deleted: 0))
         ])
         var library = ExerciseLibraryStruct(id: UUID())
         library.exercises = exercises
@@ -98,9 +98,8 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
         systemUnderTest.readExercises()
             .sinkToResult { result in
                 switch result {
-                case .success(let fetchedLibrary):
-                    let fetchedExercises = fetchedLibrary?.exercises
-                    let sortedFetchedExercises = fetchedExercises!.sorted(by: {
+                case .success(let fetchedExercises):
+                    let sortedFetchedExercises = fetchedExercises.sorted(by: {
                         $0.exerciseName < $1.exerciseName })
                     XCTAssertEqual(sortedExercises, sortedFetchedExercises)
                 case .failure(let error):

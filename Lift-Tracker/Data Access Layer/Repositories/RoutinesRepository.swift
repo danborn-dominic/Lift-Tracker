@@ -4,7 +4,7 @@
 //
 //
 //  Description:
-//  This file defines the `RoutinesRepository` protocol and its concrete implementation `RealRoutinesRepository`.
+//  This file defines the `RealRoutinesRepository`.
 //  The repository acts as an intermediary between the persistence layer (Core Data) and the application logic,
 //  facilitating CRUD operations for routines. It abstracts the underlying data fetching and manipulation
 //  mechanisms, providing a clean interface for interacting with routine data.
@@ -16,21 +16,6 @@
 
 import CoreData
 import Combine
-
-// Protocol for the implementation of a repository managing routines. Follows CRUD architecture.
-protocol RoutinesRepository {
-    /// Creates a new routine and saves it to the persistence layer.
-    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
-    
-    /// Reads all routines from the persistence layer.
-    func readRoutines() -> AnyPublisher<[RoutineStruct], Error>
-    
-    /// Updates a specific routine in the persistence layer.
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
-    
-    /// Deletes a specific routine from the persistence layer.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
-}
 
 // Concrete implementation using the PersistentStore.
 struct RealRoutinesRepository: RoutinesRepository {

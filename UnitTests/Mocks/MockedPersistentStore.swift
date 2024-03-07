@@ -33,7 +33,6 @@ final class MockedPersistentStore: Mock, PersistentStore {
     
     enum Action: Equatable {
         case fetch(ContextSnapshot)
-        case fetchOne(ContextSnapshot)
         case update(ContextSnapshot)
     }
     
@@ -83,47 +82,6 @@ final class MockedPersistentStore: Mock, PersistentStore {
             return Fail<[V], Error>(error: error).publish()
         }
     }
-    
-    /// Simulates fetching a single object of type `T` from the mock Core Data store and maps it to type `V`.
-    ///
-    /// This mock function is designed for unit testing, allowing you to verify that a fetch operation
-    /// is executed correctly without interacting with the actual Core Data store. It uses a provided
-    /// fetch request and a mapping closure to simulate fetching and converting a single object.
-    /// The method captures the result or error and returns it as a publisher for further assertions in tests.
-    ///
-    /// - Parameters:
-    ///   - fetchRequest: An `NSFetchRequest` configured to fetch objects of type `T`.
-    ///   - map: A closure that takes an object of type `T` and returns an optional object of type `V`,
-    ///          representing the mapped result. This closure may throw an error.
-    ///
-    /// - Returns: A publisher that emits an optional `V` object representing the fetched and mapped result,
-    ///            or an error if the fetch operation or mapping fails. The result is immediately available
-    ///            for testing assertions
-    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error> where T: NSFetchRequestResult {
-        do {
-            // Retrieve the view context from the mock persistent container.
-            let context = container.viewContext
-            
-            // Reset the context to ensure it's in a clean state before performing the fetch.
-            context.reset()
-            
-            // Simulate the execution of the fetch request.
-            let fetchedObjects = try context.fetch(fetchRequest)
-            
-            // Check if at least one object is fetched and process it.
-            let mappedObject: V? = try fetchedObjects.first.map { try map($0)! }
-            
-            // Record the fetchOne operation along with a snapshot of the context state for testing verification.
-            register(.fetchOne(context.snapshot))
-            
-            // Return a publisher that immediately emits the mapped object or nil.
-            return Just(mappedObject).setFailureType(to: Error.self).publish()
-        } catch {
-            // In case of an error during the fetch operation, return a publisher that emits the encountered error.
-            return Fail<V?, Error>(error: error).publish()
-        }
-    }
-    
     
     /// Executes a database operation and returns its result as a publisher.
     ///

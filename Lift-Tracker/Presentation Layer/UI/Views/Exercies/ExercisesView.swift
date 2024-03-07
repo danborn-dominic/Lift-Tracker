@@ -92,8 +92,6 @@ private extension ExercisesView {
     }
     
     func loadExercises() {
-        container.interactors.exerciseInteractor
-            .loadExercises()
     }
     
     func deleteExercise(at offsets: IndexSet) {

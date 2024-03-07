@@ -61,7 +61,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
 }
 
 struct MockedExerciseInteractor: Mock, ExerciseInteractor {
-    
+
     enum Action: Equatable {
         case loadExercises
         case addExercise(ExerciseStruct)
@@ -76,7 +76,7 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     
     /// Simulates loading exercises.
     /// Records the action and doesn't perform any real operation.
-    func loadExercises() {
+    func loadExercises(exercises: LoadableSubject<[Lift_Tracker.ExerciseStruct]>) {
         register(.loadExercises)
     }
     
@@ -85,8 +85,9 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     ///
     /// - Parameters:
     ///   - exercise: The `ExerciseStruct` instance to be added.
-    func addExercise(exercise: ExerciseStruct) {
+    func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
         register(.addExercise(exercise))
+        return Just<Void>.withErrorType(Error.self)
     }
     
     /// Simulates deleting an existing exercise.
@@ -94,8 +95,9 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     ///
     /// - Parameters:
     ///   - exercise: The `ExerciseStruct` instance to be deleted.
-    func deleteExercise(exercise: ExerciseStruct) {
+    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
         register(.deleteExercise(exercise))
+        return Just<Void>.withErrorType(Error.self)
     }
 }
 

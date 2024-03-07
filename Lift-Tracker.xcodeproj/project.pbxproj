@@ -12,6 +12,10 @@
 		070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070129302B7599F600EFF73A /* ExerciseInteractor.swift */; };
 		0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */; };
 		0733C3702B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */; };
+		0733C3722B9A519D00856E70 /* PersistenceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3712B9A519D00856E70 /* PersistenceProtocols.swift */; };
+		0733C3782B9A544700856E70 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3772B9A544700856E70 /* RepositoryProtocols.swift */; };
+		0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3792B9A550D00856E70 /* InteractorProtocols.swift */; };
+		0733C37C2B9A644400856E70 /* SystemProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C37B2B9A644400856E70 /* SystemProtocols.swift */; };
 		075461752B8D39A70063CE03 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461662B8BEEFE0063CE03 /* Mock.swift */; };
 		0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */; };
 		075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ADE1E2B8E65D80097280B /* TestHelpers.swift */; };
@@ -69,6 +73,10 @@
 		070129302B7599F600EFF73A /* ExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInteractor.swift; sourceTree = "<group>"; };
 		0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
 		0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibraryRepositoryTests.swift; sourceTree = "<group>"; };
+		0733C3712B9A519D00856E70 /* PersistenceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceProtocols.swift; sourceTree = "<group>"; };
+		0733C3772B9A544700856E70 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
+		0733C3792B9A550D00856E70 /* InteractorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorProtocols.swift; sourceTree = "<group>"; };
+		0733C37B2B9A644400856E70 /* SystemProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtocols.swift; sourceTree = "<group>"; };
 		075461662B8BEEFE0063CE03 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		0754616C2B8D392E0063CE03 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedRoutinesRepository.swift; sourceTree = "<group>"; };
@@ -374,9 +382,10 @@
 		07FDCB682A0EBBFB00EF9C75 /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
+				0733C3712B9A519D00856E70 /* PersistenceProtocols.swift */,
 				07FDCB832A17F08900EF9C75 /* CoreDataStack.swift */,
-				07FDCB5F2A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld */,
 				07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */,
+				07FDCB5F2A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -384,6 +393,7 @@
 		07FDCB692A0EBC2100EF9C75 /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				0733C3792B9A550D00856E70 /* InteractorProtocols.swift */,
 				07FDCB7D2A0F041D00EF9C75 /* RoutineInteractor.swift */,
 				070129302B7599F600EFF73A /* ExerciseInteractor.swift */,
 			);
@@ -397,6 +407,7 @@
 				07C32AF82A33B6C200219776 /* SceneDelegate.swift */,
 				07C32AFA2A33B97400219776 /* AppEnvironment.swift */,
 				07C32AFC2A39507A00219776 /* SystemEventsHandler.swift */,
+				0733C37B2B9A644400856E70 /* SystemProtocols.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -425,6 +436,7 @@
 		07FDCB6D2A0EC06A00EF9C75 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				0733C3772B9A544700856E70 /* RepositoryProtocols.swift */,
 				07FDCB7B2A0F01D500EF9C75 /* RoutinesRepository.swift */,
 				0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */,
 			);
@@ -592,6 +604,7 @@
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
 				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
+				0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */,
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
 				07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */,
@@ -607,8 +620,10 @@
 				07C32B022A464B7C00219776 /* Helpers.swift in Sources */,
 				070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */,
 				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
+				0733C37C2B9A644400856E70 /* SystemProtocols.swift in Sources */,
 				07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */,
 				07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */,
+				0733C3782B9A544700856E70 /* RepositoryProtocols.swift in Sources */,
 				07FDCB822A0FEA0500EF9C75 /* Models+CoreData.swift in Sources */,
 				07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */,
 				07FDCB7E2A0F041D00EF9C75 /* RoutineInteractor.swift in Sources */,
@@ -618,6 +633,7 @@
 				07FDCB612A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld in Sources */,
 				07C32AFD2A39507A00219776 /* SystemEventsHandler.swift in Sources */,
 				07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */,
+				0733C3722B9A519D00856E70 /* PersistenceProtocols.swift in Sources */,
 				07C32B002A3D06FB00219776 /* AddRoutineView.swift in Sources */,
 				07C32AFB2A33B97400219776 /* AppEnvironment.swift in Sources */,
 				0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */,

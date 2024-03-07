@@ -5,7 +5,7 @@
 //  Created by Dominic Danborn on 2/7/24.
 //
 //  Description:
-//  This file defines the `ExerciseLibraryRepository` protocol and its concrete implementation `RealExerciseLibraryRepository`.
+//  This file defines the `RealExerciseLibraryRepository`.
 //  The repository acts as an intermediary between the persistence layer (Core Data) and the application logic,
 //  facilitating CRUD operations for exercises in the exerciseLibrary. It abstracts the underlying data fetching and manipulation
 //  mechanisms, providing a clean interface for interacting with exercise data.
@@ -16,21 +16,6 @@
 
 import CoreData
 import Combine
-
-// Protocol for the implementation of a repository managing the ExerciseLibrary. Follows CRUD architecture.
-protocol ExerciseLibraryRepository {
-    /// Creates a new exercise and saves it to the persistence layer.
-    func createExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
-    
-    /// Reads all exercises from the persistence layer.
-    func readExercises() -> AnyPublisher<ExerciseLibraryStruct?, Error>
-    
-    /// Updates a specific exercise in the persistence layer.
-    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
-    
-    /// Deletes a specific exercise from the persistence layer.
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
-}
 
 // Concrete implementation using the PersistentStore.
 struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
@@ -74,20 +59,29 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
     }
     
     /// Reads all exercises from the exercise library in the persistent store.
-    /// This function fetches `ExerciseLibraryMO` and maps it to `ExerciseLibraryStruct`.
+    /// This function fetches `ExerciseLibraryMO` and maps it to an array of exercises.
     ///
     /// - Returns:
     ///     - A publisher that emits an optional `ExerciseLibraryStruct` containing all exercises,
     ///   or an error if the fetch fails.
-    func readExercises() -> AnyPublisher<ExerciseLibraryStruct?, Error> {
-        // Create fetch request to get exercises from the PersistentStore
+    func readExercises() -> AnyPublisher<[ExerciseStruct], Error> {
+        // Create fetch request to get the ExerciseLibrary from the PersistentStore
         let fetchRequest: NSFetchRequest<ExerciseLibraryMO> = ExerciseLibraryMO.fetchRequest()
         // Configure fetch request to avoid faults and prefetch relationships.
         fetchRequest.returnsObjectsAsFaults = false
         fetchRequest.relationshipKeyPathsForPrefetching = ["exercises"]
-        
-        // Fetch the exercise library and map it to a struct.
-        return persistentStore.fetchOne(fetchRequest, map: { ExerciseLibraryStruct(managedObject: $0) })
+
+        // Use the generic fetch method
+        return persistentStore
+            .fetch(fetchRequest) { libraryMO in
+                // Check if the library has exercises, and if so, convert them to ExerciseStruct
+                guard let exerciseMOs = libraryMO.exercises as? Set<ExerciseMO> else {
+                    return [] // Return an empty array if no exercises are found
+                }
+                return exerciseMOs.compactMap(ExerciseStruct.init) // Convert to ExerciseStruct
+            }
+            .map { $0.first ?? [] } // Extract the first result (since there should only be one library) or return an empty array
+            .eraseToAnyPublisher()
     }
     
     /// Updates an existing exercise in the persistent store.

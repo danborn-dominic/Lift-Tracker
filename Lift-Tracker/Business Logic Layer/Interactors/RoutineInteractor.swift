@@ -2,32 +2,18 @@
 //  RoutineInteractor.swift
 //  Lift-Tracker
 //
-//  Created by Dominic Danborn on 5/12/23.
-//
 //  Description:
 //  This file defines the RoutineInteractor protocol and its implementations: RealRoutineInteractor and StubRoutineInteractor.
 //  RealRoutineInteractor handles the business logic related to routines, including loading, adding, and deleting routines,
 //  and interacting with the RoutinesRepository and AppState. It utilizes Combine for asynchronous operations and state management.
 //  StubRoutineInteractor provides a mock implementation for testing and development purposes.
 //
+//  Created by Dominic Danborn on 5/12/23.
 //  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
 import Combine
 import Foundation
-import SwiftUI
-
-// Protocol defining the core functionalities for handling routines.
-protocol RoutineInteractor {
-    // Function to load all routines.
-    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>)
-    
-    // Function to add a new routine.
-    func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
-    
-    // Function to delete an existing routine.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
-}
 
 // Implementation of the RoutineInteractor protocol.
 class RealRoutineInteractor: RoutineInteractor {
@@ -72,10 +58,7 @@ class RealRoutineInteractor: RoutineInteractor {
         return routinesRepository.createRoutine(routine: routine)
     }
     
-    /// Deletes a specific routine from the repository and updates the application state.
-    /// This function sends a request to the routines repository to delete a routine,
-    /// sets the application state to loading, and upon successful deletion,
-    /// reloads the routines to reflect the latest state.
+    /// Deletes a specific routine from the repository.
     ///
     /// - Parameters:
     ///    - routine: The `RoutineStruct` instance to be deleted.

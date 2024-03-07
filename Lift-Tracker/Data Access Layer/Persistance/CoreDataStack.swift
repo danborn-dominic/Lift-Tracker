@@ -21,21 +21,6 @@ import Foundation
 import CoreData
 import Combine
 
-// PersistentStore protocol.
-// This protocol defines the core functionalities for interacting with a persistent store,
-// such as a Core Data database. It provides a set of methods for fetching and updating data
-// in a type-safe and generic way. The protocol uses Combine to handle asynchronous operations.
-protocol PersistentStore {
-    // Typealias for a database operation that can throw an error and return a result.
-    typealias DBOperation<Result> = (NSManagedObjectContext) throws -> Result
-    
-    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
-                     map: @escaping (T) throws -> V?) -> AnyPublisher<[V], Error>
-    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
-                        map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error>
-    func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error>
-}
-
 // CoreDataStack
 // The actual coredata stack, which implements the persistentStore protocol.
 struct CoreDataStack: PersistentStore {
@@ -61,14 +46,14 @@ struct CoreDataStack: PersistentStore {
     init(directory: FileManager.SearchPathDirectory = .documentDirectory,
          domainMask: FileManager.SearchPathDomainMask = .userDomainMask,
          version vNumber: UInt) {
-
+        
         // Create a `Version` instance with the provided version number.
         let version = Version(vNumber)
-
+        
         // Initialize the NSPersistentContainer with the model name.
         // The model name is derived from the `Version` instance.
         persistentContainer = NSPersistentContainer(name: version.modelName)
-
+        
         // Check if a URL for the database file can be constructed using the specified directory and domain mask.
         if let url = version.dbFileURL(directory, domainMask) {
             // Create a description for the persistent store using the URL.
@@ -76,7 +61,7 @@ struct CoreDataStack: PersistentStore {
             // Assign this store description to the persistent container.
             persistentContainer.persistentStoreDescriptions = [store]
         }
-
+        
         // Perform the loading of the persistent stores on a background queue.
         bgQueue.async { [weak isStoreLoaded, weak persistentContainer] in
             // Load the persistent stores, which involves setting up the database file and performing any necessary migrations.
@@ -96,7 +81,7 @@ struct CoreDataStack: PersistentStore {
             }
         }
     }
-
+    
     
     /// Fetches objects from the Core Data store and maps them to a different type.
     /// This generic method fetches objects of type `T` and converts them to type `V`.
@@ -118,38 +103,6 @@ struct CoreDataStack: PersistentStore {
                 promise(.success(mappedObjects))
             } catch {
                 // If an error occurs, promise a failure with the error.
-                promise(.failure(error))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    /// Fetches a single object from the Core Data store and maps it to a different type.
-    /// This generic method fetches the first object of type `T` from the results and converts it to type `V`.
-    ///
-    /// - Parameters:
-    ///   - fetchRequest: An `NSFetchRequest` instance configured to fetch `T` objects.
-    ///   - map: A closure that maps the fetched `T` object to a `V` object.
-    ///
-    /// - Returns: A publisher that emits an optional `V` object or an error.
-    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
-                        map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error> {
-        return Future<V?, Error> { promise in
-            do {
-                // Execute the fetch request on the managed object context.
-                let fetchedObjects = try self.persistentContainer.viewContext.fetch(fetchRequest)
-                // Check if at least one object is fetched and process it.
-                if let firstObject = fetchedObjects.first {
-                    // Map the first fetched object to the desired type.
-                    let mappedObject = try map(firstObject)
-                    // Promise success with the mapped object.
-                    promise(.success(mappedObject))
-                } else {
-                    // If no objects are fetched, return nil.
-                    promise(.success(nil))
-                }
-            } catch {
-                // If an error occurs during the fetch operation, promise a failure with the error.
                 promise(.failure(error))
             }
         }
