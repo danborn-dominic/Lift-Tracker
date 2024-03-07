@@ -82,7 +82,6 @@ struct CoreDataStack: PersistentStore {
         }
     }
     
-    
     /// Fetches objects from the Core Data store and maps them to a different type.
     /// This generic method fetches objects of type `T` and converts them to type `V`.
     ///
@@ -93,7 +92,9 @@ struct CoreDataStack: PersistentStore {
     /// - Returns: A publisher that emits an array of `V` objects or an error.
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
                      map: @escaping (T) throws -> V?) -> AnyPublisher<[V], Error> {
-        return Future { promise in
+        assert(Thread.isMainThread)
+
+        let fetch = Future <[V], Error> { promise in
             do {
                 // Execute the fetch request on the managed object context.
                 let fetchedObjects = try self.persistentContainer.viewContext.fetch(fetchRequest)
@@ -106,7 +107,9 @@ struct CoreDataStack: PersistentStore {
                 promise(.failure(error))
             }
         }
-        .eraseToAnyPublisher()
+        return onStoreIsReady
+            .flatMap { fetch }
+            .eraseToAnyPublisher()
     }
     
     /// Executes a database operation in the context and persists any changes.
@@ -117,22 +120,36 @@ struct CoreDataStack: PersistentStore {
     ///
     /// - Returns: A publisher that emits the result of the operation or an error.
     func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error> {
-        return Future { promise in
-            do {
-                // Perform the operation within the managed object context.
-                let result = try operation(self.persistentContainer.viewContext)
-                // Attempt to save any changes made during the operation.
-                try self.persistentContainer.viewContext.save()
-                // If successful, promise the result.
-                promise(.success(result))
-            } catch {
-                // In case of an error, rollback any changes made during the operation.
-                self.persistentContainer.viewContext.rollback()
-                // Promise a failure with the encountered error.
-                promise(.failure(error))
+        let update = Future <Result, Error> { [weak bgQueue, weak persistentContainer] promise in
+            bgQueue?.async {
+                guard let context = persistentContainer?.newBackgroundContext() else { return }
+                context.configureAsUpdateContext()
+                context.performAndWait {
+                    do {
+                        let result = try operation(context)
+                        if context.hasChanges {
+                            try context.save()
+                        }
+                        context.reset()
+                        promise(.success(result))
+                    } catch {
+                        context.reset()
+                        promise(.failure(error))
+                    }
+                }
             }
         }
-        .eraseToAnyPublisher()
+        return onStoreIsReady
+            .flatMap { update }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    private var onStoreIsReady: AnyPublisher<Void, Error> {
+        return isStoreLoaded
+            .filter { $0 }
+            .map { _ in }
+            .eraseToAnyPublisher()
     }
 }
 

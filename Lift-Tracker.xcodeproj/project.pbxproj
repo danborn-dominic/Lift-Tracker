@@ -16,6 +16,7 @@
 		0733C3782B9A544700856E70 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3772B9A544700856E70 /* RepositoryProtocols.swift */; };
 		0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3792B9A550D00856E70 /* InteractorProtocols.swift */; };
 		0733C37C2B9A644400856E70 /* SystemProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C37B2B9A644400856E70 /* SystemProtocols.swift */; };
+		0733C37E2B9A67F000856E70 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C37D2B9A67F000856E70 /* CoreDataStackTests.swift */; };
 		075461752B8D39A70063CE03 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461662B8BEEFE0063CE03 /* Mock.swift */; };
 		0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */; };
 		075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ADE1E2B8E65D80097280B /* TestHelpers.swift */; };
@@ -77,6 +78,7 @@
 		0733C3772B9A544700856E70 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
 		0733C3792B9A550D00856E70 /* InteractorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorProtocols.swift; sourceTree = "<group>"; };
 		0733C37B2B9A644400856E70 /* SystemProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtocols.swift; sourceTree = "<group>"; };
+		0733C37D2B9A67F000856E70 /* CoreDataStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackTests.swift; sourceTree = "<group>"; };
 		075461662B8BEEFE0063CE03 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		0754616C2B8D392E0063CE03 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedRoutinesRepository.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		0754615A2B87FAB60063CE03 /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
+				0733C37D2B9A67F000856E70 /* CoreDataStackTests.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				0733C3702B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift in Sources */,
 				0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */,
 				0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */,
+				0733C37E2B9A67F000856E70 /* CoreDataStackTests.swift in Sources */,
 				075461752B8D39A70063CE03 /* Mock.swift in Sources */,
 				075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */,
 			);

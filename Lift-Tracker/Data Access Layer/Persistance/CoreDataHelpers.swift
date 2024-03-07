@@ -33,6 +33,10 @@ extension ManagedEntity where Self: NSManagedObject {
         return NSEntityDescription
             .insertNewObject(forEntityName: entityName, into: context) as? Self
     }
+    
+    static func newFetchRequest() -> NSFetchRequest<Self> {
+        return .init(entityName: entityName)
+    }
 }
 
 extension NSManagedObjectContext {
