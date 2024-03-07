@@ -102,9 +102,31 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
     func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
         // Call the update function of the persistentStore.
         return persistentStore.update { context in
-            // Map the updated ExerciseStruct to an existing ExerciseMO.
-            guard let _ = exercise.store(in: context) else {
-                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
+            let fetchRequest: NSFetchRequest<ExerciseLibraryMO> = ExerciseLibraryMO.fetchRequest()
+            fetchRequest.returnsObjectsAsFaults = false
+            fetchRequest.relationshipKeyPathsForPrefetching = ["exercises"]
+            
+            // Ensure the exercise has a valid ID. If not, throw an error.
+            guard let id = exercise.id else {
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Exercise id is missing"])
+            }
+            
+            let fetchedLibrary = try context.fetch(fetchRequest)
+            
+            if let exerciseLibraryMO = fetchedLibrary.first {
+                // Find the specific ExerciseMO to update
+                if let existingExerciseMO = exerciseLibraryMO.exercises?.first(where: { ($0 as? ExerciseMO)?.id == id }) as? ExerciseMO {
+                    // Update the properties of the ExerciseMO
+                    existingExerciseMO.exerciseName = exercise.exerciseName
+                    existingExerciseMO.exerciseNotes = exercise.exerciseNotes
+                } else {
+                    // If the exercise is not found, throw an error.
+                    throw NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to find Exercise to update"])
+                }
+            }
+            else {
+                // If the exerciseLibrary is not found, throw an error.
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to find ExerciseLibrary to update an exercise"])
             }
         }
         .map { _ in }
@@ -124,34 +146,33 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
         // Call the update function of the persistentStore.
         return persistentStore.update { context in
             // Create a fetch request for the ExerciseLibraryMO entity.
-            let libraryFetchRequest: NSFetchRequest<ExerciseLibraryMO> = ExerciseLibraryMO.fetchRequest()
+            let fetchRequest: NSFetchRequest<ExerciseLibraryMO> = ExerciseLibraryMO.fetchRequest()
             // Configure the fetch request to not return objects as faults and prefetch related exercises.
-            libraryFetchRequest.returnsObjectsAsFaults = false
-            libraryFetchRequest.relationshipKeyPathsForPrefetching = ["exercises"]
+            fetchRequest.returnsObjectsAsFaults = false
+            fetchRequest.relationshipKeyPathsForPrefetching = ["exercises"]
             
             // Ensure the exercise has an ID, otherwise throw an error.
             guard let exerciseId = exercise.id else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Exercise id is missing"])
             }
             
-            do {
-                // Fetch the ExerciseLibraryMO entities.
-                let fetchedLibraries = try context.fetch(libraryFetchRequest)
-                // Ensure there is at least one ExerciseLibraryMO entity, otherwise throw an error.
-                guard let exerciseLibraryMO = fetchedLibraries.first else {
-                    throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to find ExerciseLibraryMO"])
-                }
-                
+            let fetchedLibrary = try context.fetch(fetchRequest)
+            
+            if let exerciseLibraryMO = fetchedLibrary.first {
                 // Check if the exercise library contains the specific exercise to be deleted.
                 if let exercises = exerciseLibraryMO.exercises as? Set<ExerciseMO>,
                    let exerciseMOToDelete = exercises.first(where: { $0.id == exerciseId }) {
                     // Remove the exercise from the exercise library and delete it from the context.
                     exerciseLibraryMO.removeFromExercises(exerciseMOToDelete)
                     context.delete(exerciseMOToDelete)
+                } else {
+                    // If the exercise is not found, throw an error.
+                    throw NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to find Exercise to update"])
                 }
-            } catch {
-                // Propagate any errors encountered during the fetch or delete operations.
-                throw error
+            }
+            else {
+                // If the exerciseLibrary is not found, throw an error.
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to find ExerciseLibrary to update an exercise"])
             }
         }
         .map { _ in }

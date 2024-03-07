@@ -90,6 +90,7 @@ struct RealRoutinesRepository: RoutinesRepository {
         return persistentStore.update { context in
             let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
             // Ensure the routine has a valid ID. If not, throw an error.
+            
             guard let id = routine.id else {
                 throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Routine id is missing"])
             }

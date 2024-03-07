@@ -11,7 +11,7 @@
 		0701292F2B73D7A500EFF73A /* ExerciseLibraryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */; };
 		070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070129302B7599F600EFF73A /* ExerciseInteractor.swift */; };
 		0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */; };
-		0754616F2B8D392E0063CE03 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754616E2B8D392E0063CE03 /* UnitTests.swift */; };
+		0733C3702B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */; };
 		075461752B8D39A70063CE03 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461662B8BEEFE0063CE03 /* Mock.swift */; };
 		0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */; };
 		075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ADE1E2B8E65D80097280B /* TestHelpers.swift */; };
@@ -68,9 +68,9 @@
 		0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibraryRepository.swift; sourceTree = "<group>"; };
 		070129302B7599F600EFF73A /* ExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInteractor.swift; sourceTree = "<group>"; };
 		0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
+		0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibraryRepositoryTests.swift; sourceTree = "<group>"; };
 		075461662B8BEEFE0063CE03 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		0754616C2B8D392E0063CE03 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0754616E2B8D392E0063CE03 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
 		075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedRoutinesRepository.swift; sourceTree = "<group>"; };
 		075ADE1E2B8E65D80097280B /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		075ADE202B8E82090097280B /* MockedPersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedPersistentStore.swift; sourceTree = "<group>"; };
@@ -280,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */,
+				0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -314,7 +315,6 @@
 		0754616D2B8D392E0063CE03 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				0754616E2B8D392E0063CE03 /* UnitTests.swift */,
 				075461502B87FA2A0063CE03 /* Presentation Layer */,
 				075461522B87FA4F0063CE03 /* Business Logic Layer */,
 				075461512B87FA3F0063CE03 /* Data Access Layer */,
@@ -573,10 +573,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */,
-				0754616F2B8D392E0063CE03 /* UnitTests.swift in Sources */,
 				075ADE212B8E82090097280B /* MockedPersistentStore.swift in Sources */,
 				0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */,
 				0796F2752B92A13800FC81F8 /* MockData.swift in Sources */,
+				0733C3702B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift in Sources */,
 				0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */,
 				0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */,
 				075461752B8D39A70063CE03 /* Mock.swift in Sources */,
