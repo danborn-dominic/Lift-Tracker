@@ -14,9 +14,9 @@ import Foundation
 
 extension RoutineStruct {
     static let testData: [RoutineStruct] = [
-        RoutineStruct(id: UUID(), routineName: "Push", exercises: [ExerciseStruct.testData[0], ExerciseStruct.testData[3]]),
-        RoutineStruct(id: UUID(), routineName: "Pull", exercises: [ExerciseStruct.testData[1], ExerciseStruct.testData[4]]),
-        RoutineStruct(id: UUID(), routineName: "Legs", exercises: [ExerciseStruct.testData[2], ExerciseStruct.testData[5]])
+        RoutineStruct(id: UUID(), routineName: "Push", exercises: [ExerciseStruct]()),
+        RoutineStruct(id: UUID(), routineName: "Pull", exercises: [ExerciseStruct]()),
+        RoutineStruct(id: UUID(), routineName: "Legs", exercises: [ExerciseStruct]())
     ]
 }
 

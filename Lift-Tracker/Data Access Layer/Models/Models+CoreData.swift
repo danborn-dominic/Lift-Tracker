@@ -45,6 +45,12 @@ extension RoutineStruct {
     }
 }
 
+extension RoutineMO {
+    func toStruct() -> RoutineStruct {
+        return RoutineStruct(managedObject: self)!
+    }
+}
+
 extension ExerciseStruct {
     // Initializes an ExerciseStruct from a ExerciseMO. Returns nil if essential properties are missing.
     init?(managedObject: ExerciseMO) {
@@ -66,6 +72,17 @@ extension ExerciseStruct {
         exercise.id = id
         return exercise
     }
+}
+
+extension ExerciseMO {
+    func toStruct() -> ExerciseStruct {
+        return ExerciseStruct(managedObject: self)!
+    }
+    
+    func update(with exercise: ExerciseStruct) {
+            self.exerciseName = exercise.exerciseName
+            self.id = exercise.id
+        }
 }
 
 extension ExerciseLibraryStruct {
@@ -91,5 +108,11 @@ extension ExerciseLibraryStruct {
         let exercisesArray = exercises.compactMap { $0.store(in: context) }
         exerciseLibrary.exercises = NSSet(array: exercisesArray)
         return exerciseLibrary
+    }
+}
+
+extension ExerciseLibraryMO {
+    func toStruct() -> ExerciseLibraryStruct {
+        return ExerciseLibraryStruct(managedObject: self)!
     }
 }

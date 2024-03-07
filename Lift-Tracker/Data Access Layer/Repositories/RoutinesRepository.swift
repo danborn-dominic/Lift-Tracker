@@ -88,13 +88,54 @@ struct RealRoutinesRepository: RoutinesRepository {
     func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         // Call persistentStore's update function.
         return persistentStore.update { context in
-            // Attempt to map the RoutineStruct to a RoutineMO (Managed Object).
-            // If mapping fails, throw an error.
-            guard let _ = routine.store(in: context) else {
-                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Mapping to Managed Object failed"])
+            let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
+            // Ensure the routine has a valid ID. If not, throw an error.
+            guard let id = routine.id else {
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Routine id is missing"])
+            }
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id.uuidString)
+            // Executes the fetch request to retrieve the RoutineMO.
+            let fetchedRoutines = try context.fetch(fetchRequest)
+            
+            // Check if the fetched result contains the routine to update.
+            if let routineMO = fetchedRoutines.first {
+                routineMO.routineName = routine.routineName
+                
+                // Convert the exercises from the RoutineMO to a set for comparison
+                let currentExerciseMOs = routineMO.exercises as? Set<ExerciseMO> ?? []
+                // Convert the exercises from the RoutineStruct to a set for comparison.
+                let newExercisesSet = Set(routine.exercises)
+                
+                // Determine exercises that are no longer present and should be deleted.
+                let exercisesToDelete = currentExerciseMOs.filter { !newExercisesSet.contains($0.toStruct()) }
+                exercisesToDelete.forEach { context.delete($0) }
+                
+                // Map new exercises to ExerciseMOs, updating existing ones or adding new ones.
+                let updatedExerciseMOs = try newExercisesSet.map { exerciseStruct -> ExerciseMO in
+                    
+                    // Check if the exercise already exists and update it.
+                    if let existingExerciseMO = currentExerciseMOs.first(where: { $0.id == exerciseStruct.id }) {
+                        existingExerciseMO.update(with: exerciseStruct)
+                        return existingExerciseMO
+                    } else {
+                        // Create a new ExerciseMO for new exercises.
+                        guard let newExerciseMO = exerciseStruct.store(in: context) else {
+                            throw NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to map ExerciseStruct to ExerciseMO"])
+                        }
+                        return newExerciseMO
+                    }
+                }
+                
+                // Update the RoutineMO's exercises with the modified set.
+                routineMO.exercises = NSSet(array: updatedExerciseMOs)                
+            } else {
+                // If the routine is not found, throw an error.
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to find routine to update"])
             }
         }
+        // Converts the result of the database operation to a Void return type.
         .map { _ in }
+        // Erases the type of publisher to simplify downstream usage.
         .eraseToAnyPublisher()
     }
     

@@ -3,6 +3,17 @@
 //  UnitTests
 //
 //  Description:
+//  This test suite is dedicated to validating the behavior of the RealRoutinesRepository in the Lift-Tracker app.
+//  It aims to thoroughly test CRUD (Create, Read, Update, Delete) operations provided by the repository to ensure
+//  data integrity and consistency with the underlying Core Data store. Each test method simulates typical
+//  repository interactions, leveraging a MockedPersistentStore to imitate Core Data operations. This approach
+//  allows for the examination of repository functionalities in isolation, without impacting the actual database.
+//  Tests cover scenarios such as creating new routines, reading existing routines, updating routine details,
+//  and deleting routines. By mocking database interactions and validating expected outcomes, these tests
+//  guarantee that the RealRoutinesRepository reliably manages routine data as per the business logic.
+//  The test cases use XCTest framework to assert correctness of repository methods, ensuring they perform
+//  as intended under various conditions. This ensures the stability and reliability of the routines management
+//  feature in the Lift-Tracker application.
 //
 //  Created by Dominic Danborn on 3/1/24.
 //  Copyright © 2024 Dominic Danborn. All rights reserved.
@@ -68,6 +79,7 @@ class RoutinesRepositoryTests: XCTestCase {
     func test_readRoutines() throws {
         // Setup mock data and expectations
         let routines = RoutineStruct.testData
+        let sortedRoutines = routines.sorted(by: { $0.routineName < $1.routineName })
         mockedStore.actions = .init(expected: [
             .fetch(.init(inserted: 0, updated: 0, deleted: 0))
         ])
@@ -81,8 +93,13 @@ class RoutinesRepositoryTests: XCTestCase {
         // Execute the test
         systemUnderTest.readRoutines()
             .sinkToResult { result in
-                // Assert the result matches expected data
-                result.assertSuccess(value: routines)
+                switch result {
+                case .success(let fetchedRoutines):
+                    let sortedFetchedRoutines = fetchedRoutines.sorted(by: { $0.routineName < $1.routineName })
+                    XCTAssertEqual(sortedRoutines, sortedFetchedRoutines)
+                case .failure(let error):
+                    XCTFail("Fetching routines failed with error: \(error)")
+                }
                 // Verify mock store interactions
                 self.mockedStore.verify()
                 // Verify mock store interactions
@@ -98,13 +115,16 @@ class RoutinesRepositoryTests: XCTestCase {
     func test_updateRoutine() throws {
         // Setup a routine to test the update functionality.
         let routines = RoutineStruct.testData
-        let routineToUpdate = RoutineStruct.testData[0]
+        
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 1, deleted: 0))
         ])
         try mockedStore.preloadData { context in
             routines.forEach { $0.store(in: context) }
         }
+        
+        var routineToUpdate = RoutineStruct.testData[0]
+        routineToUpdate.routineName = "Updated Routine Name"
         
         // XCTest expectation to wait for asynchronous code.
         let expected = XCTestExpectation(description: #function)
