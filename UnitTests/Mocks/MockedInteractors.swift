@@ -24,6 +24,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     enum Action: Equatable {
         case loadRoutines
         case addRoutine(RoutineStruct)
+        case updateRoutine(RoutineStruct)
         case deleteRoutine(RoutineStruct)
     }
     
@@ -49,6 +50,16 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
         return Just<Void>.withErrorType(Error.self)
     }
     
+    /// Simulates the update of an existing routine.
+    /// This function registers the action with the provided routine and provides a stub implementation.
+    ///
+    /// - Parameters:
+    ///   - routine: The `RoutineStruct` instance to be updated.
+    func updateRoutine(routine: Lift_Tracker.RoutineStruct) -> AnyPublisher<Void, Error> {
+        register(.updateRoutine(routine))
+        return Just<Void>.withErrorType(Error.self)
+    }
+    
     /// Simulates the deletion of a specific routine.
     /// This function registers the action with the provided routine and provides a stub implementation.
     ///
@@ -65,6 +76,7 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     enum Action: Equatable {
         case loadExercises
         case addExercise(ExerciseStruct)
+        case updateExercise(ExerciseStruct)
         case deleteExercise(ExerciseStruct)
     }
     
@@ -87,6 +99,16 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     ///   - exercise: The `ExerciseStruct` instance to be added.
     func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
         register(.addExercise(exercise))
+        return Just<Void>.withErrorType(Error.self)
+    }
+    
+    /// Simulates the update of an existing routine.
+    /// This function registers the action with the provided routine and provides a stub implementation.
+    ///
+    /// - Parameters:
+    ///   - exercise: The `ExerciseStruct` instance to be updated.
+    func updateExercise(exercise: Lift_Tracker.ExerciseStruct) -> AnyPublisher<Void, any Error> {
+        register(.updateExercise(exercise))
         return Just<Void>.withErrorType(Error.self)
     }
     

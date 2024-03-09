@@ -17,6 +17,7 @@ import Foundation
 
 // Implementation of the RoutineInteractor protocol.
 class RealRoutineInteractor: RoutineInteractor {
+    
     // Repository for accessing and modifying routines data.
     let routinesRepository: RoutinesRepository
     
@@ -58,6 +59,14 @@ class RealRoutineInteractor: RoutineInteractor {
         return routinesRepository.createRoutine(routine: routine)
     }
     
+    /// Updates a routine that already exists in the repository.
+    ///
+    /// - Parameters:
+    ///    - routine: The `RoutineStruct` instance to be updated.
+    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, any Error> {
+        return routinesRepository.updateRoutine(routine: routine)
+    }
+    
     /// Deletes a specific routine from the repository.
     ///
     /// - Parameters:
@@ -68,10 +77,14 @@ class RealRoutineInteractor: RoutineInteractor {
 }
 
 struct StubRoutineInteractor: RoutineInteractor {
-    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>) {
-    }
+    
+    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>) {}
     
     func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+        return Just<Void>.withErrorType(Error.self)
+    }
+    
+    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, any Error> {
         return Just<Void>.withErrorType(Error.self)
     }
     

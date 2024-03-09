@@ -17,6 +17,7 @@ import Foundation
 
 // Concrete implementation of the ExerciseInteractor protocol.
 class RealExerciseInteractor: ExerciseInteractor {
+    
     // Repository for accessing and modifying exercise data.
     let exercisesRepository: ExerciseLibraryRepository
     
@@ -57,8 +58,15 @@ class RealExerciseInteractor: ExerciseInteractor {
         return exercisesRepository.createExercise(exercise: exercise)
     }
     
-    /// Deletes a specific exercise from the repository.
+    /// Updates an exercise that already exists in  the repository.
     ///
+    /// - Parameters:
+    ///    - exercise: The `ExerciseStruct` instance to be updated.
+    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, any Error> {
+        return exercisesRepository.updateExercise(exercise: exercise)
+    }
+    
+    /// Deletes a specific exercise from the repository.
     ///
     /// - Parameters:
     ///    - exercise: The `ExerciseStruct` instance to be deleted.
@@ -68,10 +76,15 @@ class RealExerciseInteractor: ExerciseInteractor {
 }
 
 struct StubExerciseInteractor: ExerciseInteractor {
+    
     func loadExercises(exercises: LoadableSubject<[ExerciseStruct]>) {
     }
     
     func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+        return Just<Void>.withErrorType(Error.self)
+    }
+    
+    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, any Error> {
         return Just<Void>.withErrorType(Error.self)
     }
     

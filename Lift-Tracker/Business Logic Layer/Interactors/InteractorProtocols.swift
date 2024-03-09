@@ -18,6 +18,9 @@ protocol ExerciseInteractor {
     // Function to add a new exercise.
     func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
     
+    // Function to update an existing exercise.
+    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    
     // Function to delete an existing exercise.
     func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
 }
@@ -29,6 +32,9 @@ protocol RoutineInteractor {
     
     // Function to add a new routine.
     func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    
+    // Function to update an existing routine.
+    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
     
     // Function to delete an existing routine.
     func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>

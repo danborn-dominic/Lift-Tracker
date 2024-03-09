@@ -48,7 +48,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Registers the action and returns a predefined result.
     /// - Parameter routine: The routine to create.
     /// - Returns: A publisher emitting the result of the operation.
-    func createRoutine(routine: Lift_Tracker.RoutineStruct) -> AnyPublisher<Void, Error> {
+    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         register(.createRoutine(routine))
         return createRoutineResult.publish()
     }
@@ -56,7 +56,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Simulates reading routines.
     /// Registers the action and returns a predefined result.
     /// - Returns: A publisher emitting an array of routines or an error.
-    func readRoutines() -> AnyPublisher<[Lift_Tracker.RoutineStruct], Error> {
+    func readRoutines() -> AnyPublisher<[RoutineStruct], Error> {
         register(.readRoutines)
         return readRoutinesResult.publish()
     }
@@ -65,7 +65,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Registers the action and returns a predefined result.
     /// - Parameter routine: The routine to update.
     /// - Returns: A publisher emitting the result of the operation.
-    func updateRoutine(routine: Lift_Tracker.RoutineStruct) -> AnyPublisher<Void, Error> {
+    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         register(.updateRoutine(routine))
         return updateRoutineResult.publish()
     }
@@ -74,7 +74,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Registers the action and returns a predefined result.
     /// - Parameter routine: The routine to delete.
     /// - Returns: A publisher emitting the result of the operation.
-    func deleteRoutine(routine: Lift_Tracker.RoutineStruct) -> AnyPublisher<Void, Error> {
+    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
         register(.deleteRoutine(routine))
         return deleteRoutineResult.publish()
     }
