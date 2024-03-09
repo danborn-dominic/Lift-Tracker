@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ExerciseLibraryMO" representedClassName="ExerciseLibraryMO" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseMO" inverseName="exerciseLibrary" inverseEntity="ExerciseMO"/>
-    </entity>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ExerciseMO" representedClassName="ExerciseMO" syncable="YES" codeGenerationType="class">
         <attribute name="exerciseName" optional="YES" attributeType="String"/>
         <attribute name="exerciseNotes" optional="YES" attributeType="String"/>
+        <attribute name="exerciseType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="exerciseLibrary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseLibraryMO" inverseName="exercises" inverseEntity="ExerciseLibraryMO"/>
+        <attribute name="maxVolume" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="maxWeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="muscleGroup" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="performed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PerformedExerciseMO" inverseName="exercise" inverseEntity="PerformedExerciseMO"/>
         <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RoutineMO" inverseName="exercises" inverseEntity="RoutineMO"/>
     </entity>
+    <entity name="ExerciseSetMO" representedClassName="ExerciseSetMO" syncable="YES" codeGenerationType="class">
+        <attribute name="classification" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="reps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PerformedExerciseMO" inverseName="sets" inverseEntity="PerformedExerciseMO"/>
+    </entity>
+    <entity name="PerformedExerciseMO" representedClassName="PerformedExerciseMO" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseMO" inverseName="performed" inverseEntity="ExerciseMO"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseSetMO" inverseName="exercise" inverseEntity="ExerciseSetMO"/>
+        <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutMO" inverseName="exercises" inverseEntity="WorkoutMO"/>
+    </entity>
     <entity name="RoutineMO" representedClassName="RoutineMO" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="routineName" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseMO" inverseName="routine" inverseEntity="ExerciseMO"/>
+        <relationship name="performed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutMO" inverseName="routine" inverseEntity="WorkoutMO"/>
+    </entity>
+    <entity name="WorkoutMO" representedClassName="WorkoutMO" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PerformedExerciseMO" inverseName="workout" inverseEntity="PerformedExerciseMO"/>
+        <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RoutineMO" inverseName="performed" inverseEntity="RoutineMO"/>
     </entity>
 </model>

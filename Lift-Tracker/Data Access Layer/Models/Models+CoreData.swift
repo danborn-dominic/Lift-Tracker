@@ -18,6 +18,7 @@ import CoreData
 // Extend CoreData entities to conform to the ManagedEntity protocol
 extension RoutineMO: ManagedEntity { }
 extension ExerciseMO: ManagedEntity { }
+
 extension ExerciseLibraryMO: ManagedEntity { }
 
 extension Routine {
