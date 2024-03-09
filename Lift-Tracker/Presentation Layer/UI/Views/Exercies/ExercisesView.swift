@@ -73,7 +73,7 @@ private extension ExercisesView {
 // MARK: - Routing
 extension ExercisesView {
     struct Routing: Equatable {
-        var exerciseDetails: ExerciseStruct.ID?
+        var exerciseDetails: Exercise.ID?
     }
 }
 // MARK: - Managing Content

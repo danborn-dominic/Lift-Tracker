@@ -24,10 +24,10 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Enumeration of actions that can be performed on the repository.
     /// This aids in tracking which actions were invoked during tests.
     enum Action: Equatable {
-        case createRoutine(RoutineStruct)
+        case createRoutine(Routine)
         case readRoutines
-        case updateRoutine(RoutineStruct)
-        case deleteRoutine(RoutineStruct)
+        case updateRoutine(Routine)
+        case deleteRoutine(Routine)
     }
     
     /// A record of actions performed on the mock for verification in tests.
@@ -36,7 +36,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Predefined results for creating a routine, initially set to a failure state.
     var createRoutineResult: Result<Void, Error> = .failure(MockError.valueNotSet)
     /// Predefined results for reading routines, initially set to a failure state.
-    var readRoutinesResult: Result<[RoutineStruct], Error> = .failure(MockError.valueNotSet)
+    var readRoutinesResult: Result<[Routine], Error> = .failure(MockError.valueNotSet)
     /// Predefined results for updating a routine, initially set to a failure state.
     var updateRoutineResult: Result<Void, Error> = .failure(MockError.valueNotSet)
     /// Predefined results for deleting a routine, initially set to a failure state.
@@ -48,7 +48,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Registers the action and returns a predefined result.
     /// - Parameter routine: The routine to create.
     /// - Returns: A publisher emitting the result of the operation.
-    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func createRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         register(.createRoutine(routine))
         return createRoutineResult.publish()
     }
@@ -56,7 +56,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Simulates reading routines.
     /// Registers the action and returns a predefined result.
     /// - Returns: A publisher emitting an array of routines or an error.
-    func readRoutines() -> AnyPublisher<[RoutineStruct], Error> {
+    func readRoutines() -> AnyPublisher<[Routine], Error> {
         register(.readRoutines)
         return readRoutinesResult.publish()
     }
@@ -65,7 +65,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Registers the action and returns a predefined result.
     /// - Parameter routine: The routine to update.
     /// - Returns: A publisher emitting the result of the operation.
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         register(.updateRoutine(routine))
         return updateRoutineResult.publish()
     }
@@ -74,7 +74,7 @@ final class MockedRoutinesRepository: Mock, RoutinesRepository {
     /// Registers the action and returns a predefined result.
     /// - Parameter routine: The routine to delete.
     /// - Returns: A publisher emitting the result of the operation.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         register(.deleteRoutine(routine))
         return deleteRoutineResult.publish()
     }

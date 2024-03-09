@@ -20,12 +20,12 @@ extension RoutineMO: ManagedEntity { }
 extension ExerciseMO: ManagedEntity { }
 extension ExerciseLibraryMO: ManagedEntity { }
 
-extension RoutineStruct {
+extension Routine {
     // Initializes a RoutineStruct from a RoutineMO. Returns nil if essential properties are missing.
     init?(managedObject: RoutineMO) {
         guard let id = managedObject.id,
               let name = managedObject.routineName,
-              let exercises = managedObject.exercises?.toArray(of: ExerciseMO.self).compactMap(ExerciseStruct.init)
+              let exercises = managedObject.exercises?.toArray(of: ExerciseMO.self).compactMap(Exercise.init)
         else { return nil }
         
         self.init(id: id, routineName: name, exercises: exercises)
@@ -46,12 +46,12 @@ extension RoutineStruct {
 }
 
 extension RoutineMO {
-    func toStruct() -> RoutineStruct {
-        return RoutineStruct(managedObject: self)!
+    func toStruct() -> Routine {
+        return Routine(managedObject: self)!
     }
 }
 
-extension ExerciseStruct {
+extension Exercise {
     // Initializes an ExerciseStruct from a ExerciseMO. Returns nil if essential properties are missing.
     init?(managedObject: ExerciseMO) {
         guard let exerciseName = managedObject.exerciseName,
@@ -75,11 +75,11 @@ extension ExerciseStruct {
 }
 
 extension ExerciseMO {
-    func toStruct() -> ExerciseStruct {
-        return ExerciseStruct(managedObject: self)!
+    func toStruct() -> Exercise {
+        return Exercise(managedObject: self)!
     }
     
-    func update(with exercise: ExerciseStruct) {
+    func update(with exercise: Exercise) {
             self.exerciseName = exercise.exerciseName
             self.id = exercise.id
         }
@@ -92,7 +92,7 @@ extension ExerciseLibraryStruct {
         if let exercisesSet = managedObject.exercises as? Set<ExerciseMO> {
             let exercisesArray = Array(exercisesSet)
             let exercisesStructs = exercisesArray.compactMap { exerciseMO in
-                return ExerciseStruct(managedObject: exerciseMO)
+                return Exercise(managedObject: exerciseMO)
             }
             self.init(id: id, exercises: exercisesStructs)
         } else { return nil }

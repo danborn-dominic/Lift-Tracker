@@ -14,7 +14,7 @@ import SwiftUI
 
 struct RoutineDetailView: View {
     
-    let routine: RoutineStruct
+    let routine: Routine
     
     var body: some View {
         List(routine.exercises, id: \.id) { exercise in

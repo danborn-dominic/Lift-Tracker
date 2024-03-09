@@ -107,7 +107,7 @@ final class CoreDataStackV1Tests: CoreDataStackTests {
     }
     
     func test_fetching() {
-        let routines = RoutineStruct.testData
+        let routines = Routine.testData
         
         let expected = XCTestExpectation(description: #function)
         
@@ -117,11 +117,11 @@ final class CoreDataStackV1Tests: CoreDataStackTests {
                     $0.store(in: context)
                 }
             }
-            .flatMap { _ -> AnyPublisher<[RoutineStruct], Error> in
+            .flatMap { _ -> AnyPublisher<[Routine], Error> in
                 let fetchRequest = RoutineMO.newFetchRequest()
                 fetchRequest.predicate = NSPredicate(format: "id == %@", routines[0].id!.uuidString)
                 return self.systemUnderTest.fetch(fetchRequest) {
-                    RoutineStruct(managedObject: $0)
+                    Routine(managedObject: $0)
                 }
             }
             .sinkToResult { result in

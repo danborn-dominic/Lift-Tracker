@@ -35,12 +35,12 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_loadExercises_success() {
-        let list = ExerciseStruct.testData
+        let list = Exercise.testData
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .readExercises
         ])
         mockedExerciseLibraryRepository.readExercisesResult = .success(list)
-        let exercises = BindingWithPublisher(value: Loadable<[ExerciseStruct]>.notRequested)
+        let exercises = BindingWithPublisher(value: Loadable<[Exercise]>.notRequested)
         
         systemUnderTest.loadExercises(exercises: exercises.binding)
         
@@ -66,7 +66,7 @@ class ExerciseInteractorTests: XCTestCase {
         ])
         
         mockedExerciseLibraryRepository.readExercisesResult = .failure(error)
-        let exercises = BindingWithPublisher(value: Loadable<[ExerciseStruct]>.notRequested)
+        let exercises = BindingWithPublisher(value: Loadable<[Exercise]>.notRequested)
         
         systemUnderTest.loadExercises(exercises: exercises.binding)
         
@@ -86,7 +86,7 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_addExercise_success() {
-        let exerciseToAdd = ExerciseStruct.testData[0]
+        let exerciseToAdd = Exercise.testData[0]
         mockedExerciseLibraryRepository.createExerciseResult = .success(())
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .createExercise(exerciseToAdd)
@@ -105,7 +105,7 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_addExercise_fail() {
-        let exerciseToAdd = ExerciseStruct.testData[0]
+        let exerciseToAdd = Exercise.testData[0]
         
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .createExercise(exerciseToAdd)
@@ -124,7 +124,7 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_deleteExercise_success() {
-        let exerciseToDelete = ExerciseStruct.testData[0]
+        let exerciseToDelete = Exercise.testData[0]
         mockedExerciseLibraryRepository.deleteExerciseResult = .success(())
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .deleteExercise(exerciseToDelete)
@@ -143,7 +143,7 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_deleteExercise_fail() {
-        let exerciseToDelete = ExerciseStruct.testData[0]
+        let exerciseToDelete = Exercise.testData[0]
         
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .deleteExercise(exerciseToDelete)
@@ -162,7 +162,7 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_updateExercise_success() {
-        let exerciseToUpdate = ExerciseStruct.testData[0]
+        let exerciseToUpdate = Exercise.testData[0]
         mockedExerciseLibraryRepository.updateExerciseResult = .success(())
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .updateExercise(exerciseToUpdate)
@@ -181,7 +181,7 @@ class ExerciseInteractorTests: XCTestCase {
     }
     
     func test_updateExercise_fail() {
-        let exerciseToUpdate = ExerciseStruct.testData[0]
+        let exerciseToUpdate = Exercise.testData[0]
         
         mockedExerciseLibraryRepository.actions = .init(expected: [
             .updateExercise(exerciseToUpdate)
