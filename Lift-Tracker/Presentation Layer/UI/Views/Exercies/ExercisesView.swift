@@ -16,7 +16,7 @@ import Combine
 struct ExercisesView: View {
     
     private let container: DIContainer
-    @State private(set) var exercisesLibrary: Loadable<ExerciseLibraryStruct> = .notRequested
+    @State private(set) var exercisesLibrary: Loadable<ExerciseLibrary> = .notRequested
     
     init(container: DIContainer) {
         self.container = container
@@ -66,7 +66,7 @@ struct ExercisesView: View {
 
 // MARK: - Side Effects
 private extension ExercisesView {
-    var exercisesUpdate: AnyPublisher<Loadable<ExerciseLibraryStruct>, Never> {
+    var exercisesUpdate: AnyPublisher<Loadable<ExerciseLibrary>, Never> {
         container.appState.updates(for: \.userData.exerciseLibrary)
     }
 }
@@ -107,7 +107,7 @@ private extension ExercisesView {
 
 // MARK: - Displaying Content
 private extension ExercisesView {
-    func loadedView(_ exerciseLibrary: ExerciseLibraryStruct) -> some View {
+    func loadedView(_ exerciseLibrary: ExerciseLibrary) -> some View {
         let exercises = exerciseLibrary.exercises
         if exercises.isEmpty {
             return AnyView(Text("No exercises"))

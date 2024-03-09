@@ -77,7 +77,7 @@ struct Exercise: Codable, Equatable, Identifiable, Hashable {
 
 // ExerciseLibraryStruct represents a collection of the exercises created by the user in the Lift-Tracker app.
 // It includes a unique identifier and a collection of ALL exercises that exist in the app.
-struct ExerciseLibraryStruct: Codable, Equatable, Identifiable {
+struct ExerciseLibrary: Codable, Equatable, Identifiable {
     let id: UUID?                       // Unique identifier for the exercise. Must be assigned on creation.
     var exercises: [Exercise]     // A collection of all the exercises in the app.
     

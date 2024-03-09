@@ -85,7 +85,7 @@ extension ExerciseMO {
         }
 }
 
-extension ExerciseLibraryStruct {
+extension ExerciseLibrary {
     // Initializes an ExerciseLibraryStruct from a ExerciseLibraryMO. Returns nil if essential properties are missing.
     init?(managedObject: ExerciseLibraryMO) {
         guard let id = managedObject.id else { return nil }
@@ -112,7 +112,7 @@ extension ExerciseLibraryStruct {
 }
 
 extension ExerciseLibraryMO {
-    func toStruct() -> ExerciseLibraryStruct {
-        return ExerciseLibraryStruct(managedObject: self)!
+    func toStruct() -> ExerciseLibrary {
+        return ExerciseLibrary(managedObject: self)!
     }
 }
