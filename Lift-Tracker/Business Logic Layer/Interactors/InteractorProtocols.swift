@@ -13,29 +13,29 @@ import Combine
 // Protocol defining the core functionalities for handling routines.
 protocol ExerciseInteractor {
     // Function to load all exercises.
-    func loadExercises(exercises: LoadableSubject<[ExerciseStruct]>)
+    func loadExercises(exercises: LoadableSubject<[Exercise]>)
     
     // Function to add a new exercise.
-    func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    func addExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
     
     // Function to update an existing exercise.
-    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    func updateExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
     
     // Function to delete an existing exercise.
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    func deleteExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
 }
 
 // Protocol defining the core functionalities for handling routines.
 protocol RoutineInteractor {
     // Function to load all routines.
-    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>)
+    func loadRoutines(routines: LoadableSubject<[Routine]>)
     
     // Function to add a new routine.
-    func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func addRoutine(routine: Routine) -> AnyPublisher<Void, Error>
     
     // Function to update an existing routine.
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, Error>
     
     // Function to delete an existing routine.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error>
 }

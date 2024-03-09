@@ -16,7 +16,7 @@ import Combine
 struct RoutinesView: View {
     
     private let container: DIContainer
-    @State private(set) var routines: Loadable<[RoutineStruct]> = .notRequested
+    @State private(set) var routines: Loadable<[Routine]> = .notRequested
     
     init(container: DIContainer) {
         self.container = container
@@ -63,14 +63,14 @@ struct RoutinesView: View {
 }
 // MARK: - Side Effects
 private extension RoutinesView {
-    var routinesUpdate: AnyPublisher<Loadable<[RoutineStruct]>, Never> {
+    var routinesUpdate: AnyPublisher<Loadable<[Routine]>, Never> {
         container.appState.updates(for: \.userData.routines)
     }
 }
 // MARK: - Routing
 extension RoutinesView {
     struct Routing: Equatable {
-        var routineDetails: RoutineStruct.ID?
+        var routineDetails: Routine.ID?
     }
 }
 // MARK: - Managing Content
@@ -103,7 +103,7 @@ private extension RoutinesView {
 
 // MARK: - Displaying Content
 private extension RoutinesView {
-    func loadedView(_ routines: [RoutineStruct]) -> some View {
+    func loadedView(_ routines: [Routine]) -> some View {
         if routines.isEmpty {
             return AnyView(Text("No routines"))
         } else {

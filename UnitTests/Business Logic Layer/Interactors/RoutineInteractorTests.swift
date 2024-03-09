@@ -35,12 +35,12 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_loadRoutines_success() {
-        let list = RoutineStruct.testData
+        let list = Routine.testData
         mockedRoutineRepository.actions = .init(expected: [
             .readRoutines
         ])
         mockedRoutineRepository.readRoutinesResult = .success(list)
-        let routines = BindingWithPublisher(value: Loadable<[RoutineStruct]>.notRequested)
+        let routines = BindingWithPublisher(value: Loadable<[Routine]>.notRequested)
         
         systemUnderTest.loadRoutines(routines: routines.binding)
         
@@ -66,7 +66,7 @@ class RoutineInteractorTests: XCTestCase {
         ])
         
         mockedRoutineRepository.readRoutinesResult = .failure(error)
-        let routines = BindingWithPublisher(value: Loadable<[RoutineStruct]>.notRequested)
+        let routines = BindingWithPublisher(value: Loadable<[Routine]>.notRequested)
         
         systemUnderTest.loadRoutines(routines: routines.binding)
         
@@ -86,7 +86,7 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_addExercise_success() {
-        let routineToAdd = RoutineStruct.testData[0]
+        let routineToAdd = Routine.testData[0]
         mockedRoutineRepository.createRoutineResult = .success(())
         mockedRoutineRepository.actions = .init(expected: [
             .createRoutine(routineToAdd)
@@ -105,7 +105,7 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_addExercise_fail() {
-        let routineToAdd = RoutineStruct.testData[0]
+        let routineToAdd = Routine.testData[0]
         
         mockedRoutineRepository.actions = .init(expected: [
             .createRoutine(routineToAdd)
@@ -124,7 +124,7 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_deleteExercise_success() {
-        let routineToDelete = RoutineStruct.testData[0]
+        let routineToDelete = Routine.testData[0]
         mockedRoutineRepository.deleteRoutineResult = .success(())
         mockedRoutineRepository.actions = .init(expected: [
             .deleteRoutine(routineToDelete)
@@ -143,7 +143,7 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_deleteExercise_fail() {
-        let routineToDelete = RoutineStruct.testData[0]
+        let routineToDelete = Routine.testData[0]
         
         mockedRoutineRepository.actions = .init(expected: [
             .deleteRoutine(routineToDelete)
@@ -162,7 +162,7 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_updateExercise_success() {
-        let routineToUpdate = RoutineStruct.testData[0]
+        let routineToUpdate = Routine.testData[0]
         mockedRoutineRepository.updateRoutineResult = .success(())
         mockedRoutineRepository.actions = .init(expected: [
             .updateRoutine(routineToUpdate)
@@ -181,7 +181,7 @@ class RoutineInteractorTests: XCTestCase {
     }
     
     func test_updateExercise_fail() {
-        let routineToUpdate = RoutineStruct.testData[0]
+        let routineToUpdate = Routine.testData[0]
         
         mockedRoutineRepository.actions = .init(expected: [
             .updateRoutine(routineToUpdate)

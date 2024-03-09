@@ -30,7 +30,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
     /// - Returns:
     ///     - A publisher that completes when the exercise has been successfully added,
     ///   or with an error if the process fails.
-    func createExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func createExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         // Call the update function of the persistentStore.
         return persistentStore.update { context in
             // Fetch the existing ExerciseLibraryMO or create a new one if it doesn't exist.
@@ -64,7 +64,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
     /// - Returns:
     ///     - A publisher that emits an optional `ExerciseLibraryStruct` containing all exercises,
     ///   or an error if the fetch fails.
-    func readExercises() -> AnyPublisher<[ExerciseStruct], Error> {
+    func readExercises() -> AnyPublisher<[Exercise], Error> {
         // Create fetch request to get the ExerciseLibrary from the PersistentStore
         let fetchRequest: NSFetchRequest<ExerciseLibraryMO> = ExerciseLibraryMO.fetchRequest()
         // Configure fetch request to avoid faults and prefetch relationships.
@@ -78,7 +78,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
                 guard let exerciseMOs = libraryMO.exercises as? Set<ExerciseMO> else {
                     return [] // Return an empty array if no exercises are found
                 }
-                return exerciseMOs.compactMap(ExerciseStruct.init) // Convert to ExerciseStruct
+                return exerciseMOs.compactMap(Exercise.init) // Convert to ExerciseStruct
             }
             .map { $0.first ?? [] } // Extract the first result (since there should only be one library) or return an empty array
             .eraseToAnyPublisher()
@@ -93,7 +93,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
     /// - Returns:
     ///     - A publisher that completes when the exercise has been successfully updated,
     ///   or with an error if the update fails.
-    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func updateExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         // Call the update function of the persistentStore.
         return persistentStore.update { context in
             let fetchRequest: NSFetchRequest<ExerciseLibraryMO> = ExerciseLibraryMO.fetchRequest()
@@ -136,7 +136,7 @@ struct RealExerciseLibraryRepository: ExerciseLibraryRepository {
     /// - Returns:
     ///     - A publisher that completes when the exercise has been successfully deleted,
     ///   or with an error if the deletion fails.
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func deleteExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         // Call the update function of the persistentStore.
         return persistentStore.update { context in
             // Create a fetch request for the ExerciseLibraryMO entity.

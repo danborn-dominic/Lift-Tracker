@@ -30,7 +30,7 @@ struct RealRoutinesRepository: RoutinesRepository {
     /// - Returns:
     ///     -  A publisher that completes when the routine has been successfully created,
     ///   or with an error if the creation fails.
-    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func createRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         // Call persistentStore's update function.
         return persistentStore.update { context in
             // Attempt to map the RoutineStruct to a RoutineMO (Managed Object).
@@ -49,7 +49,7 @@ struct RealRoutinesRepository: RoutinesRepository {
     /// - Returns:
     ///     - A publisher emitting an array of `RoutineStruct` when the operation succeeds,
     ///   or an error if the fetch operation fails.
-    func readRoutines() -> AnyPublisher<[RoutineStruct], Error> {
+    func readRoutines() -> AnyPublisher<[Routine], Error> {
         // Build the fetch request to the persistentStore
         let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
         fetchRequest.returnsObjectsAsFaults = false
@@ -57,7 +57,7 @@ struct RealRoutinesRepository: RoutinesRepository {
         
         // Fetch the routines from the persistent store and map each RoutineMO to a RoutineStruct.
         return persistentStore
-            .fetch(fetchRequest, map: { RoutineStruct(managedObject: $0) })
+            .fetch(fetchRequest, map: { Routine(managedObject: $0) })
             .eraseToAnyPublisher()
     }
     
@@ -70,7 +70,7 @@ struct RealRoutinesRepository: RoutinesRepository {
     /// - Returns:
     ///     - A publisher that completes when the routine has been successfully updated,
     ///   or with an error if the update fails.
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         // Call persistentStore's update function.
         return persistentStore.update { context in
             let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()
@@ -134,7 +134,7 @@ struct RealRoutinesRepository: RoutinesRepository {
     /// - Returns:
     ///     - A publisher that completes when the routine has been successfully deleted,
     ///   or with an error if the deletion fails.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         // Call persistentStore's update function.
         return persistentStore.update { context in
             let fetchRequest: NSFetchRequest<RoutineMO> = RoutineMO.fetchRequest()

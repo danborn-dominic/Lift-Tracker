@@ -13,25 +13,25 @@
 import Foundation
 
 #if DEBUG
-extension RoutineStruct {
-    static let testData: [RoutineStruct] = [
-        RoutineStruct(id: UUID(), routineName: "Full Body", exercises: ExerciseStruct.testData),
-        RoutineStruct(id: UUID(), routineName: "Upper Body", exercises: [ExerciseStruct.testData[0], ExerciseStruct.testData[1]]),
-        RoutineStruct(id: UUID(), routineName: "Lower Body", exercises: [ExerciseStruct.testData[2]]),
-        RoutineStruct(id: UUID(), routineName: "Push", exercises: [ExerciseStruct.testData[3]]),
-        RoutineStruct(id: UUID(), routineName: "Pull", exercises: [ExerciseStruct.testData[4]]),
-        RoutineStruct(id: UUID(), routineName: "Legs", exercises: [ExerciseStruct.testData[5]])
+extension Routine {
+    static let testData: [Routine] = [
+        Routine(id: UUID(), routineName: "Full Body", exercises: Exercise.testData),
+        Routine(id: UUID(), routineName: "Upper Body", exercises: [Exercise.testData[0], Exercise.testData[1]]),
+        Routine(id: UUID(), routineName: "Lower Body", exercises: [Exercise.testData[2]]),
+        Routine(id: UUID(), routineName: "Push", exercises: [Exercise.testData[3]]),
+        Routine(id: UUID(), routineName: "Pull", exercises: [Exercise.testData[4]]),
+        Routine(id: UUID(), routineName: "Legs", exercises: [Exercise.testData[5]])
     ]
 }
 
-extension ExerciseStruct {
-    static let testData: [ExerciseStruct] = [
-        ExerciseStruct(id: UUID(), exerciseName: "Bench Press"),
-        ExerciseStruct(id: UUID(), exerciseName: "Pull Ups"),
-        ExerciseStruct(id: UUID(), exerciseName: "Squats"),
-        ExerciseStruct(id: UUID(), exerciseName: "Shoulder Press"),
-        ExerciseStruct(id: UUID(), exerciseName: "Bent Over Rows"),
-        ExerciseStruct(id: UUID(), exerciseName: "Lunges")
+extension Exercise {
+    static let testData: [Exercise] = [
+        Exercise(id: UUID(), exerciseName: "Bench Press"),
+        Exercise(id: UUID(), exerciseName: "Pull Ups"),
+        Exercise(id: UUID(), exerciseName: "Squats"),
+        Exercise(id: UUID(), exerciseName: "Shoulder Press"),
+        Exercise(id: UUID(), exerciseName: "Bent Over Rows"),
+        Exercise(id: UUID(), exerciseName: "Lunges")
     ]
 }
 #endif

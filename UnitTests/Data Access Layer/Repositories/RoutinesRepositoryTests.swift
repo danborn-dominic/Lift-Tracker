@@ -49,7 +49,7 @@ class RoutinesRepositoryTests: XCTestCase {
     /// Ensures that the method creates a routine successfully in the persistent store.
     func test_createRoutine() {
         // Select a routine to test creation.
-        let routineToCreate = RoutineStruct.testData[0]
+        let routineToCreate = Routine.testData[0]
         // Configure the mocked store to expect an update action reflecting routine creation.
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 1, updated: 0, deleted: 0))
@@ -77,7 +77,7 @@ class RoutinesRepositoryTests: XCTestCase {
     /// Test for verifying the `readRoutines` method of `RealRoutinesRepository`.
     /// Ensures that the method fetches routines correctly from the persistent store and returns them as expected.
     func test_readRoutines() throws {
-        let routines = RoutineStruct.testData
+        let routines = Routine.testData
         let sortedRoutines = routines.sorted(by: { $0.routineName < $1.routineName })
         mockedStore.actions = .init(expected: [
             .fetch(.init(inserted: 0, updated: 0, deleted: 0))
@@ -106,7 +106,7 @@ class RoutinesRepositoryTests: XCTestCase {
     /// Test for verifying the `updateRoutine` method of `RealRoutinesRepository`.
     /// Ensures that the method updates a routine successfully in the persistent store.
     func test_updateRoutine() throws {
-        let routines = RoutineStruct.testData
+        let routines = Routine.testData
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 1, deleted: 0))
         ])
@@ -131,7 +131,7 @@ class RoutinesRepositoryTests: XCTestCase {
     /// Test for verifying the `deleteRoutine` method of `RealRoutinesRepository`.
     /// Ensures that the method deletes a routine successfully from the persistent store.
     func test_deleteRoutine() throws {
-        let routines = RoutineStruct.testData
+        let routines = Routine.testData
         let routineToDelete = routines[0]
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 0, deleted: 1))

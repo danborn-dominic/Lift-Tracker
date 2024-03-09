@@ -15,20 +15,20 @@ import Foundation
 
 // RoutineStruct represents a routine created by the user in the Lift-Tracker app.
 // It includes a unique identifier, a name, and a collection of exercises.
-struct RoutineStruct: Codable, Equatable, Identifiable, Hashable {
+struct Routine: Codable, Equatable, Identifiable, Hashable {
     let id: UUID?                       // Unique identifier for the routine. Must be assigned on creation.
     var routineName: String             // Name of the routine.
-    var exercises: [ExerciseStruct]     // Collection of exercises.
+    var exercises: [Exercise]     // Collection of exercises.
     
     // Initializes a new routine with an ID and a name.
     init(id: UUID, routineName: String) {
         self.id = id
         self.routineName = routineName
-        self.exercises = [ExerciseStruct]()
+        self.exercises = [Exercise]()
     }
     
     // Initializes a new routine with an ID, name, and set of exercises.
-    init(id: UUID, routineName: String, exercises: [ExerciseStruct]) {
+    init(id: UUID, routineName: String, exercises: [Exercise]) {
         self.id = id
         self.routineName = routineName
         self.exercises = exercises
@@ -39,14 +39,14 @@ struct RoutineStruct: Codable, Equatable, Identifiable, Hashable {
     }
     
     // Equality is based on the `id` of the routine
-    static func ==(lhs: RoutineStruct, rhs: RoutineStruct) -> Bool {
+    static func ==(lhs: Routine, rhs: Routine) -> Bool {
         lhs.id == rhs.id
     }
 }
 
 // ExerciseStruct represents an exercise created by the user in the Lift-Tracker app.
 // It includes a unique identifier, a name, and notes about the exercise.
-struct ExerciseStruct: Codable, Equatable, Identifiable, Hashable {
+struct Exercise: Codable, Equatable, Identifiable, Hashable {
     let id: UUID?                       // Unique identifier for the exercise. Must be assigned on creation.
     var exerciseName: String            // Name of the exercise.
     var exerciseNotes: String           // Notes about the exercise.
@@ -70,7 +70,7 @@ struct ExerciseStruct: Codable, Equatable, Identifiable, Hashable {
     }
     
     // Equality is based on the `id` of the exercise
-    static func ==(lhs: ExerciseStruct, rhs: ExerciseStruct) -> Bool {
+    static func ==(lhs: Exercise, rhs: Exercise) -> Bool {
         lhs.id == rhs.id
     }
 }
@@ -79,16 +79,16 @@ struct ExerciseStruct: Codable, Equatable, Identifiable, Hashable {
 // It includes a unique identifier and a collection of ALL exercises that exist in the app.
 struct ExerciseLibraryStruct: Codable, Equatable, Identifiable {
     let id: UUID?                       // Unique identifier for the exercise. Must be assigned on creation.
-    var exercises: [ExerciseStruct]     // A collection of all the exercises in the app.
+    var exercises: [Exercise]     // A collection of all the exercises in the app.
     
     // Initializes a new ExerciseLibrary with an ID.
     init(id: UUID) {
         self.id = id
-        self.exercises = [ExerciseStruct]()
+        self.exercises = [Exercise]()
     }
     
     // Initializes a new ExerciseLibrary with an ID and a collection of exercises.
-    init(id: UUID, exercises: [ExerciseStruct]) {
+    init(id: UUID, exercises: [Exercise]) {
         self.id = id
         self.exercises = exercises
     }

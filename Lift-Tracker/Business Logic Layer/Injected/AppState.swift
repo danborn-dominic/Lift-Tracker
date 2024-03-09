@@ -33,7 +33,7 @@ extension AppState {
     // UserData encapsulates the state of user-related data such as routines and exercises.
     struct UserData: Equatable {
         // routines holds the state of user's routines.
-        var routines: Loadable<[RoutineStruct]> = .notRequested
+        var routines: Loadable<[Routine]> = .notRequested
         // exercises holds the state of the user's exercise library.
         var exerciseLibrary: Loadable<ExerciseLibraryStruct> = .notRequested
     }

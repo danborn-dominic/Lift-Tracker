@@ -23,9 +23,9 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     
     enum Action: Equatable {
         case loadRoutines
-        case addRoutine(RoutineStruct)
-        case updateRoutine(RoutineStruct)
-        case deleteRoutine(RoutineStruct)
+        case addRoutine(Routine)
+        case updateRoutine(Routine)
+        case deleteRoutine(Routine)
     }
     
     let actions: MockActions<Action>
@@ -36,7 +36,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     
     /// Simulates the loading of routines.
     /// This function registers the action and provides a stub implementation.
-    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>) {
+    func loadRoutines(routines: LoadableSubject<[Routine]>) {
         register(.loadRoutines)
     }
     
@@ -45,7 +45,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     ///
     /// - Parameters:
     ///   - routine: The `RoutineStruct` instance to be added.
-    func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func addRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         register(.addRoutine(routine))
         return Just<Void>.withErrorType(Error.self)
     }
@@ -55,7 +55,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     ///
     /// - Parameters:
     ///   - routine: The `RoutineStruct` instance to be updated.
-    func updateRoutine(routine: Lift_Tracker.RoutineStruct) -> AnyPublisher<Void, Error> {
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         register(.updateRoutine(routine))
         return Just<Void>.withErrorType(Error.self)
     }
@@ -65,7 +65,7 @@ struct MockedRoutineInteractor: Mock, RoutineInteractor {
     ///
     /// - Parameters:
     ///   - routine: The `RoutineStruct` instance to be deleted.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         register(.deleteRoutine(routine))
         return Just<Void>.withErrorType(Error.self)
     }
@@ -75,9 +75,9 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
 
     enum Action: Equatable {
         case loadExercises
-        case addExercise(ExerciseStruct)
-        case updateExercise(ExerciseStruct)
-        case deleteExercise(ExerciseStruct)
+        case addExercise(Exercise)
+        case updateExercise(Exercise)
+        case deleteExercise(Exercise)
     }
     
     let actions: MockActions<Action>
@@ -88,7 +88,7 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     
     /// Simulates loading exercises.
     /// Records the action and doesn't perform any real operation.
-    func loadExercises(exercises: LoadableSubject<[Lift_Tracker.ExerciseStruct]>) {
+    func loadExercises(exercises: LoadableSubject<[Exercise]>) {
         register(.loadExercises)
     }
     
@@ -97,7 +97,7 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     ///
     /// - Parameters:
     ///   - exercise: The `ExerciseStruct` instance to be added.
-    func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func addExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         register(.addExercise(exercise))
         return Just<Void>.withErrorType(Error.self)
     }
@@ -107,7 +107,7 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     ///
     /// - Parameters:
     ///   - exercise: The `ExerciseStruct` instance to be updated.
-    func updateExercise(exercise: Lift_Tracker.ExerciseStruct) -> AnyPublisher<Void, any Error> {
+    func updateExercise(exercise: Exercise) -> AnyPublisher<Void, any Error> {
         register(.updateExercise(exercise))
         return Just<Void>.withErrorType(Error.self)
     }
@@ -117,7 +117,7 @@ struct MockedExerciseInteractor: Mock, ExerciseInteractor {
     ///
     /// - Parameters:
     ///   - exercise: The `ExerciseStruct` instance to be deleted.
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func deleteExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         register(.deleteExercise(exercise))
         return Just<Void>.withErrorType(Error.self)
     }

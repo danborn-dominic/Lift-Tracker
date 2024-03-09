@@ -20,29 +20,29 @@ import Combine
 // Protocol for the implementation of a repository managing routines. Follows CRUD architecture.
 protocol RoutinesRepository {
     /// Creates a new routine and saves it to the persistence layer.
-    func createRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func createRoutine(routine: Routine) -> AnyPublisher<Void, Error>
     
     /// Reads all routines from the persistence layer.
-    func readRoutines() -> AnyPublisher<[RoutineStruct], Error>
+    func readRoutines() -> AnyPublisher<[Routine], Error>
     
     /// Updates a specific routine in the persistence layer.
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, Error>
     
     /// Deletes a specific routine from the persistence layer.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error>
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error>
 }
 
 // Protocol for the implementation of a repository managing the ExerciseLibrary. Follows CRUD architecture.
 protocol ExerciseLibraryRepository {
     /// Creates a new exercise and saves it to the persistence layer.
-    func createExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    func createExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
     
     /// Reads all exercises from the persistence layer.
-    func readExercises() -> AnyPublisher<[ExerciseStruct], Error>
+    func readExercises() -> AnyPublisher<[Exercise], Error>
     
     /// Updates a specific exercise in the persistence layer.
-    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    func updateExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
     
     /// Deletes a specific exercise from the persistence layer.
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error>
+    func deleteExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
 }

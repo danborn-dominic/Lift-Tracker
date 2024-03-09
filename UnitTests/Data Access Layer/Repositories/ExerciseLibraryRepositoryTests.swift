@@ -48,7 +48,7 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
     /// Test for verifying the `createExercise` method of `RealExerciseLibraryRepository`.
     /// Ensures that the method creates an exercise successfully in the persistent store.
     func test_createExercise() throws {
-        let exerciseToCreate = ExerciseStruct.testData[0]
+        let exerciseToCreate = Exercise.testData[0]
         
         // Configure the mocked store to expect an update action reflecting routine creation.
         mockedStore.actions = .init(expected: [
@@ -83,7 +83,7 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
     /// Test for verifying the `readExercises` method of `RealExerciseLibraryRepository`.
     /// Ensures that the method fetches exercises correctly from the persistent store and returns them as expected.
     func test_readExercises() throws {
-        let exercises = ExerciseStruct.testData
+        let exercises = Exercise.testData
         let sortedExercises = exercises.sorted(by: { $0.exerciseName < $1.exerciseName })
         mockedStore.actions = .init(expected: [
             .fetch(.init(inserted: 0, updated: 0, deleted: 0))
@@ -115,7 +115,7 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
     /// Test for verifying the `updateExercise` method of `RealExerciseLibraryRepository`.
     /// Ensures that the method updates an exercise successfully in the persistent store.
     func test_updateExercise() throws {
-        let exercises = ExerciseStruct.testData
+        let exercises = Exercise.testData
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 1, deleted: 0))
         ])
@@ -142,7 +142,7 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
     /// Test for verifying the `deleteExercise` method of `RealExerciseLibraryRepository`.
     /// Ensures that the method deletes an exercise successfully from the persistent store.
     func test_deleteExercise() throws {
-        let exercises = ExerciseStruct.testData
+        let exercises = Exercise.testData
         let exerciseToDelete = exercises[0]
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 2, deleted: 1))

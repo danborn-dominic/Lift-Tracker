@@ -40,7 +40,7 @@ struct AddExerciseView: View {
     }
     
     private func saveExercise() {
-        let newExercise = ExerciseStruct(id: UUID(), exerciseName: exerciseName, exerciseNotes: exerciseNotes)
+        let newExercise = Exercise(id: UUID(), exerciseName: exerciseName, exerciseNotes: exerciseNotes)
         container.interactors.exerciseInteractor.addExercise(exercise: newExercise)
         self.presentationMode.wrappedValue.dismiss()
     }

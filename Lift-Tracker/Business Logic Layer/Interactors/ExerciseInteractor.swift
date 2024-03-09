@@ -35,7 +35,7 @@ class RealExerciseInteractor: ExerciseInteractor {
     /// Loads exercises from the repository and updates the application state.
     ///
     /// - Parameter exercises: A `LoadableSubject` that holds the state of the exercises being loaded.
-    func loadExercises(exercises: LoadableSubject<[ExerciseStruct]>) {
+    func loadExercises(exercises: LoadableSubject<[Exercise]>) {
         // Initialize a new CancelBag to manage the lifecycle of this network call.
         let cancelBag = CancelBag()
         // Set the passed exercises subject to a loading state
@@ -54,7 +54,7 @@ class RealExerciseInteractor: ExerciseInteractor {
     ///
     /// - Parameters:
     ///    - exercise: The `ExerciseStruct` instance to be added.
-    func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func addExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         return exercisesRepository.createExercise(exercise: exercise)
     }
     
@@ -62,7 +62,7 @@ class RealExerciseInteractor: ExerciseInteractor {
     ///
     /// - Parameters:
     ///    - exercise: The `ExerciseStruct` instance to be updated.
-    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, any Error> {
+    func updateExercise(exercise: Exercise) -> AnyPublisher<Void, any Error> {
         return exercisesRepository.updateExercise(exercise: exercise)
     }
     
@@ -70,25 +70,25 @@ class RealExerciseInteractor: ExerciseInteractor {
     ///
     /// - Parameters:
     ///    - exercise: The `ExerciseStruct` instance to be deleted.
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func deleteExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         return exercisesRepository.deleteExercise(exercise: exercise)
     }
 }
 
 struct StubExerciseInteractor: ExerciseInteractor {
     
-    func loadExercises(exercises: LoadableSubject<[ExerciseStruct]>) {
+    func loadExercises(exercises: LoadableSubject<[Exercise]>) {
     }
     
-    func addExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func addExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         return Just<Void>.withErrorType(Error.self)
     }
     
-    func updateExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, any Error> {
+    func updateExercise(exercise: Exercise) -> AnyPublisher<Void, any Error> {
         return Just<Void>.withErrorType(Error.self)
     }
     
-    func deleteExercise(exercise: ExerciseStruct) -> AnyPublisher<Void, Error> {
+    func deleteExercise(exercise: Exercise) -> AnyPublisher<Void, Error> {
         return Just<Void>.withErrorType(Error.self)
     }
 }

@@ -35,7 +35,7 @@ class RealRoutineInteractor: RoutineInteractor {
     /// Loads routines from the repository
     ///
     /// - Parameter routines: A `LoadableSubject` that holds the state of the routines being loaded.
-    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>) {
+    func loadRoutines(routines: LoadableSubject<[Routine]>) {
         // Initialize a new CancelBag to manage the lifecycle of this network call.
         let cancelBag = CancelBag()
         // Set the passed routines subject to a loading state.
@@ -55,7 +55,7 @@ class RealRoutineInteractor: RoutineInteractor {
     ///
     /// - Parameters:
     ///    - routine: The `RoutineStruct` instance to be added.
-    func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func addRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         return routinesRepository.createRoutine(routine: routine)
     }
     
@@ -63,7 +63,7 @@ class RealRoutineInteractor: RoutineInteractor {
     ///
     /// - Parameters:
     ///    - routine: The `RoutineStruct` instance to be updated.
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, any Error> {
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, any Error> {
         return routinesRepository.updateRoutine(routine: routine)
     }
     
@@ -71,24 +71,24 @@ class RealRoutineInteractor: RoutineInteractor {
     ///
     /// - Parameters:
     ///    - routine: The `RoutineStruct` instance to be deleted.
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         return routinesRepository.deleteRoutine(routine: routine)
     }
 }
 
 struct StubRoutineInteractor: RoutineInteractor {
     
-    func loadRoutines(routines: LoadableSubject<[RoutineStruct]>) {}
+    func loadRoutines(routines: LoadableSubject<[Routine]>) {}
     
-    func addRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func addRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         return Just<Void>.withErrorType(Error.self)
     }
     
-    func updateRoutine(routine: RoutineStruct) -> AnyPublisher<Void, any Error> {
+    func updateRoutine(routine: Routine) -> AnyPublisher<Void, any Error> {
         return Just<Void>.withErrorType(Error.self)
     }
     
-    func deleteRoutine(routine: RoutineStruct) -> AnyPublisher<Void, Error> {
+    func deleteRoutine(routine: Routine) -> AnyPublisher<Void, Error> {
         return Just<Void>.withErrorType(Error.self)
     }
 }
