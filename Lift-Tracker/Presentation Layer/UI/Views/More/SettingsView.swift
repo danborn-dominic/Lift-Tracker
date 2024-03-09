@@ -35,11 +35,3 @@ struct SettingsView: View {
         Text("Settings content")
     }
 }
-
-#if DEBUG
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(container: .preview)
-    }
-}
-#endif

@@ -81,11 +81,3 @@ extension View {
             .environment(\.injected, container)
     }
 }
-
-#if DEBUG
-extension DIContainer {
-    static var preview: Self {
-        .init(appState: .init(AppState.preview), interactors: .stub)
-    }
-}
-#endif

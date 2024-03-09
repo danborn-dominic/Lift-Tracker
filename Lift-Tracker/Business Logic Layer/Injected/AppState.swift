@@ -56,15 +56,3 @@ extension AppState {
         var isActive: Bool = false
     }
 }
-
-// DEBUG extension for previewing and testing.
-#if DEBUG
-extension AppState {
-    static var preview: AppState {
-        var state = AppState()
-        state.system.isActive = true
-        state.userData.routines = .loaded(RoutineStruct.mockData)
-        return state
-    }
-}
-#endif

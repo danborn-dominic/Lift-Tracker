@@ -2,14 +2,13 @@
 //  Models+CoreData.swift
 //  Lift-Tracker
 //
-//  Created by Dominic Danborn on 5/13/23.
-//
 //  Description:
 //  This file provides extensions to CoreData Managed Object classes,
 //  enabling conversions between CoreData Managed Objects and their
 //  corresponding Swift structures. It enhances the integration of CoreData
 //  with the app's data models.
 //
+//  Created by Dominic Danborn on 5/13/23.
 //  Copyright © 2023 Dominic Danborn. All rights reserved.
 //
 
@@ -34,16 +33,21 @@ extension RoutineStruct {
     
     // Converts a RoutineStruct to RoutineMO and returns it.
     @discardableResult
-    func mapToMO(in context: NSManagedObjectContext) -> RoutineMO? {
+    func store(in context: NSManagedObjectContext) -> RoutineMO? {
         guard let routine = RoutineMO.insertNew(in: context)
-        else { return nil }
+            else { return nil }
         
         routine.routineName = routineName
         routine.id = id
-        
-        let storedExercises = exercises.compactMap { $0.mapToMO(in: context) }
+        let storedExercises = exercises.compactMap { $0.store(in: context) }
         routine.exercises = NSSet(array: storedExercises)
         return routine
+    }
+}
+
+extension RoutineMO {
+    func toStruct() -> RoutineStruct {
+        return RoutineStruct(managedObject: self)!
     }
 }
 
@@ -60,7 +64,7 @@ extension ExerciseStruct {
     
     // Converts an ExerciseStruct to an ExerciseMO and returns it.
     @discardableResult
-    func mapToMO(in context: NSManagedObjectContext) -> ExerciseMO? {
+    func store(in context: NSManagedObjectContext) -> ExerciseMO? {
         guard let exercise = ExerciseMO.insertNew(in: context)
         else { return nil }
         
@@ -68,6 +72,17 @@ extension ExerciseStruct {
         exercise.id = id
         return exercise
     }
+}
+
+extension ExerciseMO {
+    func toStruct() -> ExerciseStruct {
+        return ExerciseStruct(managedObject: self)!
+    }
+    
+    func update(with exercise: ExerciseStruct) {
+            self.exerciseName = exercise.exerciseName
+            self.id = exercise.id
+        }
 }
 
 extension ExerciseLibraryStruct {
@@ -85,13 +100,19 @@ extension ExerciseLibraryStruct {
     
     // Converts an ExerciseLibraryStruct to an ExerciseLibraryMO and returns it.
     @discardableResult
-    func mapToMO(in context: NSManagedObjectContext) -> ExerciseLibraryMO? {
+    func store(in context: NSManagedObjectContext) -> ExerciseLibraryMO? {
         guard let exerciseLibrary = ExerciseLibraryMO.insertNew(in: context)
         else { return nil }
         
         exerciseLibrary.id = id
-        let exercisesArray = exercises.compactMap { $0.mapToMO(in: context) }
+        let exercisesArray = exercises.compactMap { $0.store(in: context) }
         exerciseLibrary.exercises = NSSet(array: exercisesArray)
         return exerciseLibrary
+    }
+}
+
+extension ExerciseLibraryMO {
+    func toStruct() -> ExerciseLibraryStruct {
+        return ExerciseLibraryStruct(managedObject: self)!
     }
 }

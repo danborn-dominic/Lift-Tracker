@@ -35,11 +35,3 @@ struct ProgressView: View {
         Text("Progress content")
     }
 }
-
-#if DEBUG
-struct ProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressView(container: .preview)
-    }
-}
-#endif

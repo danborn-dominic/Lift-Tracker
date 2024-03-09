@@ -92,8 +92,6 @@ private extension ExercisesView {
     }
     
     func loadExercises() {
-        container.interactors.exerciseInteractor
-            .loadExercises()
     }
     
     func deleteExercise(at offsets: IndexSet) {
@@ -124,10 +122,3 @@ private extension ExercisesView {
     }
 }
 
-#if DEBUG
-struct ExercisesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExercisesView(container: .preview)
-    }
-}
-#endif

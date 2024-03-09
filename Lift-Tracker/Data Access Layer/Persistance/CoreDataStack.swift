@@ -21,21 +21,6 @@ import Foundation
 import CoreData
 import Combine
 
-// PersistentStore protocol.
-// This protocol defines the core functionalities for interacting with a persistent store,
-// such as a Core Data database. It provides a set of methods for fetching and updating data
-// in a type-safe and generic way. The protocol uses Combine to handle asynchronous operations.
-protocol PersistentStore {
-    // Typealias for a database operation that can throw an error and return a result.
-    typealias DBOperation<Result> = (NSManagedObjectContext) throws -> Result
-    
-    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
-                     map: @escaping (T) throws -> V?) -> AnyPublisher<[V], Error>
-    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
-                        map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error>
-    func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error>
-}
-
 // CoreDataStack
 // The actual coredata stack, which implements the persistentStore protocol.
 struct CoreDataStack: PersistentStore {
@@ -50,23 +35,46 @@ struct CoreDataStack: PersistentStore {
     private let bgQueue = DispatchQueue(label: "coredata")
     
     /// Initializes a new instance of CoreDataStack.
-    /// - Sets up the persistent container with the specified name and loads its stores.
-    init() {
-        persistentContainer = NSPersistentContainer(name: "Lift_Tracker")
+    /// This initializer is responsible for setting up the Core Data stack with a specified version of the data model.
+    /// It initializes the NSPersistentContainer and configures it with the correct store based on the provided directory, domain mask, and version number.
+    /// The loading of the persistent stores is performed asynchronously to avoid blocking the main thread.
+    ///
+    /// - Parameters:
+    ///   - directory: The FileManager.SearchPathDirectory where the database should be stored. Defaults to .documentDirectory.
+    ///   - domainMask: The FileManager.SearchPathDomainMask for the directory. Defaults to .userDomainMask.
+    ///   - vNumber: The version number of the data model.
+    init(directory: FileManager.SearchPathDirectory = .documentDirectory,
+         domainMask: FileManager.SearchPathDomainMask = .userDomainMask,
+         version vNumber: UInt) {
         
-        // Perform the store loading asynchronously to avoid blocking the main thread.
+        // Create a `Version` instance with the provided version number.
+        let version = Version(vNumber)
+        
+        // Initialize the NSPersistentContainer with the model name.
+        // The model name is derived from the `Version` instance.
+        persistentContainer = NSPersistentContainer(name: version.modelName)
+        
+        // Check if a URL for the database file can be constructed using the specified directory and domain mask.
+        if let url = version.dbFileURL(directory, domainMask) {
+            // Create a description for the persistent store using the URL.
+            let store = NSPersistentStoreDescription(url: url)
+            // Assign this store description to the persistent container.
+            persistentContainer.persistentStoreDescriptions = [store]
+        }
+        
+        // Perform the loading of the persistent stores on a background queue.
         bgQueue.async { [weak isStoreLoaded, weak persistentContainer] in
-            // Load persistent stores (database files) associated with the model.
+            // Load the persistent stores, which involves setting up the database file and performing any necessary migrations.
             persistentContainer?.loadPersistentStores { (storeDescription, error) in
-                // Once loading is complete, switch back to the main thread.
+                // Once the store loading is complete, handle the result on the main thread.
                 DispatchQueue.main.async {
                     if let error = error {
-                        // Notify subscribers about the failure in loading the store.
+                        // If there was an error loading the stores, send a failure completion to `isStoreLoaded`.
                         isStoreLoaded?.send(completion: .failure(error))
                     } else {
-                        // Configure the view context as read-only if the store is loaded successfully.
+                        // If the stores were loaded successfully, configure the main context for read-only operations.
                         persistentContainer?.viewContext.configureAsReadOnlyContext()
-                        // Notify subscribers that the store has been successfully loaded.
+                        // Update `isStoreLoaded` to indicate successful loading of the store.
                         isStoreLoaded?.value = true
                     }
                 }
@@ -84,7 +92,9 @@ struct CoreDataStack: PersistentStore {
     /// - Returns: A publisher that emits an array of `V` objects or an error.
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
                      map: @escaping (T) throws -> V?) -> AnyPublisher<[V], Error> {
-        return Future { promise in
+        assert(Thread.isMainThread)
+
+        let fetch = Future <[V], Error> { promise in
             do {
                 // Execute the fetch request on the managed object context.
                 let fetchedObjects = try self.persistentContainer.viewContext.fetch(fetchRequest)
@@ -97,39 +107,9 @@ struct CoreDataStack: PersistentStore {
                 promise(.failure(error))
             }
         }
-        .eraseToAnyPublisher()
-    }
-    
-    /// Fetches a single object from the Core Data store and maps it to a different type.
-    /// This generic method fetches the first object of type `T` from the results and converts it to type `V`.
-    ///
-    /// - Parameters:
-    ///   - fetchRequest: An `NSFetchRequest` instance configured to fetch `T` objects.
-    ///   - map: A closure that maps the fetched `T` object to a `V` object.
-    ///
-    /// - Returns: A publisher that emits an optional `V` object or an error.
-    func fetchOne<T, V>(_ fetchRequest: NSFetchRequest<T>,
-                        map: @escaping (T) throws -> V?) -> AnyPublisher<V?, Error> {
-        return Future<V?, Error> { promise in
-            do {
-                // Execute the fetch request on the managed object context.
-                let fetchedObjects = try self.persistentContainer.viewContext.fetch(fetchRequest)
-                // Check if at least one object is fetched and process it.
-                if let firstObject = fetchedObjects.first {
-                    // Map the first fetched object to the desired type.
-                    let mappedObject = try map(firstObject)
-                    // Promise success with the mapped object.
-                    promise(.success(mappedObject))
-                } else {
-                    // If no objects are fetched, return nil.
-                    promise(.success(nil))
-                }
-            } catch {
-                // If an error occurs during the fetch operation, promise a failure with the error.
-                promise(.failure(error))
-            }
-        }
-        .eraseToAnyPublisher()
+        return onStoreIsReady
+            .flatMap { fetch }
+            .eraseToAnyPublisher()
     }
     
     /// Executes a database operation in the context and persists any changes.
@@ -140,21 +120,79 @@ struct CoreDataStack: PersistentStore {
     ///
     /// - Returns: A publisher that emits the result of the operation or an error.
     func update<Result>(_ operation: @escaping DBOperation<Result>) -> AnyPublisher<Result, Error> {
-        return Future { promise in
-            do {
-                // Perform the operation within the managed object context.
-                let result = try operation(self.persistentContainer.viewContext)
-                // Attempt to save any changes made during the operation.
-                try self.persistentContainer.viewContext.save()
-                // If successful, promise the result.
-                promise(.success(result))
-            } catch {
-                // In case of an error, rollback any changes made during the operation.
-                self.persistentContainer.viewContext.rollback()
-                // Promise a failure with the encountered error.
-                promise(.failure(error))
+        let update = Future <Result, Error> { [weak bgQueue, weak persistentContainer] promise in
+            bgQueue?.async {
+                guard let context = persistentContainer?.newBackgroundContext() else { return }
+                context.configureAsUpdateContext()
+                context.performAndWait {
+                    do {
+                        let result = try operation(context)
+                        if context.hasChanges {
+                            try context.save()
+                        }
+                        context.reset()
+                        promise(.success(result))
+                    } catch {
+                        context.reset()
+                        promise(.failure(error))
+                    }
+                }
             }
         }
-        .eraseToAnyPublisher()
+        return onStoreIsReady
+            .flatMap { update }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
+    
+    private var onStoreIsReady: AnyPublisher<Void, Error> {
+        return isStoreLoaded
+            .filter { $0 }
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Versioning
+
+// Extension to `CoreDataStack` to define a nested `Version` struct.
+extension CoreDataStack {
+    // A struct to encapsulate information about a specific version of the database.
+    struct Version {
+        // Private property to hold the version number.
+        private let number: UInt
+        
+        // Initializer to create a `Version` instance with a specific version number.
+        init(_ number: UInt) {
+            self.number = number
+        }
+        
+        // Computed property to return the model name.
+        var modelName: String {
+            return "Lift_Tracker"
+        }
+        
+        // Function to generate the file URL for the database.
+        // It takes a directory and domainMask to determine where to store the database file.
+        func dbFileURL(_ directory: FileManager.SearchPathDirectory,
+                       _ domainMask: FileManager.SearchPathDomainMask) -> URL? {
+            // Uses FileManager to find the URL for the specified directory and domain,
+            // then appends the subpath for the database file.
+            return FileManager.default
+                .urls(for: directory, in: domainMask).first?
+                .appendingPathComponent(subpathToDB)
+        }
+        
+        // Private computed property to define the subpath for the database file.
+        // The database file is named "db.sql".
+        private var subpathToDB: String {
+            return "db.sql"
+        }
+    }
+}
+
+// Extension to `CoreDataStack.Version` to provide the current actual version number.
+extension CoreDataStack.Version {
+    // A static property to represent the current version of the database.
+    static var actual: UInt { 1 }
 }

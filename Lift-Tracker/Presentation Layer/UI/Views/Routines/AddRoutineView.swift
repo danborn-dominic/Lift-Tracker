@@ -65,11 +65,3 @@ struct AddRoutineView: View {
         exercises.remove(atOffsets: offsets)
     }
 }
-
-#if DEBUG
-struct AddRoutineView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddRoutineView(container: .preview)
-    }
-}
-#endif
