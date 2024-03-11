@@ -15,7 +15,7 @@ import Combine
 class ExerciseInteractorTests: XCTestCase {
     
     let appState = CurrentValueSubject<AppState, Never>(AppState())
-    var mockedExerciseLibraryRepository: MockedExerciseLibraryRepository!
+    var mockedExerciseLibraryRepository: MockedExerciseRepository!
     var subscriptions = Set<AnyCancellable>()
     
     var systemUnderTest: RealExerciseInteractor!
@@ -23,7 +23,7 @@ class ExerciseInteractorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         appState.value = AppState()
-        mockedExerciseLibraryRepository = MockedExerciseLibraryRepository()
+        mockedExerciseLibraryRepository = MockedExerciseRepository()
         systemUnderTest = RealExerciseInteractor(
             exercisesRepository: mockedExerciseLibraryRepository,
             appState: appState)

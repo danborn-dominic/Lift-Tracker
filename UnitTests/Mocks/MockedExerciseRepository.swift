@@ -12,7 +12,7 @@ import XCTest
 import Combine
 @testable import Lift_Tracker
 
-final class MockedExerciseLibraryRepository: Mock, ExercisesRepository {
+final class MockedExerciseRepository: Mock, ExercisesRepository {
     
     enum Action: Equatable {
         case createExercise(Exercise)
