@@ -31,6 +31,7 @@
 		0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1742A6B4FCE005A0A05 /* SettingsView.swift */; };
 		0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1762A6B5006005A0A05 /* ExercisesView.swift */; };
 		0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1782A6B5013005A0A05 /* ProgressView.swift */; };
+		0787B6132B9F52450082181A /* LoadableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787B6122B9F52450082181A /* LoadableTests.swift */; };
 		0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */; };
 		0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */; };
 		0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */; };
@@ -97,6 +98,7 @@
 		0777D1742A6B4FCE005A0A05 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0777D1762A6B5006005A0A05 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		0777D1782A6B5013005A0A05 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		0787B6122B9F52450082181A /* LoadableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableTests.swift; sourceTree = "<group>"; };
 		0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedInteractors.swift; sourceTree = "<group>"; };
 		0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedSystemEventsHandler.swift; sourceTree = "<group>"; };
 		0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesRepositoryTests.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		075461562B87FA830063CE03 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0787B6122B9F52450082181A /* LoadableTests.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */,
+				0787B6132B9F52450082181A /* LoadableTests.swift in Sources */,
 				075ADE212B8E82090097280B /* MockedPersistentStore.swift in Sources */,
 				0733C3842B9BECCD00856E70 /* MockedExerciseRepository.swift in Sources */,
 				0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */,
