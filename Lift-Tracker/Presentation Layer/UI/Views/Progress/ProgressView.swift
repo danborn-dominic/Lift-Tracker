@@ -23,15 +23,17 @@ struct ProgressView: View {
     var body: some View {
         self.content
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .principal) {
                     Text("Progress")
                         .font(.largeTitle)
                         .bold()
+                        .foregroundColor(.primaryTextColor)
                 }
             }
     }
     
     @ViewBuilder private var content: some View {
-        Text("Progress content")
+        Text("Progress view content")
+            .foregroundColor(.secondaryTextColor)
     }
 }

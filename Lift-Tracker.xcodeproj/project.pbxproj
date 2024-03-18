@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292C2B718D4000EFF73A /* AddExerciseView.swift */; };
-		0701292F2B73D7A500EFF73A /* ExerciseLibraryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */; };
+		0701292F2B73D7A500EFF73A /* ExercisesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292E2B73D7A500EFF73A /* ExercisesRepository.swift */; };
 		070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070129302B7599F600EFF73A /* ExerciseInteractor.swift */; };
 		0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */; };
-		0733C3702B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */; };
+		0733C3702B9A3B9C00856E70 /* ExercisesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C36F2B9A3B9C00856E70 /* ExercisesRepositoryTests.swift */; };
 		0733C3722B9A519D00856E70 /* PersistenceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3712B9A519D00856E70 /* PersistenceProtocols.swift */; };
 		0733C3782B9A544700856E70 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3772B9A544700856E70 /* RepositoryProtocols.swift */; };
 		0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3792B9A550D00856E70 /* InteractorProtocols.swift */; };
@@ -31,6 +31,7 @@
 		0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1742A6B4FCE005A0A05 /* SettingsView.swift */; };
 		0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1762A6B5006005A0A05 /* ExercisesView.swift */; };
 		0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1782A6B5013005A0A05 /* ProgressView.swift */; };
+		0787B6132B9F52450082181A /* LoadableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787B6122B9F52450082181A /* LoadableTests.swift */; };
 		0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */; };
 		0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */; };
 		0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */; };
@@ -47,6 +48,8 @@
 		07C32AFD2A39507A00219776 /* SystemEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32AFC2A39507A00219776 /* SystemEventsHandler.swift */; };
 		07C32B002A3D06FB00219776 /* AddRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32AFF2A3D06FB00219776 /* AddRoutineView.swift */; };
 		07C32B022A464B7C00219776 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32B012A464B7C00219776 /* Helpers.swift */; };
+		07E35EDA2BA4F7F20066A56B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E35ED92BA4F7F20066A56B /* Colors.swift */; };
+		07E35EDD2BA8D0A60066A56B /* TabBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E35EDC2BA8D0A60066A56B /* TabBarModifier.swift */; };
 		07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */; };
 		07FDCB592A0EBB4100EF9C75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */; };
 		07FDCB5C2A0EBB4100EF9C75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */; };
@@ -73,10 +76,10 @@
 
 /* Begin PBXFileReference section */
 		0701292C2B718D4000EFF73A /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
-		0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibraryRepository.swift; sourceTree = "<group>"; };
+		0701292E2B73D7A500EFF73A /* ExercisesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesRepository.swift; sourceTree = "<group>"; };
 		070129302B7599F600EFF73A /* ExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInteractor.swift; sourceTree = "<group>"; };
 		0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
-		0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLibraryRepositoryTests.swift; sourceTree = "<group>"; };
+		0733C36F2B9A3B9C00856E70 /* ExercisesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesRepositoryTests.swift; sourceTree = "<group>"; };
 		0733C3712B9A519D00856E70 /* PersistenceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceProtocols.swift; sourceTree = "<group>"; };
 		0733C3772B9A544700856E70 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
 		0733C3792B9A550D00856E70 /* InteractorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorProtocols.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		0777D1742A6B4FCE005A0A05 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0777D1762A6B5006005A0A05 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		0777D1782A6B5013005A0A05 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		0787B6122B9F52450082181A /* LoadableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableTests.swift; sourceTree = "<group>"; };
 		0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedInteractors.swift; sourceTree = "<group>"; };
 		0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedSystemEventsHandler.swift; sourceTree = "<group>"; };
 		0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesRepositoryTests.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 		07C32AFE2A3D01F600219776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07C32AFF2A3D06FB00219776 /* AddRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoutineView.swift; sourceTree = "<group>"; };
 		07C32B012A464B7C00219776 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		07E35ED92BA4F7F20066A56B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		07E35EDC2BA8D0A60066A56B /* TabBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModifier.swift; sourceTree = "<group>"; };
 		07FDCB512A0EBB3F00EF9C75 /* Lift-Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lift-Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07FDCB562A0EBB3F00EF9C75 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -272,6 +278,7 @@
 		075461562B87FA830063CE03 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0787B6122B9F52450082181A /* LoadableTests.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -289,7 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */,
-				0733C36F2B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift */,
+				0733C36F2B9A3B9C00856E70 /* ExercisesRepositoryTests.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -334,6 +341,15 @@
 				075ADE1E2B8E65D80097280B /* TestHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		07E35EDB2BA8D0850066A56B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				07A6C3EC2A229624008F87CB /* RootViewModifier.swift */,
+				07E35EDC2BA8D0A60066A56B /* TabBarModifier.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		07FDCB482A0EBB3F00EF9C75 = {
@@ -434,7 +450,7 @@
 			children = (
 				0733C3772B9A544700856E70 /* RepositoryProtocols.swift */,
 				07FDCB7B2A0F01D500EF9C75 /* RoutinesRepository.swift */,
-				0701292E2B73D7A500EFF73A /* ExerciseLibraryRepository.swift */,
+				0701292E2B73D7A500EFF73A /* ExercisesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -442,7 +458,7 @@
 		07FDCB6E2A0EC08E00EF9C75 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				07A6C3EC2A229624008F87CB /* RootViewModifier.swift */,
+				07E35EDB2BA8D0850066A56B /* Resources */,
 				07FDCB712A0EC93600EF9C75 /* Views */,
 				07FDCB722A0EC93D00EF9C75 /* Components */,
 			);
@@ -454,6 +470,7 @@
 			children = (
 				07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */,
 				07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */,
+				07E35ED92BA4F7F20066A56B /* Colors.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -581,11 +598,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */,
+				0787B6132B9F52450082181A /* LoadableTests.swift in Sources */,
 				075ADE212B8E82090097280B /* MockedPersistentStore.swift in Sources */,
 				0733C3842B9BECCD00856E70 /* MockedExerciseRepository.swift in Sources */,
 				0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */,
 				0796F2752B92A13800FC81F8 /* MockData.swift in Sources */,
-				0733C3702B9A3B9C00856E70 /* ExerciseLibraryRepositoryTests.swift in Sources */,
+				0733C3702B9A3B9C00856E70 /* ExercisesRepositoryTests.swift in Sources */,
 				0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */,
 				0733C3822B9BEC5300856E70 /* ExerciseInteractorTests.swift in Sources */,
 				0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */,
@@ -601,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0777D1732A6B4FA8005A0A05 /* HomeView.swift in Sources */,
+				07E35EDD2BA8D0A60066A56B /* TabBarModifier.swift in Sources */,
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
 				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
@@ -608,7 +627,7 @@
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
 				07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */,
-				0701292F2B73D7A500EFF73A /* ExerciseLibraryRepository.swift in Sources */,
+				0701292F2B73D7A500EFF73A /* ExercisesRepository.swift in Sources */,
 				07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */,
 				07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */,
 				07C32AF32A33A8D900219776 /* ErrorView.swift in Sources */,
@@ -631,6 +650,7 @@
 				0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */,
 				076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */,
 				07FDCB612A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld in Sources */,
+				07E35EDA2BA4F7F20066A56B /* Colors.swift in Sources */,
 				07C32AFD2A39507A00219776 /* SystemEventsHandler.swift in Sources */,
 				07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */,
 				0733C3722B9A519D00856E70 /* PersistenceProtocols.swift in Sources */,

@@ -38,7 +38,7 @@ extension AppEnvironment {
         
         // Create repositories for routines and exercises.
         let routinesRepository = RealRoutinesRepository(persistentStore: persistentStore)
-        let exerciseRepository = RealExerciseLibraryRepository(persistentStore: persistentStore)
+        let exerciseRepository = RealExercisesRepository(persistentStore: persistentStore)
         
         // Configure interactors with the repositories and application state.
         let interactors = configuredInteractors(appState: appState, routinesRepository: routinesRepository, exerciseRepository: exerciseRepository)
@@ -63,7 +63,7 @@ extension AppEnvironment {
     ///   - exerciseRepository: The exercise library repository for exercises-related operations.
     /// - Returns:
     ///     - Interactors for the DI container.
-    private static func configuredInteractors(appState: DataStore<AppState>, routinesRepository: RoutinesRepository, exerciseRepository: ExerciseLibraryRepository) -> DIContainer.Interactors {
+    private static func configuredInteractors(appState: DataStore<AppState>, routinesRepository: RoutinesRepository, exerciseRepository: ExercisesRepository) -> DIContainer.Interactors {
         
         // Initialize the routine interactor with the routines repository and application state.
         let routineInteractor = RealRoutineInteractor(routinesRepository: routinesRepository, appState: appState)

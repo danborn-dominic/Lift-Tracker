@@ -23,9 +23,9 @@ import XCTest
 import Combine
 @testable import Lift_Tracker
 
-class ExerciseLibraryRepositoryTests: XCTestCase {
+class ExercisesRepositoryTests: XCTestCase {
     
-    var systemUnderTest: RealExerciseLibraryRepository!
+    var systemUnderTest: RealExercisesRepository!
     
     var mockedStore: MockedPersistentStore!
     
@@ -34,7 +34,7 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockedStore = MockedPersistentStore()
-        systemUnderTest = RealExerciseLibraryRepository(persistentStore: mockedStore)
+        systemUnderTest = RealExercisesRepository(persistentStore: mockedStore)
         mockedStore.verify()
     }
     
@@ -54,11 +54,6 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 1, updated: 1, deleted: 0))
         ])
-        let library = ExerciseLibraryStruct(id: UUID())
-        // Load test data into the context
-        try mockedStore.preloadData { context in
-            library.store(in: context)
-        }
         
         // Create an XCTest expectation to handle the asynchronous nature of the operation.
         let expected = XCTestExpectation(description: #function)
@@ -88,10 +83,8 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
         mockedStore.actions = .init(expected: [
             .fetch(.init(inserted: 0, updated: 0, deleted: 0))
         ])
-        var library = ExerciseLibraryStruct(id: UUID())
-        library.exercises = exercises
         try mockedStore.preloadData { context in
-            library.store(in: context)
+            exercises.forEach { $0.store(in: context) }
         }
         
         let expected = XCTestExpectation(description: #function)
@@ -119,10 +112,8 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 1, deleted: 0))
         ])
-        var library = ExerciseLibraryStruct(id: UUID())
-        library.exercises = exercises
         try mockedStore.preloadData { context in
-            library.store(in: context)
+            exercises.forEach { $0.store(in: context) }
         }
         
         var exerciseToUpdate = exercises[0]
@@ -147,11 +138,8 @@ class ExerciseLibraryRepositoryTests: XCTestCase {
         mockedStore.actions = .init(expected: [
             .update(.init(inserted: 0, updated: 2, deleted: 1))
         ])
-        
-        var library = ExerciseLibraryStruct(id: UUID())
-        library.exercises = exercises
         try mockedStore.preloadData { context in
-            library.store(in: context)
+            exercises.forEach { $0.store(in: context) }
         }
         
         let expected = XCTestExpectation(description: #function)

@@ -35,7 +35,7 @@ extension AppState {
         // routines holds the state of user's routines.
         var routines: Loadable<[Routine]> = .notRequested
         // exercises holds the state of the user's exercise library.
-        var exerciseLibrary: Loadable<ExerciseLibraryStruct> = .notRequested
+        var exercises: Loadable<[Exercise]> = .notRequested
     }
 }
 
@@ -56,3 +56,13 @@ extension AppState {
         var isActive: Bool = false
     }
 }
+
+#if DEBUG
+extension AppState {
+    static var preview: AppState {
+        var state = AppState()
+        state.system.isActive = true
+        return state
+    }
+}
+#endif

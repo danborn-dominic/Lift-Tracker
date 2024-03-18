@@ -33,7 +33,7 @@ protocol RoutinesRepository {
 }
 
 // Protocol for the implementation of a repository managing the ExerciseLibrary. Follows CRUD architecture.
-protocol ExerciseLibraryRepository {
+protocol ExercisesRepository {
     /// Creates a new exercise and saves it to the persistence layer.
     func createExercise(exercise: Exercise) -> AnyPublisher<Void, Error>
     

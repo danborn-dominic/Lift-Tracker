@@ -26,10 +26,11 @@ struct RoutinesView: View {
     var body: some View {
         self.content
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .principal) {
                     Text("Routines")
                         .font(.largeTitle)
                         .bold()
+                        .foregroundColor(.primaryTextColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AddRoutineView(container:container)) {
@@ -53,12 +54,14 @@ struct RoutinesView: View {
     }
     
     @ViewBuilder private var content: some View {
-        switch routines {
-        case .notRequested: notRequestedView
-        case .isLoading(_, _): loadingView
-        case let .loaded(routines): loadedView(routines)
-        case let .failed(error): failedView(error)
-        }
+        Text("Routines Content")
+            .foregroundColor(.secondaryTextColor)
+//        switch routines {
+//        case .notRequested: notRequestedView
+//        case .isLoading(_, _): loadingView
+//        case let .loaded(routines): loadedView(routines)
+//        case let .failed(error): failedView(error)
+//        }
     }
 }
 // MARK: - Side Effects

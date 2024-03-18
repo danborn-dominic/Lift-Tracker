@@ -18,24 +18,27 @@ import CoreData
 // Extend CoreData entities to conform to the ManagedEntity protocol
 extension RoutineMO: ManagedEntity { }
 extension ExerciseMO: ManagedEntity { }
-extension ExerciseLibraryMO: ManagedEntity { }
+extension WorkoutMO: ManagedEntity { }
+extension WorkoutExerciseMO: ManagedEntity { }
+extension WorkoutSetMO: ManagedEntity { }
 
 extension Routine {
     // Initializes a RoutineStruct from a RoutineMO. Returns nil if essential properties are missing.
     init?(managedObject: RoutineMO) {
-        guard let id = managedObject.id,
-              let name = managedObject.routineName,
-              let exercises = managedObject.exercises?.toArray(of: ExerciseMO.self).compactMap(Exercise.init)
-        else { return nil }
+        guard let id = managedObject.id else { return nil }
+        let name = managedObject.routineName
+        let exercises = managedObject.exercises?.toArray(of: ExerciseMO.self).compactMap(Exercise.init)
         
-        self.init(id: id, routineName: name, exercises: exercises)
+        self.init(id: id,
+                  routineName: name ?? "",
+                  exercises: exercises ?? [Exercise]())
     }
     
     // Converts a RoutineStruct to RoutineMO and returns it.
     @discardableResult
     func store(in context: NSManagedObjectContext) -> RoutineMO? {
         guard let routine = RoutineMO.insertNew(in: context)
-            else { return nil }
+        else { return nil }
         
         routine.routineName = routineName
         routine.id = id
@@ -45,21 +48,25 @@ extension Routine {
     }
 }
 
-extension RoutineMO {
-    func toStruct() -> Routine {
-        return Routine(managedObject: self)!
-    }
-}
-
 extension Exercise {
     // Initializes an ExerciseStruct from a ExerciseMO. Returns nil if essential properties are missing.
     init?(managedObject: ExerciseMO) {
-        guard let exerciseName = managedObject.exerciseName,
-              let id = managedObject.id
+        guard let id = managedObject.id
         else { return nil }
+        let exerciseName = managedObject.exerciseName
         let notes = managedObject.exerciseNotes
+        let maxWeight = managedObject.maxWeight
+        let maxVolume = managedObject.maxVolume
+        let muscleGroup = MuscleGroup(rawValue: managedObject.muscleGroup)
+        let exerciseType = ExerciseType(rawValue: managedObject.exerciseType)
         
-        self.init(id: id, exerciseName: exerciseName, exerciseNotes: notes ?? "")
+        self.init(id: id,
+                  exerciseName: exerciseName ?? "",
+                  exerciseNotes: notes ?? "",
+                  maxWeight: Int(maxWeight),
+                  maxVolume: Int(maxVolume),
+                  muscleGroup: muscleGroup,
+                  exerciseType: exerciseType)
     }
     
     // Converts an ExerciseStruct to an ExerciseMO and returns it.
@@ -68,9 +75,102 @@ extension Exercise {
         guard let exercise = ExerciseMO.insertNew(in: context)
         else { return nil }
         
-        exercise.exerciseName = exerciseName
         exercise.id = id
+        exercise.exerciseName = exerciseName
+        exercise.exerciseNotes = exerciseNotes
+        exercise.maxWeight = Int64(maxWeight)
+        exercise.maxVolume = Int64(maxVolume)
+        exercise.muscleGroup = muscleGroup.rawValue
+        exercise.exerciseType = exerciseType.rawValue
         return exercise
+    }
+}
+
+extension Workout {
+    // Initializes a Workout from a WorkoutMO. Returns nil if essential properties are missing.
+    init?(managedObject: WorkoutMO) {
+        guard let id = managedObject.id, let date = managedObject.date else { return nil }
+        let exercisesMOs = managedObject.exercises?.toArray(of: WorkoutExerciseMO.self) ?? []
+        let exercises = exercisesMOs.compactMap(WorkoutExercise.init)
+        
+        self.init(id: id,
+                  date: date,
+                  exercises: exercises)
+    }
+
+    // Converts a Workout to WorkoutMO and returns it.
+    @discardableResult
+    func store(in context: NSManagedObjectContext) -> WorkoutMO? {
+        guard let workout = WorkoutMO.insertNew(in: context)
+        else { return nil }
+        
+        workout.id = id
+        workout.date = date
+        let storedExercises = exercises.compactMap { $0.store(in: context) }
+        workout.exercises = NSSet(array: storedExercises)
+        return workout
+    }
+}
+
+extension WorkoutExercise {
+    // Initializes a WorkoutExercise from a WorkoutExerciseMO.
+    init?(managedObject: WorkoutExerciseMO) {
+        guard let id = managedObject.id else { return nil }
+        let setsMOs = managedObject.sets?.toArray(of: WorkoutSetMO.self) ?? []
+        let sets = setsMOs.compactMap(WorkoutSet.init)
+
+        self.init(id: id,
+                  sets: sets)
+    }
+
+    // Converts a WorkoutExercise to WorkoutExerciseMO and returns it.
+    @discardableResult
+    func store(in context: NSManagedObjectContext) -> WorkoutExerciseMO? {
+        guard let workoutExercise = WorkoutExerciseMO.insertNew(in: context) else { return nil }
+
+        workoutExercise.id = id
+        let storedSets = sets.compactMap { $0.store(in: context) }
+        workoutExercise.sets = NSSet(array: storedSets)
+        return workoutExercise
+    }
+}
+
+extension WorkoutSet {
+    // Initializes a WorkoutSet from a WorkoutSetMO.
+    init?(managedObject: WorkoutSetMO) {
+        guard let id = managedObject.id else { return nil }
+        let reps = Int(managedObject.reps)
+        let weight = managedObject.weight
+        let completed = managedObject.completed
+        let setClassification = SetClassification(rawValue: managedObject.setClassification)
+
+        self.init(id: id,
+                  reps: reps,
+                  weight: weight,
+                  completed: completed,
+                  setClassification: setClassification)
+    }
+
+    // Converts a WorkoutSet to WorkoutSetMO and returns it.
+    @discardableResult
+    func store(in context: NSManagedObjectContext) -> WorkoutSetMO? {
+        guard let workoutSet = WorkoutSetMO.insertNew(in: context) else { return nil }
+
+        workoutSet.id = id
+        workoutSet.reps = Int64(reps)
+        workoutSet.weight = weight
+        workoutSet.completed = completed
+        workoutSet.setClassification = setClassification.rawValue
+        return workoutSet
+    }
+}
+
+
+// MARK: MO extensions
+
+extension RoutineMO {
+    func toStruct() -> Routine {
+        return Routine(managedObject: self)!
     }
 }
 
@@ -80,39 +180,39 @@ extension ExerciseMO {
     }
     
     func update(with exercise: Exercise) {
-            self.exerciseName = exercise.exerciseName
-            self.id = exercise.id
-        }
-}
-
-extension ExerciseLibraryStruct {
-    // Initializes an ExerciseLibraryStruct from a ExerciseLibraryMO. Returns nil if essential properties are missing.
-    init?(managedObject: ExerciseLibraryMO) {
-        guard let id = managedObject.id else { return nil }
-        if let exercisesSet = managedObject.exercises as? Set<ExerciseMO> {
-            let exercisesArray = Array(exercisesSet)
-            let exercisesStructs = exercisesArray.compactMap { exerciseMO in
-                return Exercise(managedObject: exerciseMO)
-            }
-            self.init(id: id, exercises: exercisesStructs)
-        } else { return nil }
-    }
-    
-    // Converts an ExerciseLibraryStruct to an ExerciseLibraryMO and returns it.
-    @discardableResult
-    func store(in context: NSManagedObjectContext) -> ExerciseLibraryMO? {
-        guard let exerciseLibrary = ExerciseLibraryMO.insertNew(in: context)
-        else { return nil }
-        
-        exerciseLibrary.id = id
-        let exercisesArray = exercises.compactMap { $0.store(in: context) }
-        exerciseLibrary.exercises = NSSet(array: exercisesArray)
-        return exerciseLibrary
+        self.exerciseName = exercise.exerciseName
+        self.id = exercise.id
     }
 }
 
-extension ExerciseLibraryMO {
-    func toStruct() -> ExerciseLibraryStruct {
-        return ExerciseLibraryStruct(managedObject: self)!
+// MARK: Enum translations
+
+extension MuscleGroup {
+    var rawValue: Int16 {
+        return Int16(self.rawValue)
+    }
+
+    init(rawValue: Int16) {
+        self = MuscleGroup(rawValue: rawValue)
+    }
+}
+
+extension ExerciseType {
+    var rawValue: Int16 {
+        return Int16(self.rawValue)
+    }
+
+    init(rawValue: Int16) {
+        self = ExerciseType(rawValue: rawValue)
+    }
+}
+
+extension SetClassification {
+    var rawValue: Int16 {
+        return Int16(self.rawValue)
+    }
+
+    init(rawValue: Int16) {
+        self = SetClassification(rawValue: rawValue)
     }
 }

@@ -19,7 +19,7 @@ import Foundation
 class RealExerciseInteractor: ExerciseInteractor {
     
     // Repository for accessing and modifying exercise data.
-    let exercisesRepository: ExerciseLibraryRepository
+    let exercisesRepository: ExercisesRepository
     
     // State holder for the application, containing all user data and system states.
     var appState: DataStore<AppState>
@@ -27,7 +27,7 @@ class RealExerciseInteractor: ExerciseInteractor {
     // CancelBag to manage and cancel ongoing Combine subscriptions.
     private var cancelBag = CancelBag()
     
-    init(exercisesRepository: ExerciseLibraryRepository, appState: DataStore<AppState>) {
+    init(exercisesRepository: ExercisesRepository, appState: DataStore<AppState>) {
         self.exercisesRepository = exercisesRepository
         self.appState = appState
     }
