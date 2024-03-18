@@ -29,63 +29,73 @@ struct ContentView: View {
     
     /// The content and layout of the view.
     var body: some View {
-        
-        TabView {
-            // Home tab with navigation view.
-            NavigationView {
-                HomeView(container: container)
-            }
-            .tabItem {
-                VStack {
-                    Image(systemName: "house")
-                    Text("Home")
+        ZStack {
+            Color.backgroundColor
+            TabView {
+                NavigationView {
+                    HomeView(container: container)
+                        .modifier(RootViewAppearance())
+                }
+                .tabItem {
+                    VStack {
+                        Image(systemName: "house")
+                        Text("Home")
+                    }
+                }
+                
+                NavigationView {
+                    RoutinesView(container: container)
+                        .modifier(RootViewAppearance())
+                }
+                .tabItem {
+                    VStack {
+                        Image(systemName: "figure.strengthtraining.traditional")
+                        Text("Routines")
+                    }
+                }
+
+                NavigationView {
+                    ExercisesView(container: container)
+                        .modifier(RootViewAppearance())
+                }
+                .tabItem {
+                    VStack {
+                        Image(systemName: "dumbbell")
+                        Text("Exercises")
+                    }
+                }
+                
+                NavigationView {
+                    ProgressView(container: container)
+                        .modifier(RootViewAppearance())
+                }
+                .tabItem {
+                    VStack {
+                        Image(systemName: "chart.bar")
+                        Text("Progress")
+                    }
+                }
+                
+                NavigationView {
+                    SettingsView(container: container)
+                        .modifier(RootViewAppearance())
+                }
+                .tabItem {
+                    VStack {
+                        Image(systemName: "ellipsis")
+                        Text("More")
+                    }
                 }
             }
-            
-            // Routines tab with navigation view.
-            NavigationView {
-                RoutinesView(container: container)
-            }
-            .tabItem {
-                VStack {
-                    Image(systemName: "figure.strengthtraining.traditional")
-                    Text("Routines")
-                }
-            }
-            
-            // Exercises tab with navigation view.
-            NavigationView {
-                ExercisesView(container: container)
-            }
-            .tabItem {
-                VStack {
-                    Image(systemName: "dumbbell")
-                    Text("Exercises")
-                }
-            }
-            
-            // Progress tab with navigation view.
-            NavigationView {
-                ProgressView(container: container)
-            }
-            .tabItem {
-                VStack {
-                    Image(systemName: "chart.bar")
-                    Text("Progress")
-                }
-            }
-            
-            // Settings (More) tab with navigation view.
-            NavigationView {
-                SettingsView(container: container)
-            }
-            .tabItem {
-                VStack {
-                    Image(systemName: "ellipsis")
-                    Text("More")
-                }
-            }
-            
         }
+        .modifier(TabBarAppearanceModifier(color: .black))
     }
 }
+
+#if DEBUG
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(container: .preview)
+    }
+}
+#endif

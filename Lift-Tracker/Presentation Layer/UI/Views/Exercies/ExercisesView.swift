@@ -22,18 +22,32 @@ struct ExercisesView: View {
     }
     
     var body: some View {
-            
-        return VStack {
-            
-        }
+        self.content
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Exercises")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.primaryTextColor)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AddRoutineView(container:container)) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
     }
     
+    @ViewBuilder private var content: some View {
+        Text("Exercises content")
+            .foregroundColor(.secondaryTextColor)
+    }
     
 }
 
 // MARK: - Side Effects
 private extension ExercisesView {
-
+    
 }
 // MARK: - Routing
 extension ExercisesView {
@@ -67,3 +81,12 @@ private extension ExercisesView {
     
 }
 
+// MARK: - Preview
+
+#if DEBUG
+struct ExercisesView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExercisesView(container: .preview)
+    }
+}
+#endif

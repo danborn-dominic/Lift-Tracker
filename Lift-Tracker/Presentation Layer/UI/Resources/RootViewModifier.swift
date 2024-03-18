@@ -18,16 +18,17 @@ import Combine
 
 /// A view modifier that applies global appearance settings to the root view.
 struct RootViewAppearance: ViewModifier {
-    
-    @Environment(\.injected) private var injected: DIContainer
-    
+        
     /// Modifies the provided content according to this modifier's logic.
     /// - Parameters:
     ///    - content: The content of the view that uses this modifier.
     /// - Returns:
     ///     - A modified view with the applied appearance settings.
     func body(content: Content) -> some View {
-        content
-            .ignoresSafeArea()              // Ensures the content extends to the entire screen, ignoring safe area insets.
+        ZStack {
+            Color.backgroundColor
+            content
+        }
+            .ignoresSafeArea()
     }
 }

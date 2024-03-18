@@ -23,16 +23,27 @@ struct HomeView: View {
     var body: some View {
         self.content
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .principal) {
                     Text("Home")
-                        .font(.largeTitle)
+                        .font(.title)
                         .bold()
+                        .foregroundColor(.primaryTextColor)
                 }
             }
     }
     
     @ViewBuilder private var content: some View {
         Text("Home content")
+            .foregroundColor(.secondaryTextColor)
     }
 }
 
+// MARK: - Preview
+
+#if DEBUG
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView(container: .preview)
+    }
+}
+#endif

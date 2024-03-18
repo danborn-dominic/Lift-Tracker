@@ -23,15 +23,17 @@ struct SettingsView: View {
     var body: some View {
         self.content
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .principal) {
                     Text("Settings")
                         .font(.largeTitle)
                         .bold()
+                        .foregroundColor(.primaryTextColor)
                 }
             }
     }
     
     @ViewBuilder private var content: some View {
-        Text("Settings content")
+        Text("Settings view content")
+            .foregroundColor(.secondaryTextColor)
     }
 }
