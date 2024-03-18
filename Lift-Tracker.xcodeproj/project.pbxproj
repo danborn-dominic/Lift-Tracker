@@ -348,6 +348,7 @@
 			children = (
 				07A6C3EC2A229624008F87CB /* RootViewModifier.swift */,
 				07E35EDC2BA8D0A60066A56B /* TabBarModifier.swift */,
+				07E35ED92BA4F7F20066A56B /* Colors.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -470,7 +471,6 @@
 			children = (
 				07FDCB582A0EBB4100EF9C75 /* Assets.xcassets */,
 				07FDCB5B2A0EBB4100EF9C75 /* Preview Assets.xcassets */,
-				07E35ED92BA4F7F20066A56B /* Colors.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

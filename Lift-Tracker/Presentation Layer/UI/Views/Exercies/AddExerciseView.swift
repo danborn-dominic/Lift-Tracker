@@ -14,34 +14,41 @@ import SwiftUI
 
 struct AddExerciseView: View {
     private let container: DIContainer
-    @State private var exerciseName = ""
-    @State private var exerciseNotes = ""
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentationMode
     
     init(container: DIContainer) {
         self.container = container
     }
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Exercise Name")) {
-                    TextField("Unnamed Exercise", text: $exerciseName)
-                }
-                Section(header: Text("Notes")) {
-                    TextField("", text: $exerciseNotes)
-                }
-            }
-            .navigationBarTitle("Add Exercise", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Save") {
-                saveExercise()
-            })
-        }
+        self.content
     }
     
-    private func saveExercise() {
-        let newExercise = Exercise(id: UUID(), exerciseName: exerciseName, exerciseNotes: exerciseNotes)
-        container.interactors.exerciseInteractor.addExercise(exercise: newExercise)
-        self.presentationMode.wrappedValue.dismiss()
+    @ViewBuilder private var content: some View {
+        
+        NavigationView {
+            ZStack {
+                Color.backgroundColor.ignoresSafeArea()
+                Form {
+                    
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true) // Hides the default back button
+        .navigationBarItems(leading: backButton) // Adds your custom back button
+        
+    }
+    
+    private var backButton: some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Image(systemName: "chevron.left") // The SFSymbol for the back arrow
+                    .foregroundColor(.accentColor) // Here you can set the color you want
+                Text("Exercises") // Your custom text
+                    .foregroundColor(.accentColor) // And the color
+            }
+        }
     }
 }

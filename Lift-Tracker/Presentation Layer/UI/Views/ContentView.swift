@@ -88,7 +88,7 @@ struct ContentView: View {
                 }
             }
         }
-        .modifier(TabBarAppearanceModifier(color: .black))
+        .modifier(TabBarAppearanceModifier(selectedColor: Color.accentColor, unselectedColor: Color.secondaryTextColor))
     }
 }
 

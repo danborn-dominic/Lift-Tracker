@@ -31,9 +31,13 @@ struct ExercisesView: View {
                         .foregroundColor(.primaryTextColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddRoutineView(container:container)) {
+                    NavigationLink(destination:
+                                    AddExerciseView(container:container)
+                        .modifier(RootViewAppearance())
+                    ) {
                         Image(systemName: "plus")
                     }
+                    .foregroundColor(.accentColor)
                 }
             }
     }
