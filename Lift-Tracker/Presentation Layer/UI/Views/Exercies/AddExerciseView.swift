@@ -39,7 +39,9 @@ struct AddExerciseView: View {
                 Color.backgroundColor.ignoresSafeArea(.all)
                 VStack(spacing: 0) {
                     header
-                    dataForm
+                    if #available(iOS 17.0, *) {
+                        dataForm
+                    }
                 }
             }
         }
@@ -66,46 +68,53 @@ struct AddExerciseView: View {
             .foregroundColor(Color.primaryTextColor)
     }
     
+    @available(iOS 17.0, *)
     private var dataForm: some View {
         Form {
             Section {
                 SuperTextField(placeholder: Text("Unnamed Exercise").foregroundColor(Color.secondaryTextColor), text: $exerciseName)
+                    .foregroundColor(Color.secondaryTextColor)
+                    .listRowBackground(Color.componentColor)
             } header: {
-                Text("Exercise Name").foregroundColor(.secondaryTextColor)
+                Text("Exercise Name")
+                    .foregroundColor(.secondaryTextColor)
             }
-            .listRowBackground(Color.componentColor)
             
             Section {
-                SuperTextField(placeholder: Text("").foregroundColor(Color.secondaryTextColor), text: $notes)
+                SuperTextFieldV2(
+                    placeholder:
+                        Text("")
+                            .foregroundColor(Color.secondaryTextColor),
+                    text:
+                        $notes
+                )
+                .frame(height: 100)
+                .foregroundColor(Color.secondaryTextColor)
+                .listRowBackground(Color.componentColor)
             } header: {
-                Text("Notes").foregroundColor(.secondaryTextColor)
+                Text("Notes")
+                    .foregroundColor(.secondaryTextColor)
             }
-            .listRowBackground(Color.componentColor)
             
-            Section(header: Text("Body Part")) {
-                Picker("Body Part", selection: $selectedBodyPart) {
-                    ForEach(bodyParts, id: \.self) {
-                        Text($0)
-                    }
+            Section {
+                HStack {
+                    SuperTextFieldV3()
+                    SuperTextFieldV3()
                 }
-                .foregroundColor(.white)
-                .pickerStyle(MenuPickerStyle())
-            }
-            Section(header: Text("Category")) {
-                Picker("Category", selection: $selectedCategory) {
-                    ForEach(categories, id: \.self) {
-                        Text($0)
-                    }
+                
+            } header: {
+                HStack {
+                    Text("Body Part")
+                    Spacer()
+                    Text("Category")
                 }
-                .foregroundColor(.white)
-                .pickerStyle(MenuPickerStyle())
+                .foregroundColor(.secondaryTextColor)
             }
-            Button("Save Exercise") {
-                // Action to save exercise
-            }
-            .foregroundColor(.blue)
+            .listRowBackground(Color.backgroundColor)
+
             
         }
+        .listSectionSpacing(0)
         .scrollContentBackground(.hidden)
     }
 }
