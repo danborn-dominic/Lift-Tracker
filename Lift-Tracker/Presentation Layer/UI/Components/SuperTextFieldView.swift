@@ -48,19 +48,20 @@ struct SuperTextFieldV2: View {
     
 }
 
-struct SuperTextFieldV3: View {
+struct DropDownField: View {
     
     var body: some View {
         HStack(spacing: 45) {
             HStack(spacing: 10) {
                 Text("Any")
-                    .font(Font.custom("Inter", size: 15))
-                    .lineSpacing(22)
+                    .foregroundColor(Color.secondaryTextColor)
+                Spacer()
+                Image(systemName: "chevron.down")
                     .foregroundColor(Color.secondaryTextColor)
             }
         }
-        .padding(EdgeInsets(top: 9, leading: 13, bottom: 9, trailing: 13))
-        .frame(width: 160)
+        .padding(EdgeInsets(top: 12, leading: 13, bottom: 12, trailing: 13))
+        .frame(width: 165)
         .background(Color.componentColor)
         .cornerRadius(10)
         

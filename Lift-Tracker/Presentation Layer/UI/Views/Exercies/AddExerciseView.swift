@@ -17,10 +17,15 @@ struct AddExerciseView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var exerciseName: String = ""
     @State private var notes: String = ""
-    @State private var selectedBodyPart: String = "Any"
-    @State private var selectedCategory: String = "Any"
     
-    let bodyParts = ["Any", "Chest", "Back", "Arms", "Legs", "Shoulders", "Core"]
+    @State private var isShowingBodyPartPicker = false
+    @State private var isShowingPickerOverlay = false
+    @State private var selectedBodyPart: String? = "Any"
+    
+    let bodyParts: [String] = [
+        "Any", "Back", "Biceps", "Calves", "Chest", "Core", "Forearms", "Full Body",
+        "Glutes", "Hamstrings", "Quads", "Shoulders", "Triceps", "Other"
+    ]
     let categories = ["Any", "Strength", "Cardio", "Flexibility", "Balance"]
     
     
@@ -43,10 +48,25 @@ struct AddExerciseView: View {
                         dataForm
                     }
                 }
+                if isShowingBodyPartPicker {
+                    blurredBackground
+                    pickerOverlay
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+    }
+    
+    private var blurredBackground: some View {
+        Color.backgroundColor
+            .blur(radius: 3)
+            .ignoresSafeArea(.all)
+    }
+    
+    private var pickerOverlay: some View {
+        BodyPartPickerOverlay(isPresented: $isShowingBodyPartPicker, selectedBodyPart: $selectedBodyPart, bodyParts: bodyParts)
+            .background(Color.black.opacity(0.6).edgesIgnoringSafeArea(.all))
     }
     
     private var backButton: some View {
@@ -84,7 +104,7 @@ struct AddExerciseView: View {
                 SuperTextFieldV2(
                     placeholder:
                         Text("")
-                            .foregroundColor(Color.secondaryTextColor),
+                        .foregroundColor(Color.secondaryTextColor),
                     text:
                         $notes
                 )
@@ -98,20 +118,26 @@ struct AddExerciseView: View {
             
             Section {
                 HStack {
-                    SuperTextFieldV3()
-                    SuperTextFieldV3()
+                    Button(action: {
+                        isShowingBodyPartPicker.toggle()
+                    }, label: {
+                        DropDownField()
+                    })
                 }
-                
+                .padding(.horizontal, 20)
+                .frame(width: 390)
             } header: {
                 HStack {
                     Text("Body Part")
                     Spacer()
+                    Spacer()
                     Text("Category")
+                    Spacer()
                 }
                 .foregroundColor(.secondaryTextColor)
             }
             .listRowBackground(Color.backgroundColor)
-
+            
             
         }
         .listSectionSpacing(0)

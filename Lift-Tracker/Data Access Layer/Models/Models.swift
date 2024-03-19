@@ -139,6 +139,25 @@ enum MuscleGroup: Int16, Codable {
     case other = 13
     
     static let defaultValue = MuscleGroup.undefined
+    
+    var displayName: String {
+        switch self {
+        case .undefined: return "Undefined"
+        case .chest: return "Chest"
+        case .back: return "Back"
+        case .triceps: return "Triceps"
+        case .biceps: return "Biceps"
+        case .forearms: return "Forearms"
+        case .shoulders: return "Shoulders"
+        case .quads: return "Quads"
+        case .hamstrings: return "Hamstrings"
+        case .glutes: return "Glutes"
+        case .calves: return "Calves"
+        case .core: return "Core"
+        case .fullBody: return "Full Body"
+        case .other: return "Other"
+        }
+    }
 }
 
 enum ExerciseType: Int16, Codable {
