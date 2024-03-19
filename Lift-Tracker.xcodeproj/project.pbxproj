@@ -32,6 +32,8 @@
 		0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1762A6B5006005A0A05 /* ExercisesView.swift */; };
 		0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0777D1782A6B5013005A0A05 /* ProgressView.swift */; };
 		0787B6132B9F52450082181A /* LoadableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787B6122B9F52450082181A /* LoadableTests.swift */; };
+		0796CCC12BA92BE7007C74EF /* idk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCC02BA92BE7007C74EF /* idk.swift */; };
+		0796CCC32BA93843007C74EF /* SuperTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCC22BA93843007C74EF /* SuperTextFieldView.swift */; };
 		0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */; };
 		0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */; };
 		0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */; };
@@ -101,6 +103,8 @@
 		0777D1762A6B5006005A0A05 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		0777D1782A6B5013005A0A05 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		0787B6122B9F52450082181A /* LoadableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableTests.swift; sourceTree = "<group>"; };
+		0796CCC02BA92BE7007C74EF /* idk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = idk.swift; sourceTree = "<group>"; };
+		0796CCC22BA93843007C74EF /* SuperTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperTextFieldView.swift; sourceTree = "<group>"; };
 		0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedInteractors.swift; sourceTree = "<group>"; };
 		0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedSystemEventsHandler.swift; sourceTree = "<group>"; };
 		0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesRepositoryTests.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 			children = (
 				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
 				0701292C2B718D4000EFF73A /* AddExerciseView.swift */,
+				0796CCC02BA92BE7007C74EF /* idk.swift */,
 			);
 			path = Exercies;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				07A6C3EC2A229624008F87CB /* RootViewModifier.swift */,
 				07E35EDC2BA8D0A60066A56B /* TabBarModifier.swift */,
 				07E35ED92BA4F7F20066A56B /* Colors.swift */,
+				0796CCC22BA93843007C74EF /* SuperTextFieldView.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -621,6 +627,7 @@
 				0777D1732A6B4FA8005A0A05 /* HomeView.swift in Sources */,
 				07E35EDD2BA8D0A60066A56B /* TabBarModifier.swift in Sources */,
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
+				0796CCC32BA93843007C74EF /* SuperTextFieldView.swift in Sources */,
 				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
 				0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */,
@@ -638,6 +645,7 @@
 				07FDCB7C2A0F01D500EF9C75 /* RoutinesRepository.swift in Sources */,
 				07C32B022A464B7C00219776 /* Helpers.swift in Sources */,
 				070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */,
+				0796CCC12BA92BE7007C74EF /* idk.swift in Sources */,
 				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
 				0733C37C2B9A644400856E70 /* SystemProtocols.swift in Sources */,
 				07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */,

@@ -36,7 +36,7 @@ struct RoutinesView: View {
                     NavigationLink(destination: AddRoutineView(container:container)) {
                         Image(systemName: "plus")
                     }
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(Color.accentColorBlue)
                 }
             }
             .onAppear(perform: loadRoutines)

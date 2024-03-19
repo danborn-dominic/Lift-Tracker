@@ -37,7 +37,7 @@ struct ExercisesView: View {
                     ) {
                         Image(systemName: "plus")
                     }
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(Color.accentColorBlue)
                 }
             }
     }
