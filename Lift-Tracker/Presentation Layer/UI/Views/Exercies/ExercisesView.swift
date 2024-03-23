@@ -32,7 +32,7 @@ struct ExercisesView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination:
-                                    AddExerciseView(container:container)
+                                    AddExerciseViewv2(container:container)
                         .modifier(RootViewAppearance())
                     ) {
                         Image(systemName: "plus")

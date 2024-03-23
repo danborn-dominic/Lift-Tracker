@@ -1,13 +1,8 @@
 //
-//  AddExerciseView.swift
+//  AddExerciseViewv2.swift
 //  Lift-Tracker
 //
-//  Created by Dominic Danborn on 2/5/24.
-//
-//  Description:
-// TODO: write description
-//
-//  Copyright © 2023 Dominic Danborn. All rights reserved.
+//  Created by Dominic Danborn on 3/22/24.
 //
 
 import SwiftUI
@@ -19,14 +14,19 @@ struct AddExerciseView: View {
     @State private var notes: String = ""
     
     @State private var isShowingBodyPartPicker = false
-    @State private var isShowingPickerOverlay = false
-    @State private var selectedBodyPart: String? = "Any"
+    @State private var selectedBodyPart: String = "Any"
+    
+    @State private var isShowingCategoryPicker = false
+    @State private var selectedCategory: String = "Any"
     
     let bodyParts: [String] = [
         "Any", "Back", "Biceps", "Calves", "Chest", "Core", "Forearms", "Full Body",
         "Glutes", "Hamstrings", "Quads", "Shoulders", "Triceps", "Other"
     ]
-    let categories = ["Any", "Strength", "Cardio", "Flexibility", "Balance"]
+    
+    let categories: [String] = [
+        "Any", "Body Weight", "Barbell", "Cardio", "Dumbbell", "Machine", "Other"
+    ]
     
     
     init(container: DIContainer) {
@@ -44,13 +44,14 @@ struct AddExerciseView: View {
                 Color.backgroundColor.ignoresSafeArea(.all)
                 VStack(spacing: 0) {
                     header
-                    if #available(iOS 17.0, *) {
-                        dataForm
-                    }
+                    dataForm
+                    Spacer()
                 }
                 if isShowingBodyPartPicker {
-                    blurredBackground
-                    pickerOverlay
+                    bodyPartPickerOverlay
+                }
+                if isShowingCategoryPicker {
+                    categoryPickerOverlay
                 }
             }
         }
@@ -58,15 +59,28 @@ struct AddExerciseView: View {
         .navigationBarItems(leading: backButton)
     }
     
-    private var blurredBackground: some View {
-        Color.backgroundColor
-            .blur(radius: 3)
-            .ignoresSafeArea(.all)
+    private var bodyPartPickerOverlay: some View {
+        ZStack {
+            Color.backgroundColor
+                .opacity(0.8)
+                .ignoresSafeArea(.all)
+                .onTapGesture {
+                    isShowingBodyPartPicker = false
+                }
+            BodyPartPickerOverlay(isPresented: $isShowingBodyPartPicker, selectedBodyPart: $selectedBodyPart, bodyParts: bodyParts)
+        }
     }
     
-    private var pickerOverlay: some View {
-        BodyPartPickerOverlay(isPresented: $isShowingBodyPartPicker, selectedBodyPart: $selectedBodyPart, bodyParts: bodyParts)
-            .background(Color.black.opacity(0.6).edgesIgnoringSafeArea(.all))
+    private var categoryPickerOverlay: some View {
+        ZStack {
+            Color.backgroundColor
+                .opacity(0.8)
+                .ignoresSafeArea(.all)
+                .onTapGesture {
+                    isShowingCategoryPicker = false
+                }
+            CategoryPickerOverlay(isPresented: $isShowingCategoryPicker, selectedCategory: $selectedCategory, categories: categories)
+        }
     }
     
     private var backButton: some View {
@@ -83,65 +97,37 @@ struct AddExerciseView: View {
     }
     
     private var header: some View {
-        Text("New Exercise")
-            .font(.title)
-            .foregroundColor(Color.primaryTextColor)
+        HStack {
+                Spacer()
+                Text("New Exercise")
+                    .font(.title)
+                    .foregroundColor(Color.primaryTextColor)
+                Spacer()
+            }
+            .padding(.top, 0)
     }
     
-    @available(iOS 17.0, *)
     private var dataForm: some View {
-        Form {
-            Section {
-                SuperTextField(placeholder: Text("Unnamed Exercise").foregroundColor(Color.secondaryTextColor), text: $exerciseName)
-                    .foregroundColor(Color.secondaryTextColor)
-                    .listRowBackground(Color.componentColor)
-            } header: {
-                Text("Exercise Name")
-                    .foregroundColor(.secondaryTextColor)
-            }
+        VStack(spacing: 10) {
+            StyledTextField(labelText: "Exercise Name", placeholder: Text("Unnamed Exercise"), text: $exerciseName, width: 356, height: 40, labelPadding: -2)
             
-            Section {
-                SuperTextFieldV2(
-                    placeholder:
-                        Text("")
-                        .foregroundColor(Color.secondaryTextColor),
-                    text:
-                        $notes
-                )
-                .frame(height: 100)
-                .foregroundColor(Color.secondaryTextColor)
-                .listRowBackground(Color.componentColor)
-            } header: {
-                Text("Notes")
-                    .foregroundColor(.secondaryTextColor)
-            }
+            StyledTextFieldWithTextTopLeft(labelText: "Notes", placeholder: Text("Some notes"), text: $notes, width: 356, height: 140, labelPadding: -2)
             
-            Section {
-                HStack {
-                    Button(action: {
-                        isShowingBodyPartPicker.toggle()
-                    }, label: {
-                        DropDownField()
-                    })
+            
+            HStack {
+                StyledDropdownButton(labelText: "Body Part", displayText: selectedBodyPart, labelPadding: -2) {
+                    isShowingBodyPartPicker.toggle()
                 }
-                .padding(.horizontal, 20)
-                .frame(width: 390)
-            } header: {
-                HStack {
-                    Text("Body Part")
-                    Spacer()
-                    Spacer()
-                    Text("Category")
-                    Spacer()
+                .padding(.leading, 20)
+                
+                StyledDropdownButton(labelText: "Category", displayText: selectedCategory, labelPadding: -2) {
+                    isShowingCategoryPicker.toggle()
                 }
-                .foregroundColor(.secondaryTextColor)
+                .padding(.leading, 10)
             }
-            .listRowBackground(Color.backgroundColor)
-            
             
         }
-        .listSectionSpacing(0)
-        .scrollContentBackground(.hidden)
+        .padding(.top)
     }
 }
 

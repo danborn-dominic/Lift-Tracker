@@ -49,21 +49,24 @@ struct SuperTextFieldV2: View {
 }
 
 struct DropDownField: View {
-    
+    var displayText: String
+    var action: () -> Void // Add an action closure
+
     var body: some View {
-        HStack(spacing: 45) {
-            HStack(spacing: 10) {
-                Text("Any")
-                    .foregroundColor(Color.secondaryTextColor)
-                Spacer()
-                Image(systemName: "chevron.down")
-                    .foregroundColor(Color.secondaryTextColor)
-            }
+        HStack(spacing: 10) {
+            Text(displayText)
+                .foregroundColor(Color.secondaryTextColor)
+            Spacer()
+            Image(systemName: "chevron.down")
+                .foregroundColor(Color.secondaryTextColor)
         }
         .padding(EdgeInsets(top: 12, leading: 13, bottom: 12, trailing: 13))
-        .frame(width: 165)
+        .frame(width: 165, height: 40) // Ensure you set a height as well
         .background(Color.componentColor)
         .cornerRadius(10)
-        
+        .onTapGesture {
+            self.action() // Call the action on tap
+        }
     }
 }
+

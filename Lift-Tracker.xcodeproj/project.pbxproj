@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292C2B718D4000EFF73A /* AddExerciseView.swift */; };
 		0701292F2B73D7A500EFF73A /* ExercisesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0701292E2B73D7A500EFF73A /* ExercisesRepository.swift */; };
 		070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070129302B7599F600EFF73A /* ExerciseInteractor.swift */; };
 		0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */; };
@@ -34,6 +33,10 @@
 		0787B6132B9F52450082181A /* LoadableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787B6122B9F52450082181A /* LoadableTests.swift */; };
 		0796CCC32BA93843007C74EF /* SuperTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCC22BA93843007C74EF /* SuperTextFieldView.swift */; };
 		0796CCC72BAA3458007C74EF /* BodyPartPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCC62BAA3458007C74EF /* BodyPartPicker.swift */; };
+		0796CCC92BAB2B88007C74EF /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCC82BAB2B88007C74EF /* CategoryPicker.swift */; };
+		0796CCCB2BAB5096007C74EF /* StyledDropdownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCCA2BAB5096007C74EF /* StyledDropdownButton.swift */; };
+		0796CCCD2BADAB9D007C74EF /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCCC2BADAB9D007C74EF /* AddExerciseView.swift */; };
+		0796CCD12BADB75F007C74EF /* StyledTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796CCD02BADB75F007C74EF /* StyledTextView.swift */; };
 		0796F26F2B9126B700FC81F8 /* MockedInteractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */; };
 		0796F2712B92131800FC81F8 /* MockedSystemEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */; };
 		0796F2732B921B2E00FC81F8 /* RoutinesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */; };
@@ -77,7 +80,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0701292C2B718D4000EFF73A /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
 		0701292E2B73D7A500EFF73A /* ExercisesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesRepository.swift; sourceTree = "<group>"; };
 		070129302B7599F600EFF73A /* ExerciseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInteractor.swift; sourceTree = "<group>"; };
 		0728FAEF2B7074CE008E6FE5 /* RoutineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,10 @@
 		0787B6122B9F52450082181A /* LoadableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableTests.swift; sourceTree = "<group>"; };
 		0796CCC22BA93843007C74EF /* SuperTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperTextFieldView.swift; sourceTree = "<group>"; };
 		0796CCC62BAA3458007C74EF /* BodyPartPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartPicker.swift; sourceTree = "<group>"; };
+		0796CCC82BAB2B88007C74EF /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		0796CCCA2BAB5096007C74EF /* StyledDropdownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledDropdownButton.swift; sourceTree = "<group>"; };
+		0796CCCC2BADAB9D007C74EF /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
+		0796CCD02BADB75F007C74EF /* StyledTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextView.swift; sourceTree = "<group>"; };
 		0796F26E2B9126B700FC81F8 /* MockedInteractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedInteractors.swift; sourceTree = "<group>"; };
 		0796F2702B92131800FC81F8 /* MockedSystemEventsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedSystemEventsHandler.swift; sourceTree = "<group>"; };
 		0796F2722B921B2E00FC81F8 /* RoutinesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesRepositoryTests.swift; sourceTree = "<group>"; };
@@ -179,8 +185,11 @@
 			isa = PBXGroup;
 			children = (
 				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
-				0701292C2B718D4000EFF73A /* AddExerciseView.swift */,
 				0796CCC62BAA3458007C74EF /* BodyPartPicker.swift */,
+				0796CCC82BAB2B88007C74EF /* CategoryPicker.swift */,
+				0796CCCA2BAB5096007C74EF /* StyledDropdownButton.swift */,
+				0796CCCC2BADAB9D007C74EF /* AddExerciseView.swift */,
+				0796CCD02BADB75F007C74EF /* StyledTextView.swift */,
 			);
 			path = Exercies;
 			sourceTree = "<group>";
@@ -629,6 +638,7 @@
 				07A6C3F52A26D04C008F87CB /* Store.swift in Sources */,
 				0796CCC32BA93843007C74EF /* SuperTextFieldView.swift in Sources */,
 				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
+				0796CCC92BAB2B88007C74EF /* CategoryPicker.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
 				0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */,
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
@@ -648,14 +658,17 @@
 				070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */,
 				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
 				0733C37C2B9A644400856E70 /* SystemProtocols.swift in Sources */,
+				0796CCD12BADB75F007C74EF /* StyledTextView.swift in Sources */,
 				07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */,
 				07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */,
 				0733C3782B9A544700856E70 /* RepositoryProtocols.swift in Sources */,
 				07FDCB822A0FEA0500EF9C75 /* Models+CoreData.swift in Sources */,
 				07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */,
 				07FDCB7E2A0F041D00EF9C75 /* RoutineInteractor.swift in Sources */,
+				0796CCCB2BAB5096007C74EF /* StyledDropdownButton.swift in Sources */,
 				0728FAF02B7074CE008E6FE5 /* RoutineDetailView.swift in Sources */,
 				0777D1752A6B4FCE005A0A05 /* SettingsView.swift in Sources */,
+				0796CCCD2BADAB9D007C74EF /* AddExerciseView.swift in Sources */,
 				076ACFE72A2BC9020002D89B /* Loadable.swift in Sources */,
 				07FDCB612A0EBB4100EF9C75 /* Lift_Tracker.xcdatamodeld in Sources */,
 				07E35EDA2BA4F7F20066A56B /* Colors.swift in Sources */,
@@ -664,7 +677,6 @@
 				0733C3722B9A519D00856E70 /* PersistenceProtocols.swift in Sources */,
 				07C32B002A3D06FB00219776 /* AddRoutineView.swift in Sources */,
 				07C32AFB2A33B97400219776 /* AppEnvironment.swift in Sources */,
-				0701292D2B718D4000EFF73A /* AddExerciseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
