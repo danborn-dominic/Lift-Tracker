@@ -26,12 +26,105 @@ extension Routine {
 
 extension Exercise {
     static let testData: [Exercise] = [
-        Exercise(id: UUID(), exerciseName: "Bench Press"),
-        Exercise(id: UUID(), exerciseName: "Pull Ups"),
-        Exercise(id: UUID(), exerciseName: "Squats"),
-        Exercise(id: UUID(), exerciseName: "Shoulder Press"),
-        Exercise(id: UUID(), exerciseName: "Bent Over Rows"),
-        Exercise(id: UUID(), exerciseName: "Lunges")
-    ]
+        Exercise(
+            id: UUID(),
+            exerciseName: "Bench Press",
+            exerciseNotes: "Keep elbows at 45 degrees.",
+            maxWeight: 185,
+            repsForMaxWeight: 5,
+            muscleGroup: .chest,
+            exerciseType: .barbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Bent Over Rows",
+            exerciseNotes: "Keep the back horizontal and use full range of motion.",
+            maxWeight: 135,
+            repsForMaxWeight: 8,
+            muscleGroup: .back,
+            exerciseType: .barbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Deadlift",
+            exerciseNotes: "Keep your back straight and drive through the heels.",
+            maxWeight: 300,
+            repsForMaxWeight: 4,
+            muscleGroup: .back,
+            exerciseType: .barbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Leg Press",
+            exerciseNotes: "Do not lock your knees when extending.",
+            maxWeight: 400,
+            repsForMaxWeight: 6,
+            muscleGroup: .quads,
+            exerciseType: .machine
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Lunges",
+            exerciseNotes: "Keep the knee in line with the foot.",
+            maxWeight: 50,
+            repsForMaxWeight: 10,
+            muscleGroup: .quads,
+            exerciseType: .dumbbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Pull Ups",
+            exerciseNotes: "Full range of motion from dead hang.",
+            maxWeight: 0,
+            repsForMaxWeight: 10,
+            muscleGroup: .back,
+            exerciseType: .bodyweight
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Push Ups",
+            exerciseNotes: "Keep body in a straight line throughout the movement.",
+            maxWeight: 0,
+            repsForMaxWeight: 20,
+            muscleGroup: .chest,
+            exerciseType: .bodyweight
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Shoulder Press",
+            exerciseNotes: "Press overhead to full extension.",
+            maxWeight: 95,
+            repsForMaxWeight: 8,
+            muscleGroup: .shoulders,
+            exerciseType: .dumbbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Sit Ups",
+            exerciseNotes: "Keep feet anchored and use a full range of motion.",
+            maxWeight: 0,
+            repsForMaxWeight: 15,
+            muscleGroup: .core,
+            exerciseType: .bodyweight
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Squats",
+            exerciseNotes: "Depth below parallel.",
+            maxWeight: 225,
+            repsForMaxWeight: 5,
+            muscleGroup: .quads,
+            exerciseType: .barbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Tricep Dips",
+            exerciseNotes: "Lower until shoulders are just below the elbows.",
+            maxWeight: 0,
+            repsForMaxWeight: 12,
+            muscleGroup: .triceps,
+            exerciseType: .bodyweight
+        )
+    ].sorted(by: { $0.exerciseName < $1.exerciseName }) // Sort the array by exercise name
 }
 #endif

@@ -19,6 +19,7 @@
 		0733C3802B9B4D9000856E70 /* RoutineInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C37F2B9B4D9000856E70 /* RoutineInteractorTests.swift */; };
 		0733C3822B9BEC5300856E70 /* ExerciseInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3812B9BEC5300856E70 /* ExerciseInteractorTests.swift */; };
 		0733C3842B9BECCD00856E70 /* MockedExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733C3832B9BECCD00856E70 /* MockedExerciseRepository.swift */; };
+		073E5C312BAF89B2005BC194 /* ExerciseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E5C302BAF89B2005BC194 /* ExerciseCardView.swift */; };
 		075461752B8D39A70063CE03 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461662B8BEEFE0063CE03 /* Mock.swift */; };
 		0754617A2B8D3C760063CE03 /* MockedRoutinesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */; };
 		075ADE1F2B8E65D80097280B /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ADE1E2B8E65D80097280B /* TestHelpers.swift */; };
@@ -45,6 +46,18 @@
 		07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3EE2A2296F7008F87CB /* RoutinesView.swift */; };
 		07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */; };
 		07A6C3F52A26D04C008F87CB /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C3F42A26D04C008F87CB /* Store.swift */; };
+		07BC16562BAFB12500BF7AD3 /* ExerciseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16552BAFB12500BF7AD3 /* ExerciseData.swift */; };
+		07BC16582BAFB22100BF7AD3 /* ChestExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16572BAFB22100BF7AD3 /* ChestExercises.swift */; };
+		07BC165A2BAFB26500BF7AD3 /* ShoulderExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16592BAFB26500BF7AD3 /* ShoulderExercises.swift */; };
+		07BC165C2BB0A18900BF7AD3 /* TricepExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC165B2BB0A18900BF7AD3 /* TricepExercises.swift */; };
+		07BC165E2BB0A27700BF7AD3 /* BicepExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC165D2BB0A27700BF7AD3 /* BicepExercises.swift */; };
+		07BC16602BB0A35C00BF7AD3 /* QuadsExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC165F2BB0A35C00BF7AD3 /* QuadsExercises.swift */; };
+		07BC16622BB0A44200BF7AD3 /* HamstringExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16612BB0A44200BF7AD3 /* HamstringExercises.swift */; };
+		07BC16642BB0A44F00BF7AD3 /* CalfExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16632BB0A44F00BF7AD3 /* CalfExercises.swift */; };
+		07BC16662BB0A83C00BF7AD3 /* GluteExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16652BB0A83C00BF7AD3 /* GluteExercises.swift */; };
+		07BC16682BB0AACD00BF7AD3 /* CoreExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16672BB0AACD00BF7AD3 /* CoreExercises.swift */; };
+		07BC166A2BB0AB9100BF7AD3 /* ForearmExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC16692BB0AB9100BF7AD3 /* ForearmExercises.swift */; };
+		07BC166C2BB0AC9F00BF7AD3 /* BackExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BC166B2BB0AC9F00BF7AD3 /* BackExercises.swift */; };
 		07C32AF32A33A8D900219776 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32AF22A33A8D900219776 /* ErrorView.swift */; };
 		07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32AF42A33A95100219776 /* ActivityIndicatorView.swift */; };
 		07C32AF72A33B38900219776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C32AF62A33B38900219776 /* AppDelegate.swift */; };
@@ -92,6 +105,7 @@
 		0733C37F2B9B4D9000856E70 /* RoutineInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInteractorTests.swift; sourceTree = "<group>"; };
 		0733C3812B9BEC5300856E70 /* ExerciseInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInteractorTests.swift; sourceTree = "<group>"; };
 		0733C3832B9BECCD00856E70 /* MockedExerciseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedExerciseRepository.swift; sourceTree = "<group>"; };
+		073E5C302BAF89B2005BC194 /* ExerciseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCardView.swift; sourceTree = "<group>"; };
 		075461662B8BEEFE0063CE03 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		0754616C2B8D392E0063CE03 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		075461792B8D3C760063CE03 /* MockedRoutinesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedRoutinesRepository.swift; sourceTree = "<group>"; };
@@ -119,6 +133,18 @@
 		07A6C3EE2A2296F7008F87CB /* RoutinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesView.swift; sourceTree = "<group>"; };
 		07A6C3F22A257EA5008F87CB /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		07A6C3F42A26D04C008F87CB /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		07BC16552BAFB12500BF7AD3 /* ExerciseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseData.swift; sourceTree = "<group>"; };
+		07BC16572BAFB22100BF7AD3 /* ChestExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChestExercises.swift; sourceTree = "<group>"; };
+		07BC16592BAFB26500BF7AD3 /* ShoulderExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoulderExercises.swift; sourceTree = "<group>"; };
+		07BC165B2BB0A18900BF7AD3 /* TricepExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricepExercises.swift; sourceTree = "<group>"; };
+		07BC165D2BB0A27700BF7AD3 /* BicepExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BicepExercises.swift; sourceTree = "<group>"; };
+		07BC165F2BB0A35C00BF7AD3 /* QuadsExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadsExercises.swift; sourceTree = "<group>"; };
+		07BC16612BB0A44200BF7AD3 /* HamstringExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamstringExercises.swift; sourceTree = "<group>"; };
+		07BC16632BB0A44F00BF7AD3 /* CalfExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalfExercises.swift; sourceTree = "<group>"; };
+		07BC16652BB0A83C00BF7AD3 /* GluteExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GluteExercises.swift; sourceTree = "<group>"; };
+		07BC16672BB0AACD00BF7AD3 /* CoreExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExercises.swift; sourceTree = "<group>"; };
+		07BC16692BB0AB9100BF7AD3 /* ForearmExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForearmExercises.swift; sourceTree = "<group>"; };
+		07BC166B2BB0AC9F00BF7AD3 /* BackExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackExercises.swift; sourceTree = "<group>"; };
 		07C32AF22A33A8D900219776 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		07C32AF42A33A95100219776 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		07C32AF62A33B38900219776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,11 +211,12 @@
 			isa = PBXGroup;
 			children = (
 				0777D1762A6B5006005A0A05 /* ExercisesView.swift */,
+				0796CCCC2BADAB9D007C74EF /* AddExerciseView.swift */,
 				0796CCC62BAA3458007C74EF /* BodyPartPicker.swift */,
 				0796CCC82BAB2B88007C74EF /* CategoryPicker.swift */,
 				0796CCCA2BAB5096007C74EF /* StyledDropdownButton.swift */,
-				0796CCCC2BADAB9D007C74EF /* AddExerciseView.swift */,
 				0796CCD02BADB75F007C74EF /* StyledTextView.swift */,
+				073E5C302BAF89B2005BC194 /* ExerciseCardView.swift */,
 			);
 			path = Exercies;
 			sourceTree = "<group>";
@@ -232,6 +259,7 @@
 		0754614F2B87D59D0063CE03 /* Data Access Layer */ = {
 			isa = PBXGroup;
 			children = (
+				07BC16542BAFB10D00BF7AD3 /* ExercisesData */,
 				07FDCB672A0EBBE000EF9C75 /* Models */,
 				07FDCB682A0EBBFB00EF9C75 /* Persistance */,
 				07FDCB6D2A0EC06A00EF9C75 /* Repositories */,
@@ -355,6 +383,25 @@
 				075ADE1E2B8E65D80097280B /* TestHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		07BC16542BAFB10D00BF7AD3 /* ExercisesData */ = {
+			isa = PBXGroup;
+			children = (
+				07BC16552BAFB12500BF7AD3 /* ExerciseData.swift */,
+				07BC16572BAFB22100BF7AD3 /* ChestExercises.swift */,
+				07BC16592BAFB26500BF7AD3 /* ShoulderExercises.swift */,
+				07BC165B2BB0A18900BF7AD3 /* TricepExercises.swift */,
+				07BC165D2BB0A27700BF7AD3 /* BicepExercises.swift */,
+				07BC165F2BB0A35C00BF7AD3 /* QuadsExercises.swift */,
+				07BC16612BB0A44200BF7AD3 /* HamstringExercises.swift */,
+				07BC16632BB0A44F00BF7AD3 /* CalfExercises.swift */,
+				07BC16652BB0A83C00BF7AD3 /* GluteExercises.swift */,
+				07BC16672BB0AACD00BF7AD3 /* CoreExercises.swift */,
+				07BC16692BB0AB9100BF7AD3 /* ForearmExercises.swift */,
+				07BC166B2BB0AC9F00BF7AD3 /* BackExercises.swift */,
+			);
+			path = ExercisesData;
 			sourceTree = "<group>";
 		};
 		07E35EDB2BA8D0850066A56B /* Resources */ = {
@@ -639,6 +686,7 @@
 				0796CCC32BA93843007C74EF /* SuperTextFieldView.swift in Sources */,
 				0777D1772A6B5006005A0A05 /* ExercisesView.swift in Sources */,
 				0796CCC92BAB2B88007C74EF /* CategoryPicker.swift in Sources */,
+				07BC16682BB0AACD00BF7AD3 /* CoreExercises.swift in Sources */,
 				07FDCB802A0FE9F400EF9C75 /* Models.swift in Sources */,
 				0733C37A2B9A550D00856E70 /* InteractorProtocols.swift in Sources */,
 				0777D1712A6B19B6005A0A05 /* MockData.swift in Sources */,
@@ -646,21 +694,29 @@
 				07FDCB762A0ED24000EF9C75 /* InteractorsContainer.swift in Sources */,
 				07A6C3EF2A2296F7008F87CB /* RoutinesView.swift in Sources */,
 				0701292F2B73D7A500EFF73A /* ExercisesRepository.swift in Sources */,
+				07BC16562BAFB12500BF7AD3 /* ExerciseData.swift in Sources */,
 				07A6C3F32A257EA5008F87CB /* CoreDataHelpers.swift in Sources */,
 				07FDCB782A0ED2BC00EF9C75 /* DependencyInjector.swift in Sources */,
 				07C32AF32A33A8D900219776 /* ErrorView.swift in Sources */,
+				07BC16582BAFB22100BF7AD3 /* ChestExercises.swift in Sources */,
+				07BC165A2BAFB26500BF7AD3 /* ShoulderExercises.swift in Sources */,
+				07BC16622BB0A44200BF7AD3 /* HamstringExercises.swift in Sources */,
 				07C32AF92A33B6C200219776 /* SceneDelegate.swift in Sources */,
 				07C32AF72A33B38900219776 /* AppDelegate.swift in Sources */,
 				07FDCB742A0ED14400EF9C75 /* AppState.swift in Sources */,
 				076ACFE92A2BC9100002D89B /* CancelBag.swift in Sources */,
 				07FDCB7C2A0F01D500EF9C75 /* RoutinesRepository.swift in Sources */,
+				07BC16662BB0A83C00BF7AD3 /* GluteExercises.swift in Sources */,
+				07BC165C2BB0A18900BF7AD3 /* TricepExercises.swift in Sources */,
 				07C32B022A464B7C00219776 /* Helpers.swift in Sources */,
 				070129312B7599F600EFF73A /* ExerciseInteractor.swift in Sources */,
 				0777D1792A6B5013005A0A05 /* ProgressView.swift in Sources */,
 				0733C37C2B9A644400856E70 /* SystemProtocols.swift in Sources */,
+				07BC166A2BB0AB9100BF7AD3 /* ForearmExercises.swift in Sources */,
 				0796CCD12BADB75F007C74EF /* StyledTextView.swift in Sources */,
 				07FDCB842A17F08900EF9C75 /* CoreDataStack.swift in Sources */,
 				07C32AF52A33A95100219776 /* ActivityIndicatorView.swift in Sources */,
+				07BC16642BB0A44F00BF7AD3 /* CalfExercises.swift in Sources */,
 				0733C3782B9A544700856E70 /* RepositoryProtocols.swift in Sources */,
 				07FDCB822A0FEA0500EF9C75 /* Models+CoreData.swift in Sources */,
 				07FDCB572A0EBB3F00EF9C75 /* ContentView.swift in Sources */,
@@ -674,7 +730,11 @@
 				07E35EDA2BA4F7F20066A56B /* Colors.swift in Sources */,
 				07C32AFD2A39507A00219776 /* SystemEventsHandler.swift in Sources */,
 				07A6C3ED2A229624008F87CB /* RootViewModifier.swift in Sources */,
+				07BC166C2BB0AC9F00BF7AD3 /* BackExercises.swift in Sources */,
+				073E5C312BAF89B2005BC194 /* ExerciseCardView.swift in Sources */,
 				0733C3722B9A519D00856E70 /* PersistenceProtocols.swift in Sources */,
+				07BC165E2BB0A27700BF7AD3 /* BicepExercises.swift in Sources */,
+				07BC16602BB0A35C00BF7AD3 /* QuadsExercises.swift in Sources */,
 				07C32B002A3D06FB00219776 /* AddRoutineView.swift in Sources */,
 				07C32AFB2A33B97400219776 /* AppEnvironment.swift in Sources */,
 			);

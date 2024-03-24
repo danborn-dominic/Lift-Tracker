@@ -15,6 +15,8 @@ import Combine
 
 struct ExercisesView: View {
     
+    @State private var exerciseData: [Exercise] = Exercise.testData
+    
     private let container: DIContainer
     
     init(container: DIContainer) {
@@ -26,13 +28,12 @@ struct ExercisesView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Exercises")
-                        .font(.largeTitle)
+                        .font(.title)
                         .bold()
-                        .foregroundColor(.primaryTextColor)
+                        .foregroundColor(.secondaryTextColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination:
-                                    AddExerciseViewv2(container:container)
+                    NavigationLink(destination: AddExerciseView(container: container)
                         .modifier(RootViewAppearance())
                     ) {
                         Image(systemName: "plus")
@@ -43,8 +44,92 @@ struct ExercisesView: View {
     }
     
     @ViewBuilder private var content: some View {
-        Text("Exercises content")
-            .foregroundColor(.secondaryTextColor)
+        VStack(spacing: 10) {
+            searchBar
+                .padding(.horizontal)
+            filters
+                .padding(.horizontal)
+            exercises
+        }
+        .padding(.top, 100)
+    }
+    
+    private var searchBar: some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.componentColor)
+                .frame(width: 356, height: 34)
+                .cornerRadius(8);
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color.secondaryTextColor)
+                Text("Search")
+                    .foregroundColor(Color.secondaryTextColor)
+                Spacer()
+            }
+            .padding(.leading, 30)
+        }
+    }
+    
+    private var filters: some View {
+        HStack {
+            ZStack {
+                Rectangle()
+                    .fill(Color.componentColor)
+                    .frame(width: 114, height: 24)
+                    .cornerRadius(8)
+                Text("Body Part")
+                    .foregroundColor(Color.secondaryTextColor)
+                    .font(.system(size: 12))
+            }
+            
+            ZStack {
+                Rectangle()
+                    .fill(Color.componentColor)
+                    .frame(width: 114, height: 24)
+                    .cornerRadius(8)
+                Text("Category")
+                    .foregroundColor(Color.secondaryTextColor)
+                    .font(.system(size: 12))
+            }
+            
+            ZStack {
+                Rectangle()
+                    .fill(Color.componentColor)
+                    .frame(width: 114, height: 24)
+                    .cornerRadius(8)
+                Text("Recent")
+                    .foregroundColor(Color.secondaryTextColor)
+                    .font(.system(size: 12))
+            }
+        }
+    }
+    
+    private var exercises: some View {
+        VStack {
+            HStack {
+                Text("All Exercises")
+                    .foregroundColor(Color.secondaryTextColor)
+                    .font(.system(size: 12))
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 4, trailing: 0))
+                Spacer()
+            }
+            ScrollView {
+                LazyVStack(spacing: 6) { // Add some spacing between your cards
+                    ForEach(exerciseData) { exercise in
+                        ExerciseCardView(
+                            exerciseName: exercise.exerciseName,
+                            bodyPart: exercise.muscleGroup.displayName,
+                            equipment: exercise.exerciseType.displayName,
+                            weight: "\(exercise.maxWeight) lbs",
+                            reps: "\(exercise.repsForMaxWeight) reps"
+                        )
+                    }
+                }
+                .padding(EdgeInsets(top: 0, leading: 12, bottom: 5, trailing: 12))
+            }
+            .padding(.bottom, 90)
+        }
     }
     
 }
@@ -91,6 +176,7 @@ private extension ExercisesView {
 struct ExercisesView_Previews: PreviewProvider {
     static var previews: some View {
         ExercisesView(container: .preview)
+            .modifier(RootViewAppearance())
     }
 }
 #endif

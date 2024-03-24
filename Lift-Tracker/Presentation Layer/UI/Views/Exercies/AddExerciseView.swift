@@ -104,7 +104,7 @@ struct AddExerciseView: View {
                     .foregroundColor(Color.primaryTextColor)
                 Spacer()
             }
-            .padding(.top, 0)
+            .padding(.top, -50)
     }
     
     private var dataForm: some View {
@@ -127,7 +127,6 @@ struct AddExerciseView: View {
             }
             
         }
-        .padding(.top)
     }
 }
 

@@ -87,7 +87,6 @@ struct RealExercisesRepository: ExercisesRepository {
                 exerciseMO.exerciseNotes = exercise.exerciseNotes
                 exerciseMO.muscleGroup = exercise.muscleGroup.rawValue
                 exerciseMO.exerciseType = exercise.muscleGroup.rawValue
-                exerciseMO.maxVolume = Int64(exercise.maxVolume)
                 exerciseMO.maxWeight = Int64(exercise.maxWeight)
             } else {
                 // If the routine is not found, throw an error.

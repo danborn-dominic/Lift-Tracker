@@ -64,7 +64,6 @@ extension Exercise {
                   exerciseName: exerciseName ?? "",
                   exerciseNotes: notes ?? "",
                   maxWeight: Int(maxWeight),
-                  maxVolume: Int(maxVolume),
                   muscleGroup: muscleGroup,
                   exerciseType: exerciseType)
     }
@@ -79,7 +78,6 @@ extension Exercise {
         exercise.exerciseName = exerciseName
         exercise.exerciseNotes = exerciseNotes
         exercise.maxWeight = Int64(maxWeight)
-        exercise.maxVolume = Int64(maxVolume)
         exercise.muscleGroup = muscleGroup.rawValue
         exercise.exerciseType = exerciseType.rawValue
         return exercise

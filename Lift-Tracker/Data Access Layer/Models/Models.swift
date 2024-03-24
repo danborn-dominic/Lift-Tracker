@@ -52,23 +52,30 @@ struct Exercise: Codable, Equatable, Identifiable, Hashable {
     var exerciseNotes: String           // Notes about the exercise.
     var muscleGroup: MuscleGroup
     var exerciseType: ExerciseType
-    var maxVolume: Int
     var maxWeight: Int
+    var repsForMaxWeight: Int
+    var isPerformed: Bool
+    var dateLastPerformed: Date
     
     init(id: UUID,
          exerciseName: String = "",
          exerciseNotes: String = "",
          maxWeight: Int = 0,
-         maxVolume: Int = 0,
+         repsForMaxWeight: Int = 0,
          muscleGroup: MuscleGroup = .other,
-         exerciseType: ExerciseType = .other) {
+         exerciseType: ExerciseType = .other,
+         isPerformed: Bool = false,
+         dateLastPerformed: Date = Date()
+    ) {
         self.id = id
         self.exerciseName = exerciseName
         self.exerciseNotes = exerciseNotes
         self.maxWeight = maxWeight
-        self.maxVolume = maxVolume
+        self.repsForMaxWeight = repsForMaxWeight
         self.muscleGroup = muscleGroup
         self.exerciseType = exerciseType
+        self.isPerformed = isPerformed
+        self.dateLastPerformed = dateLastPerformed
     }
     
     func hash(into hasher: inout Hasher) {
@@ -172,6 +179,20 @@ enum ExerciseType: Int16, Codable {
     case other = 8
     
     static let defaultValue = ExerciseType.undefined
+    
+    var displayName: String {
+        switch self {
+        case .undefined: return "Undefined"
+        case .dumbbell: return "Dumbbell"
+        case .barbell: return "Barbell"
+        case .machine: return "Machine"
+        case .cable: return "Cable"
+        case .freeweight: return "Freeweight"
+        case .bodyweight: return "Bodyweight"
+        case .cardio: return "Cardio"
+        case .other: return "Other"
+        }
+    }
 }
 
 enum SetClassification: Int16, Codable {
