@@ -165,6 +165,12 @@ enum MuscleGroup: Int16, Codable, CaseIterable {
         case .other: return "Other"
         }
     }
+    
+    static var allDisplayNames: [String] {
+        return MuscleGroup.allCases
+            .filter { $0 != .undefined }
+            .map { $0.displayName }
+    }
 }
 
 enum ExerciseType: Int16, Codable, CaseIterable {
@@ -192,6 +198,12 @@ enum ExerciseType: Int16, Codable, CaseIterable {
         case .cardio: return "Cardio"
         case .other: return "Other"
         }
+    }
+    
+    static var allDisplayNames: [String] {
+        return ExerciseType.allCases
+            .filter { $0 != .undefined }
+            .map { $0.displayName }
     }
 }
 

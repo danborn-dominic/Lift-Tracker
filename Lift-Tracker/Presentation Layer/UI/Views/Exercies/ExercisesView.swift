@@ -15,9 +15,9 @@ import Combine
 
 struct ExercisesView: View {
     
-    @State private var exerciseData: [Exercise] = ExerciseData.all
-    
     private let container: DIContainer
+    
+    @State private var exerciseData: [Exercise] = ExerciseData.all
     
     @State private var selectedBodyPart: MuscleGroup = .undefined
     @State private var selectedCategory: ExerciseType = .undefined
@@ -28,14 +28,11 @@ struct ExercisesView: View {
     @State private var selectedBodyPartFilter: String = "Body Part"
     @State private var selectedCategoryFilter: String = "Category"
     
-    let bodyParts: [String] = [
-        "Any", "Back", "Biceps", "Calves", "Chest", "Core", "Forearms", "Full Body",
-        "Glutes", "Hamstrings", "Quads", "Shoulders", "Triceps", "Other"
-    ]
+    @State private var searchQuery: String = ""
     
-    let categories: [String] = [
-        "Any", "Body Weight", "Barbell", "Cardio", "Dumbbell", "Machine", "Other"
-    ]
+    
+    let bodyParts: [String] = MuscleGroup.allDisplayNames
+    let categories: [String] = ExerciseType.allDisplayNames
     
     
     init(container: DIContainer) {
@@ -79,25 +76,109 @@ struct ExercisesView: View {
             categoryPickerOverlay
         }
     }
+}
+
+// MARK: - Routing
+extension ExercisesView {
+    struct Routing: Equatable {
+        var exerciseDetails: Exercise.ID?
+    }
+}
+
+// MARK: - Managing Content
+private extension ExercisesView {
+    var notRequestedView: some View {
+        Text("Not Requested View").onAppear(perform: loadExercises)
+    }
     
-    private var searchBar: some View {
+    var loadingView: some View {
+        Text("Loading...")
+    }
+    
+    func failedView(_ error: Error) -> some View {
+        Text("Failed to load routines: \(error.localizedDescription)")
+            .onTapGesture { self.loadExercises() }
+    }
+    
+    func loadExercises() {
+    }
+    
+    private func filteredExercises() -> [Exercise] {
+        let selectedMuscleGroup = muscleGroup(for: selectedBodyPartFilter)
+        let selectedExType = exerciseType(for: selectedCategoryFilter)
+        
+        return exerciseData.filter { exercise in
+            let matchesSearchQuery = searchQuery.isEmpty || exercise.exerciseName.localizedCaseInsensitiveContains(searchQuery)
+            let matchesMuscleGroup = selectedMuscleGroup == .undefined || exercise.muscleGroup == selectedMuscleGroup
+            let matchesExerciseType = selectedExType == .undefined || exercise.exerciseType == selectedExType
+            
+            return matchesSearchQuery && matchesMuscleGroup && matchesExerciseType
+        }
+    }
+    
+    func muscleGroup(for filter: String) -> MuscleGroup {
+        switch filter {
+        case "Chest": return .chest
+        case "Back": return .back
+        case "Triceps": return .triceps
+        case "Biceps": return .biceps
+        case "Forearms": return .forearms
+        case "Shoulders": return .shoulders
+        case "Quads": return .quads
+        case "Hamstrings": return .hamstrings
+        case "Glutes": return .glutes
+        case "Calves": return .calves
+        case "Core": return .core
+        case "FullBody": return .fullBody
+        case "Other": return .other
+            
+        default: return .undefined
+        }
+    }
+    
+    func exerciseType(for filter: String) -> ExerciseType {
+        switch filter {
+        case "Dumbbell": return .dumbbell
+        case "Barbell": return .barbell
+        case "Machine": return .machine
+        case "Cable": return .cable
+        case "Freeweight": return .freeweight
+        case "Body Weight": return .bodyWeight
+        case "Cardio": return .cardio
+        case "Other": return .other
+            
+        default: return .undefined
+        }
+    }
+}
+
+// MARK: - Displaying Content
+private extension ExercisesView {
+    
+    var searchBar: some View {
         ZStack {
             Rectangle()
                 .fill(Color.componentColor)
                 .frame(width: 356, height: 34)
-                .cornerRadius(8);
+                .cornerRadius(8)
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(Color.secondaryTextColor)
-                Text("Search")
-                    .foregroundColor(Color.secondaryTextColor)
+                ZStack(alignment: .leading) {
+                    if searchQuery.isEmpty {
+                        Text("Search")
+                            .foregroundColor(Color.secondaryTextColor)
+                    }
+                    TextField("", text: $searchQuery)
+                        .foregroundColor(Color.secondaryTextColor)
+                }
                 Spacer()
             }
-            .padding(.leading, 30)
+            .padding(.leading, 15)
         }
     }
     
-    private var filters: some View {
+    var filters: some View {
         HStack {
             ZStack {
                 Button(action: {
@@ -149,7 +230,7 @@ struct ExercisesView: View {
         }
     }
     
-    private var exercises: some View {
+    var exercises: some View {
         VStack {
             HStack {
                 Text("All Exercises")
@@ -159,14 +240,15 @@ struct ExercisesView: View {
                 Spacer()
             }
             ScrollView {
-                LazyVStack(spacing: 6) { // Add some spacing between your cards
+                LazyVStack(spacing: 6) {
                     ForEach(filteredExercises()) { exercise in
                         ExerciseCardView(
                             exerciseName: exercise.exerciseName,
                             bodyPart: exercise.muscleGroup.displayName,
                             equipment: exercise.exerciseType.displayName,
                             weight: "\(exercise.maxWeight) lbs",
-                            reps: "\(exercise.repsForMaxWeight) reps"
+                            reps: "\(exercise.repsForMaxWeight) reps",
+                            performed: exercise.isPerformed
                         )
                     }
                 }
@@ -176,7 +258,7 @@ struct ExercisesView: View {
         }
     }
     
-    private var bodyPartPickerOverlay: some View {
+    var bodyPartPickerOverlay: some View {
         ZStack {
             Color.backgroundColor
                 .opacity(0.8)
@@ -184,11 +266,20 @@ struct ExercisesView: View {
                 .onTapGesture {
                     isShowingBodyPartPicker = false
                 }
-            BodyPartPickerOverlay(isPresented: $isShowingBodyPartPicker, selectedBodyPart: $selectedBodyPartFilter, bodyParts: bodyParts)
+            BodyPartPickerOverlay(
+                isPresented: $isShowingBodyPartPicker,
+                selectedBodyPart: Binding<String>(
+                    get: { self.selectedBodyPartFilter },
+                    set: { newValue in
+                        self.selectedBodyPartFilter = newValue == "Any" ? "Body Part" : newValue
+                    }
+                ),
+                bodyParts: bodyParts
+            )
         }
     }
     
-    private var categoryPickerOverlay: some View {
+    var categoryPickerOverlay: some View {
         ZStack {
             Color.backgroundColor
                 .opacity(0.8)
@@ -199,94 +290,7 @@ struct ExercisesView: View {
             CategoryPickerOverlay(isPresented: $isShowingCategoryPicker, selectedCategory: $selectedCategoryFilter, categories: categories)
         }
     }
-    
 }
-
-// MARK: - Side Effects
-private extension ExercisesView {
-    
-}
-
-// MARK: - Routing
-extension ExercisesView {
-    struct Routing: Equatable {
-        var exerciseDetails: Exercise.ID?
-    }
-}
-
-// MARK: - Managing Content
-private extension ExercisesView {
-    var notRequestedView: some View {
-        Text("Not Requested View").onAppear(perform: loadExercises)
-    }
-    
-    var loadingView: some View {
-        Text("Loading...")
-    }
-    
-    func failedView(_ error: Error) -> some View {
-        Text("Failed to load routines: \(error.localizedDescription)")
-            .onTapGesture { self.loadExercises() }
-    }
-    
-    func loadExercises() {
-    }
-    
-    private func filteredExercises() -> [Exercise] {
-        let selectedMuscleGroup = muscleGroup(for: selectedBodyPartFilter)
-        let selectedExType = exerciseType(for: selectedCategoryFilter)
-        
-        return exerciseData.filter { exercise in
-            (selectedMuscleGroup == .undefined || exercise.muscleGroup == selectedMuscleGroup) &&
-            (selectedExType == .undefined || exercise.exerciseType == selectedExType)
-        }
-    }
-}
-
-private extension ExercisesView {
-    func muscleGroup(for filter: String) -> MuscleGroup {
-        switch filter {
-        case "Chest": return .chest
-        case "Back": return .back
-        case "Triceps": return .triceps
-        case "Biceps": return .biceps
-        case "Forearms": return .forearms
-        case "Shoulders": return .shoulders
-        case "Quads": return .quads
-        case "Hamstrings": return .hamstrings
-        case "Glutes": return .glutes
-        case "Calves": return .calves
-        case "Core": return .core
-        case "FullBody": return .fullBody
-        case "Other": return .other
-            
-        default: return .undefined
-        }
-    }
-    
-    func exerciseType(for filter: String) -> ExerciseType {
-        switch filter {
-        case "Dumbbell": return .dumbbell
-        case "Barbell": return .barbell
-        case "Machine": return .machine
-        case "Cable": return .cable
-        case "Freeweight": return .freeweight
-        case "Body Weight": return .bodyWeight
-        case "Cardio": return .cardio
-        case "Other": return .other
-            
-        default: return .undefined
-        }
-    }
-}
-
-
-// MARK: - Displaying Content
-private extension ExercisesView {
-    
-}
-
-
 
 // MARK: - Preview
 

@@ -13,6 +13,7 @@ struct ExerciseCardView: View {
     let equipment: String
     let weight: String
     let reps: String
+    let performed: Bool
     
     var body: some View {
         HStack {
@@ -33,12 +34,14 @@ struct ExerciseCardView: View {
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 4) {
-                Text(weight)
-                    .font(.headline)
-                    .foregroundColor(Color.primaryTextColor)
-                Text(reps)
-                    .font(.subheadline)
-                    .foregroundColor(Color.secondaryTextColor)
+                if performed {
+                    Text(weight)
+                        .font(.headline)
+                        .foregroundColor(Color.primaryTextColor)
+                    Text(reps)
+                        .font(.subheadline)
+                        .foregroundColor(Color.secondaryTextColor)
+                }
             }
         }
         .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
@@ -48,5 +51,8 @@ struct ExerciseCardView: View {
 }
 
 #Preview {
-    ExerciseCardView(exerciseName: "Barbell Back Squat", bodyPart: "Quads", equipment: "Barbell", weight: "245", reps: "10").padding(.horizontal, 4)
+    VStack(spacing: 6) {
+        ExerciseCardView(exerciseName: "Barbell Back Squat", bodyPart: "Quads", equipment: "Barbell", weight: "0 lbs", reps: "0 reps", performed: false).padding(.horizontal, 4)
+        ExerciseCardView(exerciseName: "Romanian Deadlifts", bodyPart: "Hamstrings", equipment: "Barbell", weight: "245 lbs", reps: "10 reps", performed: true).padding(.horizontal, 4)
+    }
 }
