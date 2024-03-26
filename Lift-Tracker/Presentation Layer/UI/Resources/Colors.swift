@@ -12,6 +12,7 @@ extension Color {
     static let backgroundColor = Color("BackgroundColor")
     static let blackColor = Color("BlackColor")
     static let componentColor = Color("ComponentColor")
+    static let selectedColor = Color("SelectedColor")
     static let accentColorBlue = Color("AccentColor")
     static let primaryTextColor = Color("PrimaryTextColor")
     static let secondaryTextColor = Color("SecondaryTextColor")

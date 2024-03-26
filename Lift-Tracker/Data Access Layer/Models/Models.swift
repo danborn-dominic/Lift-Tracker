@@ -129,7 +129,7 @@ struct WorkoutSet {
 
 // MARK: Enums
 
-enum MuscleGroup: Int16, Codable {
+enum MuscleGroup: Int16, Codable, CaseIterable {
     case undefined = 0
     case chest = 1
     case back = 2
@@ -167,14 +167,14 @@ enum MuscleGroup: Int16, Codable {
     }
 }
 
-enum ExerciseType: Int16, Codable {
+enum ExerciseType: Int16, Codable, CaseIterable {
     case undefined = 0
     case dumbbell = 1
     case barbell = 2
     case machine = 3
     case cable = 4
     case freeweight = 5
-    case bodyweight = 6
+    case bodyWeight = 6
     case cardio = 7
     case other = 8
     
@@ -188,7 +188,7 @@ enum ExerciseType: Int16, Codable {
         case .machine: return "Machine"
         case .cable: return "Cable"
         case .freeweight: return "Freeweight"
-        case .bodyweight: return "Bodyweight"
+        case .bodyWeight: return "Bodyweight"
         case .cardio: return "Cardio"
         case .other: return "Other"
         }

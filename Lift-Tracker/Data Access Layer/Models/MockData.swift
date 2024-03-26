@@ -78,7 +78,7 @@ extension Exercise {
             maxWeight: 0,
             repsForMaxWeight: 10,
             muscleGroup: .back,
-            exerciseType: .bodyweight
+            exerciseType: .bodyWeight
         ),
         Exercise(
             id: UUID(),
@@ -87,7 +87,7 @@ extension Exercise {
             maxWeight: 0,
             repsForMaxWeight: 20,
             muscleGroup: .chest,
-            exerciseType: .bodyweight
+            exerciseType: .bodyWeight
         ),
         Exercise(
             id: UUID(),
@@ -105,7 +105,7 @@ extension Exercise {
             maxWeight: 0,
             repsForMaxWeight: 15,
             muscleGroup: .core,
-            exerciseType: .bodyweight
+            exerciseType: .bodyWeight
         ),
         Exercise(
             id: UUID(),
@@ -123,7 +123,7 @@ extension Exercise {
             maxWeight: 0,
             repsForMaxWeight: 12,
             muscleGroup: .triceps,
-            exerciseType: .bodyweight
+            exerciseType: .bodyWeight
         )
     ].sorted(by: { $0.exerciseName < $1.exerciseName }) // Sort the array by exercise name
 }

@@ -10,39 +10,64 @@ import Foundation
 struct HamstringExercises {
     static let data: [Exercise] = [
         Exercise(
-                    id: UUID(),
-                    exerciseName: "Bodyweight Leg Curl",
-                    exerciseNotes: "Perform curl movement using bodyweight.",
-                    muscleGroup: .hamstrings,
-                    exerciseType: .bodyweight
-                ),
+            id: UUID(),
+            exerciseName: "Bodyweight Leg Curl",
+            muscleGroup: .hamstrings,
+            exerciseType: .bodyWeight
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Ball Leg Curl",
+            muscleGroup: .hamstrings,
+            exerciseType: .other
+        ),
         Exercise(
             id: UUID(),
             exerciseName: "Seated Leg Curl",
-            exerciseNotes: "Use the seated leg curl machine for hamstrings.",
             muscleGroup: .hamstrings,
             exerciseType: .machine
         ),
         Exercise(
             id: UUID(),
             exerciseName: "Romanian Deadlift",
-            exerciseNotes: "Keep your legs relatively straight, hinge at the hips.",
             muscleGroup: .hamstrings,
             exerciseType: .barbell
         ),
         Exercise(
             id: UUID(),
+            exerciseName: "Dumbbell Romanian Deadlift",
+            muscleGroup: .hamstrings,
+            exerciseType: .barbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Single Leg Romanian Deadlift",
+            muscleGroup: .hamstrings,
+            exerciseType: .barbell
+        ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Stiff Legged Deadlift",
+            muscleGroup: .hamstrings,
+            exerciseType: .bodyWeight
+        ),
+        Exercise(
+            id: UUID(),
             exerciseName: "Lying Leg Curl",
-            exerciseNotes: "Use the lying leg curl machine to target hamstrings.",
             muscleGroup: .hamstrings,
             exerciseType: .machine
         ),
         Exercise(
             id: UUID(),
-            exerciseName: "Leg Curl On Ball",
-            exerciseNotes: "Use a stability ball to perform leg curls.",
+            exerciseName: "Kettlebell Swing",
             muscleGroup: .hamstrings,
-            exerciseType: .bodyweight
+            exerciseType: .machine
         ),
+        Exercise(
+            id: UUID(),
+            exerciseName: "Good Morning",
+            muscleGroup: .hamstrings,
+            exerciseType: .machine
+        )
     ]
 }

@@ -57,8 +57,8 @@ extension Exercise {
         let notes = managedObject.exerciseNotes
         let maxWeight = managedObject.maxWeight
         let maxVolume = managedObject.maxVolume
-        let muscleGroup = MuscleGroup(rawValue: managedObject.muscleGroup)
-        let exerciseType = ExerciseType(rawValue: managedObject.exerciseType)
+        let muscleGroup = MuscleGroup(rawValue: managedObject.muscleGroup)!
+        let exerciseType = ExerciseType(rawValue: managedObject.exerciseType)!
         
         self.init(id: id,
                   exerciseName: exerciseName ?? "",
@@ -140,7 +140,7 @@ extension WorkoutSet {
         let reps = Int(managedObject.reps)
         let weight = managedObject.weight
         let completed = managedObject.completed
-        let setClassification = SetClassification(rawValue: managedObject.setClassification)
+        let setClassification = SetClassification(rawValue: managedObject.setClassification)!
 
         self.init(id: id,
                   reps: reps,
@@ -186,31 +186,31 @@ extension ExerciseMO {
 // MARK: Enum translations
 
 extension MuscleGroup {
-    var rawValue: Int16 {
+    var customRawValue: Int16 {
         return Int16(self.rawValue)
     }
 
-    init(rawValue: Int16) {
-        self = MuscleGroup(rawValue: rawValue)
+    init(customRawValue: Int16) {
+        self = MuscleGroup(rawValue: Int16(Int(customRawValue))) ?? .defaultValue // Replace .defaultCase with a default value of your enum
     }
 }
 
 extension ExerciseType {
-    var rawValue: Int16 {
+    var customRawValue: Int16 {
         return Int16(self.rawValue)
     }
 
-    init(rawValue: Int16) {
-        self = ExerciseType(rawValue: rawValue)
+    init(customRawValue: Int16) {
+        self = ExerciseType(rawValue: Int16(Int(customRawValue))) ?? .defaultValue // Replace .defaultCase with a default value of your enum
     }
 }
 
 extension SetClassification {
-    var rawValue: Int16 {
+    var customRawValue: Int16 {
         return Int16(self.rawValue)
     }
 
-    init(rawValue: Int16) {
-        self = SetClassification(rawValue: rawValue)
+    init(customRawValue: Int16) {
+        self = SetClassification(rawValue: Int16(Int(customRawValue))) ?? .defaultValue // Replace .defaultCase with a default value of your enum
     }
 }
