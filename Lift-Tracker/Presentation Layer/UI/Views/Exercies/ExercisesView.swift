@@ -17,6 +17,8 @@ struct ExercisesView: View {
     
     private let container: DIContainer
     
+    @State private(set) var exercises: Loadable<[Exercise]> = .notRequested
+
     @State private var exerciseData: [Exercise] = ExerciseData.all
     
     @State private var selectedBodyPart: MuscleGroup = .undefined
@@ -60,20 +62,15 @@ struct ExercisesView: View {
     }
     
     @ViewBuilder private var content: some View {
-        VStack(spacing: 10) {
-            searchBar
-                .padding(.horizontal)
-            filters
-                .padding(.horizontal)
-            exercises
-        }
-        .padding(.top, 100)
-        
-        if isShowingBodyPartPicker {
-            bodyPartPickerOverlay
-        }
-        if isShowingCategoryPicker {
-            categoryPickerOverlay
+        switch exercises {
+        case .notRequested:
+            notRequestedView
+        case .isLoading(let last, let cancelBag):
+            loadingView
+        case .loaded:
+            loadedView()
+        case .failed(let error):
+            failedView(error)
         }
     }
 }
@@ -87,20 +84,9 @@ extension ExercisesView {
 
 // MARK: - Managing Content
 private extension ExercisesView {
-    var notRequestedView: some View {
-        Text("Not Requested View").onAppear(perform: loadExercises)
-    }
-    
-    var loadingView: some View {
-        Text("Loading...")
-    }
-    
-    func failedView(_ error: Error) -> some View {
-        Text("Failed to load routines: \(error.localizedDescription)")
-            .onTapGesture { self.loadExercises() }
-    }
     
     func loadExercises() {
+        print("called loadExercises")
     }
     
     private func filteredExercises() -> [Exercise] {
@@ -152,8 +138,51 @@ private extension ExercisesView {
     }
 }
 
+
+// MARK: - Loading Content
+
+private extension ExercisesView {
+    var notRequestedView: some View {
+        Text("")
+            .foregroundColor(Color.secondaryTextColor)
+            .onAppear(perform: loadExercises)
+    }
+    
+    var loadingView: some View {
+        Text("Loading...")
+            .foregroundColor(Color.secondaryTextColor)
+    }
+    
+    func failedView(_ error: Error) -> some View {
+        Text("Failed to load exercises: \(error.localizedDescription)")
+            .foregroundColor(Color.secondaryTextColor)
+            .onTapGesture { self.loadExercises() }
+    }
+}
+
 // MARK: - Displaying Content
 private extension ExercisesView {
+    
+    func loadedView() -> some View {
+        
+        Group {
+            VStack(spacing: 10) {
+                searchBar
+                    .padding(.horizontal)
+                filters
+                    .padding(.horizontal)
+                exercisesView
+            }
+            .padding(.top, 100)
+            
+            if isShowingBodyPartPicker {
+                bodyPartPickerOverlay
+            }
+            if isShowingCategoryPicker {
+                categoryPickerOverlay
+            }
+        }
+    }
     
     var searchBar: some View {
         ZStack {
@@ -230,7 +259,7 @@ private extension ExercisesView {
         }
     }
     
-    var exercises: some View {
+    var exercisesView: some View {
         VStack {
             HStack {
                 Text("All Exercises")

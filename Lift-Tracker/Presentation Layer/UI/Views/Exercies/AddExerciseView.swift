@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct AddExerciseView: View {
     private let container: DIContainer
+    
     @Environment(\.presentationMode) var presentationMode
+    
     @State private var exerciseName: String = ""
     @State private var notes: String = ""
     
@@ -19,14 +22,8 @@ struct AddExerciseView: View {
     @State private var isShowingCategoryPicker = false
     @State private var selectedCategory: String = "Any"
     
-    let bodyParts: [String] = [
-        "Any", "Back", "Biceps", "Calves", "Chest", "Core", "Forearms", "Full Body",
-        "Glutes", "Hamstrings", "Quads", "Shoulders", "Triceps", "Other"
-    ]
-    
-    let categories: [String] = [
-        "Any", "Body Weight", "Barbell", "Cardio", "Dumbbell", "Machine", "Other"
-    ]
+    let bodyParts: [String] = MuscleGroup.allDisplayNames
+    let categories: [String] = ExerciseType.allDisplayNames
     
     
     init(container: DIContainer) {
@@ -58,6 +55,28 @@ struct AddExerciseView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }
+}
+
+// MARK: - Managing Content
+
+private extension AddExerciseView {
+    
+    func saveExercise() -> AnyPublisher<Void, Error> {
+        let newExercise = Exercise(
+            id: UUID(),
+            exerciseName: exerciseName,
+            exerciseNotes: notes,
+            muscleGroup: MuscleGroup(rawValue: MuscleGroup.allCases.first(where: { $0.displayName == selectedBodyPart })?.rawValue ?? 0) ?? .undefined,
+            exerciseType: ExerciseType(rawValue: ExerciseType.allCases.first(where: { $0.displayName == selectedCategory })?.rawValue ?? 0) ?? .undefined
+        )
+        
+        return container.interactors.exerciseInteractor.addExercise(exercise: newExercise)
+    }
+}
+
+// MARK: - Displaying Content
+
+private extension AddExerciseView {
     
     private var bodyPartPickerOverlay: some View {
         ZStack {
@@ -85,6 +104,9 @@ struct AddExerciseView: View {
     
     private var backButton: some View {
         Button(action: {
+            if !exerciseName.isEmpty {
+                saveExercise()
+            }
             self.presentationMode.wrappedValue.dismiss()
         }) {
             HStack {
@@ -98,13 +120,13 @@ struct AddExerciseView: View {
     
     private var header: some View {
         HStack {
-                Spacer()
-                Text("New Exercise")
-                    .font(.title)
-                    .foregroundColor(Color.primaryTextColor)
-                Spacer()
-            }
-            .padding(.top, -50)
+            Spacer()
+            Text("New Exercise")
+                .font(.title)
+                .foregroundColor(Color.primaryTextColor)
+            Spacer()
+        }
+        .padding(.top, -50)
     }
     
     private var dataForm: some View {
